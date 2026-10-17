@@ -11,7 +11,18 @@
   $('dom-practice').hidden=id!==23;$('supabase-practice').hidden=id!==24;
   const rooms=['arquivos','tecnica','recepcao','laboratorio','farmacia','gestao'];
   const index=Math.max(0,rooms.indexOf(item.room)),column=index%3,row=Math.floor(index/3);
+  // Cada fase ganha espelhamento e iluminação próprios; sem zoom, para a detetive manter a proporção do ambiente.
+  // A regra fica em cases.js, compartilhada com as fotos das pastas da tela inicial.
+  const variant=window.HospitalSceneVariantFor(item);
+  window.HospitalSceneVariant=variant;
+  const zoom=variant.zoom,panX=(760-760/zoom)*variant.pan,panY=400-400/zoom;
+  item.sceneFocus=window.HospitalSceneFocusFor(item,variant);
   const focus=item.sceneFocus;
+  // Efeito ambiente coerente com a sala: telas varrendo em técnica/laboratório, luz da janela nas demais e poeira no ar em todas.
+  const motes=[0,1,2,3,4].map(n=>`<circle class="scene-mote" cx="${90+((id*97+n*131)%580)}" cy="${120+((id*53+n*47)%160)}" r="${1.4+n%2*.8}" style="animation-delay:${-(n*2.3+id%3)}s"/>`).join('');
+  const roomEffect=(['tecnica','laboratorio'].includes(item.room)
+    ?'<rect class="scene-screen-scan" y="-6" width="760" height="6"/>'
+    :'<rect class="scene-window-light" x="30" y="0" width="150" height="300" fill="#fff3c5"/>')+motes;
   const sceneClues={
     1:'<rect x="-17" y="-17" width="34" height="34" rx="4" fill="#e9dfbd" stroke="#536d52" stroke-width="2"/><rect x="-11" y="-11" width="22" height="6" rx="1" fill="#263f32"/><g fill="#617958"><circle cx="-7" cy="2" r="2"/><circle cy="2" r="2"/><circle cx="7" cy="2" r="2"/><circle cx="-7" cy="9" r="2"/><circle cy="9" r="2"/><circle cx="7" cy="9" r="2"/></g>',
     2:'<rect x="-16" y="-17" width="32" height="34" rx="5" fill="#526d58" stroke="#e3d6ac" stroke-width="2"/><rect x="-10" y="-10" width="14" height="8" rx="1" fill="#1c3229"/><path d="M-10 3h18m-18 5h13M8-12l7-9" stroke="#e3d6ac" stroke-width="2"/><circle cx="9" cy="10" r="4" fill="#d3b878"/>',
@@ -44,9 +55,9 @@
     <title id="room-title">${escape(item.location)} · ${escape(item.title)}</title>
     <desc id="room-description">Investigue ${escape(focus.label)}. A detetive avança até o objeto quando o JavaScript do desafio é executado corretamente. O caminho fica no piso livre, em frente aos móveis.</desc>
     <defs><clipPath id="room-crop"><rect width="760" height="400"/></clipPath><linearGradient id="scene-floor-shade" x2="0" y2="1"><stop stop-color="#182f2700"/><stop offset="1" stop-color="#182f27" stop-opacity=".22"/></linearGradient><radialGradient id="foot-shadow"><stop stop-color="#1b2619" stop-opacity=".42"/><stop offset="1" stop-color="#1b2619" stop-opacity="0"/></radialGradient><radialGradient id="scene-focus-glow"><stop stop-color="#f5e7a5" stop-opacity=".64"/><stop offset="1" stop-color="#f5e7a5" stop-opacity="0"/></radialGradient></defs>
-    <g clip-path="url(#room-crop)" aria-hidden="true"><image href="assets/rooms-v2.png" x="${-column*760}" y="${-row*400}" width="2280" height="800" preserveAspectRatio="none"/></g>
+    <g clip-path="url(#room-crop)" aria-hidden="true"><g transform="${variant.flip?'translate(760 0) scale(-1 1)':''}"><svg width="760" height="400" viewBox="${column*760+panX} ${row*400+panY} ${760/zoom} ${400/zoom}" preserveAspectRatio="none" overflow="hidden"><image href="assets/rooms-v2.png" width="2280" height="800" preserveAspectRatio="none" style="filter:${variant.filter}"/></svg></g><rect class="scene-ambient ambient-${variant.key}" width="760" height="400" fill="${variant.wash}" opacity="${variant.alpha}"/>${roomEffect}</g>
     <rect y="240" width="760" height="160" fill="url(#scene-floor-shade)" pointer-events="none"/>
-    <g class="scene-focus-marker" transform="translate(${focus.x} ${focus.y})" aria-hidden="true"><circle class="scene-focus-glow" r="30" fill="url(#scene-focus-glow)"/><circle class="scene-focus-ring" r="27" fill="none" stroke="#f5e7a5" stroke-width="1.5"/><g class="scene-clue-art">${sceneClues[id]}</g><path d="M0-32v4m0 56v4m-32-32h4m56 0h4" stroke="#fff3c5" stroke-width="2"/><g transform="translate(0 -42)"><rect x="-59" y="-10" width="118" height="20" rx="10" fill="#203b33" fill-opacity=".94"/><circle cx="-47" r="2.5" fill="#e8d990"/><text x="2" y="3" text-anchor="middle" font-family="sans-serif" font-size="9" font-weight="700" letter-spacing=".5" fill="#fff8df">${escape(focus.label.toUpperCase())}</text></g></g>
+    <g class="scene-focus-marker" style="--focus-speed:${(2.2+(id%5)*.35).toFixed(2)}s;--focus-delay:${(id%4)*.3}s;--focus-color:${['#f5e7a5','#ffd08a','#a8e6ff','#c9f2b5','#ffb7a0','#e3c7ff'][id%6]}" transform="translate(${focus.x} ${focus.y})" aria-hidden="true"><circle class="scene-focus-glow" r="30" fill="url(#scene-focus-glow)"/><circle class="scene-focus-ring" r="27" fill="none" stroke="#f5e7a5" stroke-width="1.5"/><g class="scene-clue-art">${sceneClues[id]}</g><path d="M0-32v4m0 56v4m-32-32h4m56 0h4" stroke="#fff3c5" stroke-width="2"/><g transform="translate(0 -42)"><rect x="-59" y="-10" width="118" height="20" rx="10" fill="#203b33" fill-opacity=".94"/><circle cx="-47" r="2.5" fill="#e8d990"/><text x="2" y="3" text-anchor="middle" font-family="sans-serif" font-size="9" font-weight="700" letter-spacing=".5" fill="#fff8df">${escape(focus.label.toUpperCase())}</text></g></g>
     <g id="walk-target" opacity="0" pointer-events="none"><ellipse rx="14" ry="5" fill="none" stroke="#f1dfad" stroke-width="1.5"/><circle r="2" fill="#f1dfad"/></g>
     <g id="detective-position" transform="translate(194 348)" pointer-events="none"><ellipse id="detective-shadow" cy="1" rx="27" ry="8" fill="url(#foot-shadow)"/>
       <g id="detective-depth"><g id="detective-facing">

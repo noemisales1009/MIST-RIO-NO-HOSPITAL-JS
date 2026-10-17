@@ -60,7 +60,7 @@
  window.addEventListener('pagehide',pause);window.addEventListener('blur',pause);window.addEventListener('focus',()=>{if(target)schedule();});
  document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')pause();else if(target)schedule();});
  reduced.addEventListener?.('change',()=>{if(reduced.matches){if(target){x=target.x;y=target.y;target=null;}pause();}});
- const image=new Image();
+ const image=new Image(),decodedPoses=[];
  image.onload=()=>{
   try{
    const tileW=sprite.width/sprite.columns,tileH=sprite.height/sprite.rows;
@@ -72,6 +72,8 @@
     context.drawImage(image,pose%4*tileW,Math.floor(pose/4)*tileH,tileW,tileH,0,0,tileW,tileH);
     framesOfWalk.push(canvas.toDataURL('image/png'));
    }
+   // Decodifica as poses antes da primeira caminhada, para o primeiro passo não travar.
+   for(const src of framesOfWalk){const pose=new Image();pose.src=src;pose.decode?.().catch(()=>{});decodedPoses.push(pose);}
    spriteReady=true;paint();
   }catch{framesOfWalk.length=0;spriteReady=false;paint();}
  };

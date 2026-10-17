@@ -61,4 +61,7 @@
   finish(){stop();if(visible)show(profile.steps.length-1);},
   reset(){stop();root.hidden=true;visible=false;$('action-stage').setAttribute('data-mode','room');$('interaction-caption').textContent='';}
  };
+ // Decodifica as poses da ação num momento ocioso, para a primeira troca de pose não travar.
+ const idle=window.requestIdleCallback||(typeof Image==='function'?callback=>setTimeout(callback,1500):null);
+ idle?.(()=>{const picture=new Image();picture.src=item?.id===1?'assets/archive-interaction-v1.png':'assets/detective-interactions-v1.png';picture.decode?.().catch(()=>{});window.HospitalInteraction.preloaded=picture;});
 })();

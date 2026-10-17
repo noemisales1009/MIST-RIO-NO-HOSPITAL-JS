@@ -115,9 +115,18 @@
 #investigation-room:focus-visible{outline:3px solid #b39925;outline-offset:-5px}
 /* Cenários ilustrados e retratos no mesmo estilo da protagonista. */
 .case-scene{background:#34443a;isolation:isolate}.case-scene svg{width:100%;max-height:none;display:block}
-.scene-focus-marker{pointer-events:none}.scene-focus-glow{animation:scene-focus-pulse 2.8s ease-in-out infinite;transform-box:fill-box;transform-origin:center}.scene-focus-ring{stroke-opacity:.9}
+.scene-focus-marker{pointer-events:none}.scene-focus-glow{animation:scene-focus-pulse var(--focus-speed,2.8s) ease-in-out var(--focus-delay,0s) infinite;transform-box:fill-box;transform-origin:center}.scene-focus-ring{stroke-opacity:.9;stroke:var(--focus-color,#f5e7a5)}
 @keyframes scene-focus-pulse{0%,100%{opacity:.42;transform:scale(.84)}50%{opacity:.9;transform:scale(1.12)}}
-@media(prefers-reduced-motion:reduce){.scene-focus-glow{animation:none;opacity:.7}}
+.scene-ambient{pointer-events:none;mix-blend-mode:soft-light}
+.ambient-dia,.ambient-amanhecer{animation:ambient-breathe 8s ease-in-out infinite}.ambient-entardecer{animation:ambient-breathe 10s ease-in-out infinite}.ambient-noite,.ambient-plantao{animation:ambient-breathe 6s ease-in-out infinite}.ambient-clinico{animation:ambient-breathe 5s ease-in-out infinite}
+@keyframes ambient-breathe{0%,100%{opacity:.08}50%{opacity:.26}}
+.scene-mote{pointer-events:none;fill:#fff8df;animation:scene-mote 12s ease-in-out infinite}
+@keyframes scene-mote{0%,100%{opacity:0;transform:translate(0,0)}30%{opacity:.5}70%{opacity:.35;transform:translate(10px,-26px)}}
+.scene-screen-scan{pointer-events:none;fill:#bfe8ff;opacity:.07;animation:scene-scan 7s linear infinite}
+@keyframes scene-scan{0%{transform:translateY(0)}100%{transform:translateY(400px)}}
+.scene-window-light{pointer-events:none;mix-blend-mode:soft-light;animation:scene-window 11s ease-in-out infinite}
+@keyframes scene-window{0%,100%{opacity:.05;transform:translateX(-10px)}50%{opacity:.28;transform:translateX(14px)}}
+@media(prefers-reduced-motion:reduce){.scene-focus-glow{animation:none;opacity:.7}.scene-ambient,.scene-mote,.scene-screen-scan,.scene-window-light{animation:none}.scene-mote{opacity:.3}}
 .scene-walk-hint{background:#e6ddc4;color:#615f47;border-color:#c5bca4}
 #detective-idle,#detective-walk{transition:none}
 .suspect-card>.person-portrait{width:100%;aspect-ratio:1.03;position:relative;overflow:hidden;border:1px solid #bdc6ae;border-radius:4px;background:linear-gradient(135deg,#e8e0c7,#c9d2b9)}
@@ -215,7 +224,7 @@ dialog[open]{max-height:min(90dvh,calc(100dvh - var(--safe-top) - var(--safe-bot
 .lobby-folder .folder-top>span:first-child{color:var(--room);font-weight:700;letter-spacing:.12em}
 .lobby-folder .folder-number{display:none}
 .lobby-folder h3,.lobby-folder>p,.lobby-folder[data-solved=true] h3,.lobby-folder[data-solved=true]>p{max-width:calc(100% - 245px)}
-.folder-scene{position:absolute;top:58px;right:26px;width:214px;aspect-ratio:16/9;background-image:url(assets/rooms-v2.png);background-repeat:no-repeat;background-size:300% 200%;border:5px solid #fffaf0;border-radius:3px;box-shadow:0 6px 16px #3b30163d;transform:rotate(2.5deg);transition:transform .25s ease}
+.folder-scene{position:absolute;top:58px;right:26px;width:214px;aspect-ratio:16/9;border:5px solid #fffaf0;border-radius:3px;box-shadow:0 6px 16px #3b30163d;transform:rotate(2.5deg);transition:transform .25s ease}
 .folder-scene:before{content:'';position:absolute;top:-11px;left:50%;width:46px;height:15px;margin-left:-23px;background:#e9dcae;opacity:.9;transform:rotate(-3deg);box-shadow:0 1px 1px #0000001a}
 .lobby-folder:hover .folder-scene,.lobby-folder:focus-visible .folder-scene{transform:rotate(0) scale(1.03)}
 .folder-clue{position:absolute;width:0;height:0}
@@ -228,3 +237,4 @@ dialog[open]{max-height:min(90dvh,calc(100dvh - var(--safe-top) - var(--safe-bot
 .folder-culprit{top:118px;right:16px;width:84px;z-index:2}
 @media(max-width:760px){.lobby-folder h3,.lobby-folder>p,.lobby-folder[data-solved=true] h3,.lobby-folder[data-solved=true]>p{max-width:none}.folder-scene{position:relative;top:auto;right:auto;display:block;width:100%;margin:2px 0 18px;transform:rotate(-1deg)}.folder-culprit{top:74px;right:18px;width:76px}}
 @media(prefers-reduced-motion:reduce){.folder-scene{transition:none}}
+.folder-scene-view{position:absolute;inset:0;overflow:hidden}.folder-scene-flip,.folder-scene-art,.folder-scene-wash{position:absolute;inset:0}.folder-scene-art{background-image:url(assets/rooms-v2.png);background-repeat:no-repeat;background-size:300% 200%}

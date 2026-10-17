@@ -1,0 +1,35 @@
+MISTÉRIO NO HOSPITAL JS — LEIA PRIMEIRO
+
+Este ZIP contém o código completo da versão atual do jogo, com os 24 casos,
+personagens, imagens, animações, caderno, análises e conclusões por JavaScript.
+
+COMO USAR OS ARQUIVOS
+1. Extraia o ZIP (no Windows, clique com o botão direito e escolha Extrair Tudo).
+2. Abra a pasta misterio-hospital-js no Visual Studio Code.
+3. Leia README.md para conhecer a estrutura e o funcionamento.
+
+ONDE ESTÁ CADA PARTE
+- public/: páginas e código do jogo.
+- public/caso1.html até public/caso24.html: os 24 casos.
+- public/assets/: imagens e animações.
+- public/lessons.js: desafios de JavaScript.
+- public/cases.js: histórias, personagens e análises.
+- tests/: testes automatizados.
+- app/: integração com a autenticação do site.
+
+SOBRE EXECUTAR O JOGO
+Esta é a cópia do código da versão publicada no ChatGPT Sites.
+O login depende da autenticação dessa plataforma. Para hospedar fora dela,
+será necessário adaptar a autenticação e o endpoint /api/profile.
+Abrir o HTML diretamente com dois cliques não substitui essa integração.
+
+JOGO PUBLICADO
+https://misterio-hospital-js-noemi.yellow-fly-6205.chatgpt.site
+
+SEU PROGRESSO
+O ZIP contém o projeto. As anotações, fotos e o progresso pessoal ficam no
+navegador em que você joga. Para guardá-los também, use a opção de exportar
+uma cópia completa pelo caderno do jogo e salve o arquivo JSON.
+
+A pasta node_modules e os arquivos temporários não fazem parte deste ZIP.
+Versão do código: e663f1fb3befdc608a983c37a74470dddc5e3516

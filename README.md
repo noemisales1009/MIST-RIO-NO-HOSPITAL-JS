@@ -1,0 +1,91 @@
+# Mistério no Hospital JS
+Jogo em português para aprender JavaScript resolvendo 24 investigações curtas em um hospital fictício, criado para Noemi Sales.
+
+## Conteúdo
+Cada caso tem uma ocorrência diferente, cenário, pista, um desafio de JavaScript, três fichas de personagens e uma conclusão. Todos os 24 casos estão disponíveis em páginas próprias. A seleção mostra as 24 pastas diretamente, sem cronômetro ou perda de vidas.
+
+- Casos 01–06: variáveis, atribuição, nomes, tipos e textos.
+- Casos 07–12: comparações, if/else e condições compostas.
+- Casos 13–18: listas, repetição, objetos e tratamento de texto.
+- Casos 19–23: funções, transformação de listas, JSON, async/await e DOM.
+- Caso 24: leitura com JavaScript e Supabase. SQL aparece somente aqui.
+
+O terminal mostra uma prévia dos dados após uma breve pausa na digitação, sem liberar registros ou mover a personagem. A função pronta conferirFicha("nome") abre a ficha em um pop-up quando o comando fica completo. Os retratos preparam esse comando em um campo de consulta separado, preservando o programa do desafio. O botão Executar valida os dados e o comando de ação do caso. Não basta imprimir a resposta: abrirPorta(senha), por exemplo, precisa receber a senha correta para destrancar a porta. A sequência aparece em pop-up no computador e no celular: aproximação, ação no objeto, dados aplicados e registro recuperado. A pista só é liberada depois da ação, com opção de pular a animação. Prévia e execução usam Workers separados; ao continuar digitando, a prévia anterior é cancelada. Código incompleto recebe uma indicação discreta, sem alertas a cada tecla.
+
+O código é executado em Web Worker, com limite de dois segundos e limite de saída. Funções têm verificações com entradas diferentes. DOM e cliente Supabase são modelos locais explícitos para treino. O último caso também permite preparar uma tabela fictícia com SQL e testar uma conexão real de leitura pela API de um projeto Supabase informado pelo jogador. Não há projeto Supabase pré-configurado. Campos de URL e chave não são persistidos; só chaves públicas publishable/anon são aceitas. O SQL limita o acesso da tabela de treino à leitura com RLS.
+
+Resolver o programa recupera um registro. Para concluir, compare o identificador com as fichas e escreva concluirCaso("nome da pessoa");. O comando correto conclui e salva automaticamente, sem seleção manual de pessoas. Progresso de código e conclusão são salvos separadamente.
+
+## Personagem e interface
+A detetive usa uma sequência ilustrada de oito poses para caminhar. A animação acompanha a distância percorrida, com aceleração, desaceleração e mudança de direção. Ela avança até a pista somente quando o código do desafio é aprovado. A execução correta abre o pop-up com a ação do objeto e o registro recuperado. Ao fechar, o cenário volta para a sala, mantendo a personagem e sua posição. O computador sinaliza acerto ou erro com texto e cor; código incorreto não abre o pop-up. Ao recomeçar a prática, ela volta ao ponto inicial. Os subpassos mantêm a resposta semelhante em telas com taxas de atualização diferentes. O desenho em repouso não é deformado por recortes de pernas.
+
+As seis salas usam cenários detalhados próprios: arquivos, suporte técnico, recepção, laboratório, farmácia e gestão. Cada uma das 24 fases acrescenta uma ilustração de pista própria à sala, identifica o objeto investigado e posiciona a chegada da detetive junto a ele. A arte vetorial acompanha a largura disponível em celular, tablet e computador. Todo o corredor inferior é reservado para caminhar; os limites dos pés ficam em x=84–678 e y=302–369. A personagem mantém escala comum ao repouso e à caminhada, proporcional à mobília, com os pés ancorados ao piso. Somente uma pose é exibida por vez. Cada caso tem três suspeitos exclusivos: 72 nomes, crachás e retratos sem reutilizar personagens entre casos. Os retratos das pessoas usam a mesma linguagem visual da protagonista, em lugar de rostos geométricos. O nome autenticado aparece no cartão inicial e no cabeçalho, separado da personagem. Preferência por movimento reduzido é respeitada.
+
+As imagens estão em `public/assets/`. O atlas é recortado na renderização, preservando os arquivos PNG e a transparência. Os oito quadros da caminhada são isolados em memória antes de serem exibidos, evitando cabeças ou pés de poses vizinhas. Consulte `ART_ASSETS.md` para caminhos e prompts das artes.
+A interface inclui monitor sem teclado decorativo, pistas fora do desenho, atalhos móveis, botões confortáveis e editor com fonte de 16px em telas pequenas. Verificação visual em navegador e aparelho físico ainda é necessária; os testes automatizados não substituem essa avaliação.
+
+## Arquivo pessoal
+A sessão usa o helper oficial Sites em `app/chatgpt-auth.ts`. `/api/profile` exige autenticação e retorna o ID estável e o nome autenticado para identificação, sem e-mail e sem cache compartilhado. Quando não há nome disponível, usa “Detetive”.
+
+O caderno usa IndexedDB separado pela conta. O arquivo antigo é preservado e migrado uma vez, sem copiá-lo para outras contas. Textos, fotos, post-its, posições das fichas, descobertas, desafios e conclusões podem ser exportados e restaurados em JSON. Não existe sincronização entre dispositivos. As evidências antigas têm aliases para restauração de cópias anteriores.
+
+## Estrutura e validação
+- `public/index.html`, `public/lobby.js`: seleção direta dos 24 casos, cartão pessoal e progresso.
+- `public/caso1.html` a `public/caso24.html`: páginas das investigações.
+- `public/cases.js`, `public/lessons.js`: histórias, personagens e desafios.
+- `public/case-bootstrap.js`, `public/movement.js`: cenários e caminhada com limites.
+- `public/app.js`, `public/worker.js`: editor, execução e correção.
+- `public/characters.js`: fichas, conclusão e persistência dos casos resolvidos.
+- `public/notebook.js`: quadro, fotos, caderno, pastas e cópias de segurança.
+- `public/connection.js`: SQL didático e conexão real opcional do Caso 24.
+- `public/identity.js`, `public/storage.js`: sessão, separação de contas e migração.
+- `public/theme.js`, `public/dark-theme.css`: modo escuro. O botão de lua/sol no cabeçalho alterna o tema e guarda a escolha no navegador; sem escolha salva, o jogo segue o tema do sistema. `dark-theme.css` é gerado a partir de `style.css` por `node scripts/build-dark-theme.mjs`: rode de novo sempre que mudar cores no `style.css`. Cenários, retratos, animações e botões amarelos mantêm as cores originais.
+
+`npm test` executa verificações das 24 soluções, 24 cenários ilustrados, conclusões, salvamento e restauração do caderno, isolamento de contas, identidade e limites da caminhada, aceleração, parada, acionamento pelo desafio e consistência de atualização. A conexão real com Supabase depende do projeto e da chave pública do jogador; os testes verificam o modelo de treino.
+
+Use o helper de build do plugin Sites. A aplicação mantém o starter Vinext e a integração de autenticação da plataforma. A saída fica em `dist/client` e `dist/server`.
+
+## Comandos de investigação
+São funções prontas deste jogo para praticar JavaScript; não são funções nativas da linguagem. A interface mostra os exemplos de cada caso.
+
+- `lerOcorrencia()` abre o relato e a localização.
+- `examinarObjeto("terminal")` examina o objeto indicado naquele caso.
+- `conferirFicha("Brisa")` abre a ficha de uma das pessoas daquele caso.
+- `coletarPista()` envia a pista recuperada ao quadro.
+- `anotar("Minha descoberta")` adiciona um post-it ao caderno do caso.
+- Cada caso possui uma ação própria com os dados aprendidos: `abrirPorta(senha)`, `imprimirEtiqueta(codigo)`, `abrirGaveta(destino)` e outras.
+
+Os comandos de leitura abrem o resultado após a digitação estar completa. Anotações são salvas apenas ao clicar em Executar comando, evitando post-its com fragmentos do texto. Ações no cenário exigem Executar e argumentos corretos. A prévia não concede progresso nem coleta uma pista ainda não liberada.
+
+`public/scene-actions.js` controla a ação visual e a revelação. Os testes adicionais verificam as 24 sequências e os comandos com argumentos corretos/incorretos. A conferência visual em navegador e celular continua necessária.
+
+A página Como jogar é acessível pelo menu superior. O caderno inclui a aba Cola de JavaScript: comandos do jogo e exemplos dos 24 conceitos, disponíveis no caso atual e nos concluídos. A seleção usa links nativos sem atrasar a navegação, resposta ao toque e restauração do estado ao voltar.
+
+O monitor organiza o programa em três passos: preparar dados, mostrar valores com console.log e chamar a ação. A conferência informa cada etapa e mostra o que falta dentro do monitor. Inserir uma linha existente seleciona o comando em vez de duplicá-lo. Consultas de ocorrência, objetos e fichas usam um campo separado, preservando o programa do desafio, com exemplos de entrada e resultado. As fichas explicam como comparar o crachá do registro, abrir as pessoas e apresentar a conclusão. As pastas usam navegação direta, sem transformações ao passar o mouse ou transição visual entre páginas.
+
+## Animações de interação
+Os 24 casos têm sequências próprias em public/interactions.js. A caminhada termina antes de a interação começar. No Caso 01, seis quadros mostram a detetive abrir a gaveta, retirar uma pasta e examiná-la. Nos demais casos, 12 poses de interação são combinadas com o objeto da história: controles de rádio, impressão, leitura de crachá e recusa, conferência da escala, registro de chave, rota, estoque, restauração de fichas, normalização do cadastro, gaveta secreta, calibração, JSON, espera de mensagem, painel e leitura da tabela de treino. As animações aparecem no pop-up e têm legenda por etapa. A pista é revelada no fim, com opção explícita de pular. Fechar ou recomeçar cancela os temporizadores, e movimento reduzido mostra o resultado sem aguardar a animação.
+
+Os cenários permanecem livres de elementos desenhados por cima dos móveis. A interação aparece como um detalhe ilustrado no pop-up. O Caso 24 mantém o modelo local de treino do Supabase; a animação não representa uma conexão real. Testes verificam a ordem das 24 sequências e sua integração com o editor. Conferência visual em navegador e aparelho físico continua pendente.
+
+O pop-up de ação mostra a animação em uma única área. O quadro lateral com uma segunda ilustração do objeto e os valores das variáveis foi removido. Os valores continuam no console do programa, e a pista aparece depois da animação.
+
+A conclusão dos 24 casos também usa JavaScript: concluirCaso("nome da pessoa");. O nome é validado contra as fichas do próprio caso, com normalização de acentos e maiúsculas. O registro precisa ter sido recuperado antes. Comando incompleto, nome desconhecido e resposta incorreta não avançam o caso; o acerto salva a conclusão, adiciona a evidência ao quadro e libera o próximo caso. O campo aceita também variáveis e código JavaScript válido. A conferência é feita após uma pausa na digitação ou por Executar conclusão.
+
+As análises seguem o fluxo do jogo SQL de referência: o programa recupera um registro, `analisarPistas()` organiza os achados sem revelar a pessoa responsável, e a comparação com as fichas orienta `concluirCaso("Nome");`. Cada um dos 24 casos tem uma pergunta, uma orientação e um desfecho próprios. A conclusão mostra retrato, crachá, evidência, motivo da resposta e o conceito de JavaScript praticado; a explicação também fica no caderno.
+
+## Investigação, dicas e guia
+- Nos casos 7, 19 e 21, o resultado do programa é a pista: o registro não entrega a pessoa responsável, e a conclusão vem do console e dos depoimentos das fichas (`"deduction": "codigo"` em `public/cases.js`).
+- O corretor (`public/worker.js`) também roda o programa com dados alternativos (`variants` em `public/lessons.js`). Escrever o resultado final direto não passa. As mensagens orientam sem revelar o valor esperado.
+- Dicas em três níveis: a dica de conceito fica sempre visível; a dica 2 aparece depois da primeira tentativa que não deu certo, e a solução depois da segunda.
+- O Caso 1 tem um guia passo a passo (`public/tutorial.js`), que abre na primeira visita e pode ser revisto pelo botão "Ver o guia do caso".
+- Casos concluídos mostram, na pasta, a foto da pessoa identificada com o carimbo CULPADO.
+
+## Rodar no seu computador, com login e Supabase
+- Dê dois cliques em `INICIAR-JOGO.bat` (ou rode `npm run local`). O jogo abre em http://localhost:5174. Mantenha a janela preta aberta enquanto joga.
+- **Login:** e-mail e senha pelo Supabase Auth (`public/identity.js`). Sem configuração do Supabase, o jogo pede só um nome e guarda tudo no navegador (modo local).
+- **Configuração:** `public/supabase-config.js` (URL e chave pública *anon*; nunca use a chave *service_role* aqui).
+- **Banco:** rode `supabase/schema.sql` no SQL Editor do Supabase. Cria a tabela `hospital_dados` com RLS: cada pessoa só lê e altera as próprias linhas.
+- **Sincronização:** `public/sync.js`. O jogo continua gravando no navegador e envia uma cópia para a nuvem (caderno, fotos, progresso e código digitado). Ao abrir em outro aparelho, traz de volta. Casos concluídos nunca diminuem ao juntar dois aparelhos; no mais, vale a gravação mais recente.
+- Biblioteca: `public/vendor/supabase.js` é o pacote oficial supabase-js 2.118.0, servido pelo próprio jogo.
+- `app/` e `build/` são da hospedagem original (ChatGPT Sites) e não são usados no modo local.

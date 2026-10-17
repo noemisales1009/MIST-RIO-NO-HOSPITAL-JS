@@ -1,5 +1,10 @@
 /* Tela de entrada, botão Sair e indicador de sincronização. Cores próprias para o modo claro e o escuro. */
 html.login-open body{overflow:hidden}
+/* Antes de saber quem está jogando, nada do arquivo aparece: o theme.js liga auth-pending e o identity.js desliga ao entrar. */
+html.auth-pending body>*:not(.login-overlay):not(.auth-waiting){visibility:hidden}
+html.auth-pending .login-overlay{background:radial-gradient(120% 90% at 50% 0%,#24493f,#0e211b)}
+:root[data-theme="dark"].auth-pending .login-overlay{background:radial-gradient(120% 90% at 50% 0%,#0f2a22,#050c0a)}
+.auth-waiting{position:fixed;inset:0;z-index:999;display:grid;place-items:center;margin:0;padding:24px;color:var(--muted);font:600 15px var(--body);text-align:center}
 .login-overlay{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;padding:calc(16px + var(--safe-top,0px)) calc(16px + var(--safe-right,0px)) calc(16px + var(--safe-bottom,0px)) calc(16px + var(--safe-left,0px));background:radial-gradient(120% 90% at 50% 0%,#24493fe6,#0e211bf0);backdrop-filter:blur(4px);overflow:auto}
 .login-card{width:min(420px,100%);overflow:hidden;background:#fffaf0;color:#213d35;border:1px solid #e3d6ae;border-radius:14px;box-shadow:0 24px 60px #06110d66;font-family:var(--body)}
 /* Faixa do hospital, com a detetive. */

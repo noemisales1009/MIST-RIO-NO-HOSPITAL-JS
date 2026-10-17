@@ -22,7 +22,15 @@
   if(!navigator.onLine)return 'Sem internet no momento. Conecte-se para entrar.';
   return 'Não foi possível concluir. Tente novamente.';
  }
+ // Enquanto confere a conta, a página fica escondida; depois de um instante aparece só um aviso.
+ let waiting=null;
+ const waitTimer=setTimeout(()=>{waiting=el('p',{className:'auth-waiting',role:'status',text:'Abrindo seu arquivo…'});document.body.append(waiting);},400);
+ function reveal(){clearTimeout(waitTimer);waiting?.remove();document.documentElement.classList.remove('auth-pending');}
+ // Sessão guardada no aparelho pela biblioteca (mesma chave do createClient).
+ function storedSession(){try{const s=JSON.parse(localStorage.getItem('hospital-js-auth')||'null');return s&&s.user&&s.user.id&&s.refresh_token?s:null;}catch{return null;}}
+ const networkTrouble=error=>!navigator.onLine||!!(error&&(window.supabase.isAuthRetryableFetchError?.(error)||error.status===0));
  function fillPage(user){
+  reveal();
   window.HospitalUser=user;
   $$('[data-player-name]').forEach(node=>node.textContent=user.name);
   $$('[data-player-badge]').forEach(node=>{node.hidden=false;if(!node.parentNode.querySelector('[data-sign-out]')){const button=el('button',{type:'button',className:'sign-out-button',text:'Sair'});button.setAttribute('data-sign-out','');button.addEventListener('click',signOut);node.after(button);}});
@@ -96,6 +104,7 @@
     }catch(error){failures++;if(failures>=5){lockedUntil=Date.now()+30000;failures=0;}say(friendly(error),true);}
     finally{submit.disabled=false;passInput.value='';}
    });
+   clearTimeout(waitTimer);waiting?.remove();
    document.documentElement.classList.add('login-open');document.body.append(overlay);paint();
    (remote&&!recovery?emailInput:nameInput).focus();
   });
@@ -108,9 +117,14 @@
     client.auth.onAuthStateChange(event=>{if(event==='SIGNED_OUT'&&window.HospitalUser)location.reload();});
     // Link de "esqueci a senha": a biblioteca cria uma sessão temporária; o endereço traz type=recovery.
     const recovering=/type=recovery/.test(location.hash||'');
-    const {data}=await client.auth.getSession();
+    // Depois de um tempo sem abrir, o acesso precisa ser renovado pela internet. Se a rede do celular
+    // ainda não acordou (ou caiu), a pessoa continua com a conta guardada no aparelho: a biblioteca
+    // renova sozinha quando a internet voltar. Só uma conta recusada pelo servidor volta para "Entrar".
+    const loading=client.auth.getSession();
+    const {data,error,slow}=recovering?await loading:await Promise.race([loading,new Promise(done=>setTimeout(()=>done({data:{},slow:true}),6000))]);
     if(recovering){history.replaceState(null,'',location.pathname);user=await showLogin('recovery');}
     else if(data.session)user=fromSession(data.session);
+    else if((slow||networkTrouble(error))&&storedSession())user=fromSession(storedSession());
    }else{
     let saved=null;try{saved=localStorage.getItem(LOCAL_NAME);}catch{}
     if(saved)user={id:'local',name:cleanName(saved)};
@@ -118,7 +132,8 @@
    if(!user)user=await showLogin();
    fillPage(user);return user;
   }catch{
-   $$('[data-account-status]').forEach(node=>{node.textContent='Atualize a página para abrir seu arquivo.';});return null;
+   clearTimeout(waitTimer);if(!waiting){waiting=el('p',{className:'auth-waiting',role:'status'});document.body.append(waiting);}
+   waiting.textContent='Não foi possível abrir seu arquivo. Feche e abra de novo.';return null;
   }
  })();
 })();

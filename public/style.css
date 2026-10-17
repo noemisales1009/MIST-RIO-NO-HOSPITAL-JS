@@ -239,6 +239,10 @@ dialog[open]{max-height:min(90dvh,calc(100dvh - var(--safe-top) - var(--safe-bot
 .lobby-folder[data-solved=true] .folder-suspects small:after{content:' · culpado identificado';color:#a33a2f}
 .folder-culprit{top:118px;right:16px;width:84px;z-index:2}
 @media(max-width:760px){.lobby-folder h3,.lobby-folder>p,.lobby-folder[data-solved=true] h3,.lobby-folder[data-solved=true]>p{max-width:none}.folder-scene{position:relative;top:auto;right:auto;display:block;width:100%;margin:2px 0 18px;transform:rotate(-1deg)}.folder-culprit{top:74px;right:18px;width:76px}}
+/* A foto da sala só fica ao lado do texto quando a pasta é larga. Em pasta estreita (tablet e computador
+   pequeno, com duas pastas por linha), ela vai para cima do texto, como no celular. */
+.lobby-folder{container-type:inline-size}
+@container (max-width:540px){.lobby-folder h3,.lobby-folder>p,.lobby-folder[data-solved=true] h3,.lobby-folder[data-solved=true]>p{max-width:none}.folder-scene{position:relative;top:auto;right:auto;display:block;width:100%;margin:2px 0 18px;transform:rotate(-1deg)}.folder-culprit{top:74px;right:18px;width:76px}}
 @media(prefers-reduced-motion:reduce){.folder-scene{transition:none}}
 .folder-scene-view{position:absolute;inset:0;overflow:hidden}.folder-scene-flip,.folder-scene-art,.folder-scene-wash{position:absolute;inset:0}.folder-scene-art{background-image:url(assets/rooms-v2.png);background-repeat:no-repeat;background-size:300% 200%}
 /* Computador: editor colorido que cresce com o programa e quebra linha; passos mais enxutos. */

@@ -252,6 +252,8 @@
     renderPhotos();renderPins();updateMeta();
   }
   function download(name,blob) {
+    // No aplicativo Android não existe "baixar": o nativo.js do projeto Android abre a tela de compartilhar.
+    if(typeof window.HospitalNativeSave==='function'){window.HospitalNativeSave(name,blob);return;}
     const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),10000);
   }
   async function exportNotebook() {

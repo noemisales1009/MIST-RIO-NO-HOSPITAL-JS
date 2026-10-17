@@ -1,0 +1,57 @@
+/* Ajustes feitos à mão para o modo escuro: "hospital à noite".
+   Carregado depois de dark-theme.css (que é gerado automaticamente) para corrigir as cores que viravam oliva.
+   Paleta: fundo verde-noite, superfícies verde-ardósia, texto creme e detalhes dourados. */
+:root[data-theme="dark"]{--bg:#0d1714;--paper:#14211c;--ink:#e7e1cc;--green:#8fcfae;--muted:#9fb0a5;--line:#263a31;--soft:#18271f;--yellow:#e8d27a}
+:root[data-theme="dark"] body{background:radial-gradient(120% 60% at 50% 0%,#132520,#0d1714 70%) fixed}
+
+/* Cartão de boas-vindas */
+:root[data-theme="dark"] .player-welcome{background:linear-gradient(135deg,#1a3d33,#11271f);border:1px solid #2f5546;box-shadow:0 5px 0 #08120f,inset 0 -3px 0 #c9a64055}
+:root[data-theme="dark"] .player-welcome .eyebrow{color:#e2c35f}
+:root[data-theme="dark"] .player-welcome h1{color:#f3ead0}
+:root[data-theme="dark"] .player-summary #player-level{background:#23453a;color:#bfe3cf}
+:root[data-theme="dark"] .player-summary{color:#b9c5bb}
+:root[data-theme="dark"] #player-progress{appearance:none;-webkit-appearance:none;height:8px;border:0;border-radius:8px;background:#0b1713;overflow:hidden}
+:root[data-theme="dark"] #player-progress::-webkit-progress-bar{background:#0b1713;border-radius:8px}
+:root[data-theme="dark"] #player-progress::-webkit-progress-value{background:linear-gradient(90deg,#c9a640,#e8d27a);border-radius:8px}
+:root[data-theme="dark"] #player-progress::-moz-progress-bar{background:linear-gradient(90deg,#c9a640,#e8d27a);border-radius:8px}
+:root[data-theme="dark"] .continue-investigation{background:linear-gradient(135deg,#2f7a64,#245f4e);color:#fff7dc;box-shadow:0 3px 0 #163d33}
+
+/* Pastas dos casos: pasta de arquivo à noite, com detalhes dourados */
+:root[data-theme="dark"] .lobby-folder.available-folder{color:#cfd8cc;border-color:#2c4036;background:linear-gradient(135deg,#1a2822,#141f1a);box-shadow:0 5px 0 -1px #0b1411,0 6px 0 -1px #2c4036}
+:root[data-theme="dark"] .lobby-folder.available-folder:before{background:#1a2822;border-color:#2c4036}
+:root[data-theme="dark"] .lobby-folder.available-folder:hover{box-shadow:0 9px 0 -1px #0b1411,0 10px 0 -1px #3a5646}
+:root[data-theme="dark"] .available-folder .folder-tab{color:#d6bf6a}
+:root[data-theme="dark"] .lobby-folder .folder-top>span:first-child{color:#8fa596}
+:root[data-theme="dark"] .available-folder .folder-state{color:#a8d5b8;background:#0f1a16;border-color:#33503f}
+:root[data-theme="dark"] .lobby-folder[data-solved=true] .folder-state{color:#e8d27a;border-color:#6b5c26;background:#1d1a0e}
+:root[data-theme="dark"] .available-folder .folder-number{color:#e8d27a;opacity:.07}
+:root[data-theme="dark"] .available-folder h3{color:#f0e8cf}
+:root[data-theme="dark"] .available-folder>p{color:#a9b5a6}
+:root[data-theme="dark"] .available-folder .folder-concepts>span{color:#a8d5b8;border-color:#33503f;background:#0f1a16}
+:root[data-theme="dark"] .available-folder .folder-bottom{border-color:#263a31}
+:root[data-theme="dark"] .folder-bottom>span{color:#7f9187}
+:root[data-theme="dark"] .available-folder .folder-bottom>strong{color:#e8d27a}
+/* Um toque da cor de cada sala na borda de cima da pasta */
+:root[data-theme="dark"] .room-arquivos.available-folder{border-top:2px solid #b08d57}
+:root[data-theme="dark"] .room-tecnica.available-folder{border-top:2px solid #5f9db0}
+:root[data-theme="dark"] .room-recepcao.available-folder{border-top:2px solid #c9a640}
+:root[data-theme="dark"] .room-laboratorio.available-folder{border-top:2px solid #7cc4b0}
+:root[data-theme="dark"] .room-farmacia.available-folder{border-top:2px solid #9cc47a}
+:root[data-theme="dark"] .room-gestao.available-folder{border-top:2px solid #b49ad0}
+:root[data-theme="dark"] .room-arquivos.available-folder,:root[data-theme="dark"] .room-tecnica.available-folder,:root[data-theme="dark"] .room-recepcao.available-folder,:root[data-theme="dark"] .room-laboratorio.available-folder,:root[data-theme="dark"] .room-farmacia.available-folder,:root[data-theme="dark"] .room-gestao.available-folder{background:linear-gradient(135deg,#1a2822,#141f1a)}
+
+/* Foto do culpado: moldura de papel fica clara também à noite */
+:root[data-theme="dark"] .culprit-photo{background:#efe6c8;border-color:#cbbf98;box-shadow:0 4px 12px #000a}
+:root[data-theme="dark"] .culprit-photo>figcaption{color:#3a3426}
+:root[data-theme="dark"] .culprit-stamp{border-color:#c0392b;color:#c0392b;background:#efe6c8b3;box-shadow:inset 0 0 0 1px #c0392b66}
+
+/* Página do caso: painéis no mesmo verde-noite */
+:root[data-theme="dark"] .code-panel{background:#121e19}
+:root[data-theme="dark"] .case-path{background:#14211c}
+:root[data-theme="dark"] .lesson-learning{background:#172620;border-left-color:#4f8f74}
+:root[data-theme="dark"] .suspect-panel{background:#121d18}
+:root[data-theme="dark"] .suspect-card{background:#17241e;border-color:#2c4036;box-shadow:0 2px 0 #0b1411}
+:root[data-theme="dark"] .clue-card{background:#2a2614;border-color:#6b5c26;color:#efe2b0;box-shadow:2px 3px 0 #00000055}
+:root[data-theme="dark"] .recovered-record{background:#17251f;border-color:#6b5c26;box-shadow:2px 3px 0 #00000055}
+:root[data-theme="dark"] .case-conclusion,:root[data-theme="dark"] .success{background:#16241e;border-color:#2f5546}
+:root[data-theme="dark"] .deduction-form{border-top-color:#263a31}

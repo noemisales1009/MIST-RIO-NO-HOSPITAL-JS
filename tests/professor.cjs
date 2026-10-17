@@ -37,6 +37,10 @@ const text=items=>items.map(item=>[item.title,item.text,item.example,item.q,item
  assert(find('diferença entre const e let',20).includes('const e let'));
  assert(find('o que faz o return?',19).includes('return'));
  assert.equal(ada.search('xyz qwerty',5),null);
+ // Dúvida de outro caso vem marcada com o caso que ensina aquilo; exemplos usam o tema do caso.
+ assert.equal(ada.search('o que é um array',4).lessonId,13);assert.equal(ada.search('pra que servem as aspas?',1).lessonId,1);
+ assert(ada.explainIssue({code:'type',name:'horario',expected:'number'},lessons[3]).example.includes('Impressora'),'Exemplo com o tema do caso');
+ assert(ada.explainIssue({code:'mutable',name:'acesso'},lessons[1]).example.includes('Radio'));
  assert.equal(ada.intent('me dá a resposta'),'answer');assert.equal(ada.intent('deu erro aqui'),'error');assert.equal(ada.intent('olha meu código'),'check');
  console.log('Tira-dúvidas: perguntas frequentes nos 24 casos, explicações próprias para cada problema e erro comum, nada entrega a resposta e perguntas livres encontram a explicação certa.');
 })().catch(e=>{console.error(e);process.exit(1)});

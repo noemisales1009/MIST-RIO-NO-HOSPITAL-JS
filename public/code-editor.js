@@ -27,7 +27,8 @@
   // Copia a tipografia real do campo (ela muda conforme o aparelho).
   const style=getComputedStyle(code);
   for(const property of ['fontFamily','fontSize','fontWeight','lineHeight','letterSpacing','tabSize','paddingTop','paddingRight','paddingBottom','paddingLeft'])view.style[property]=style[property];
-  view.style.width=code.getBoundingClientRect().width+'px';view.style.top=code.offsetTop+'px';view.style.left=code.offsetLeft+'px';
+  // Largura útil do campo (sem a barra de rolagem), para as linhas quebrarem no mesmo ponto.
+  view.style.width=code.clientWidth+'px';view.style.top=code.offsetTop+'px';view.style.left=code.offsetLeft+'px';
   numbers.style.top=code.offsetTop+parseFloat(style.paddingTop)+'px';
   const lines=code.value.split('\n');view.replaceChildren();
   for(const line of lines){
@@ -39,13 +40,25 @@
   // Números de linha na altura de cada linha (uma linha longa ocupa mais de uma faixa).
   const rows=[...view.children];numbers.replaceChildren();
   rows.forEach((row,index)=>{const number=document.createElement('span');number.textContent=String(index+1);number.style.height=row.getBoundingClientRect().height+'px';numbers.append(number);});
-  // O campo cresce até mostrar o programa inteiro, sem barra de rolagem interna.
+  // O campo cresce com o programa até mais ou menos metade da tela; daí em diante, rola por dentro.
   code.style.height='auto';
-  const minimum=parseFloat(style.minHeight)||0;
-  code.style.height=Math.max(minimum,view.scrollHeight)+'px';
+  const minimum=parseFloat(style.minHeight)||0,content=view.scrollHeight,limit=Math.max(minimum,Math.round(innerHeight*.5)),height=Math.max(minimum,Math.min(content,limit));
+  code.style.height=height+'px';view.style.height=height+'px';
+  numbers.style.height=Math.max(0,height-parseFloat(style.paddingTop)-parseFloat(style.paddingBottom))+'px';
+  code.classList.toggle('code-scrolls',content>height);
+  syncScroll();
  }
+ // A cópia colorida e os números acompanham a rolagem do campo.
+ function syncScroll(){view.scrollTop=code.scrollTop;numbers.scrollTop=code.scrollTop;}
+ code.addEventListener('scroll',syncScroll);
  const schedule=()=>{if(code.value!==last||!numbers.firstElementChild||area.dataset.width!==String(area.clientWidth)){area.dataset.width=String(area.clientWidth);render();}};
  code.addEventListener('input',render);
+ // Passos do programa numa faixa compacta: os botões de inserir linha vão para a barra do editor.
+ const controls=document.querySelector('.editor-controls'),run=document.getElementById('run');
+ let previous=run;
+ for(const [id,label]of [['insert-console','＋ console.log'],['insert-action','＋ ação do caso']]){const button=document.getElementById(id);if(button&&controls&&previous){button.textContent=label;button.classList.add('editor-insert');previous.after(button);previous=button;}}
+ const shortTitles=['Dados','Console','Ação'];
+ document.querySelectorAll('.program-checklist li').forEach((step,index)=>{const title=step.querySelector('b');if(title&&shortTitles[index]){step.title=title.textContent;title.textContent=shortTitles[index];}});
  addEventListener('resize',()=>{last=null;schedule();});
  // O programa também muda sem digitação (recomeçar, inserir linha, solução, cópia salva).
  const watch=()=>{schedule();requestAnimationFrame(watch);};

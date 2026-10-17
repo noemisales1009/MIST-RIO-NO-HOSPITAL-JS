@@ -1,5 +1,5 @@
 'use strict';
-// Tira-dúvidas da Dra. Ada: explica o código da jogadora, traduz erros do JavaScript e responde dúvidas,
+// Tira-dúvidas da professora Mica: explica o código da jogadora, traduz erros do JavaScript e responde dúvidas,
 // sempre com exemplos diferentes dos dados do caso, para ensinar sem entregar a resposta.
 (()=>{
  // ---------- perguntas frequentes de cada caso (q: pergunta, a: resposta, x: exemplo, k: palavras-chave) ----------
@@ -85,25 +85,32 @@
  ];
  // ---------- explicações para cada tipo de problema encontrado pelo corretor ----------
  const typeText={string:'precisa ser um texto. Texto vai entre aspas. Sem aspas, o JavaScript entende um número ou o nome de outra variável.',number:'precisa ser um número, sem aspas. "12" com aspas é texto; 12 sem aspas é número e serve para contas.',boolean:'precisa ser true ou false, sem aspas. Com aspas, "true" vira só um texto.',list:'precisa ser uma lista, entre colchetes [ ].',object:'precisa ser um objeto, entre chaves { }.'};
- const typeExample={string:'const sala = "B";',number:'const andar = 3;',boolean:'const aberto = true;',list:'const frutas = ["maçã", "uva"];',object:'const ficha = { nome: "Rui" };'};
+ // Exemplos com o tema do caso (o objeto investigado), sempre com outros nomes e valores, para não entregar a resposta.
+ const camel=text=>normalize(text).split(/[^a-z0-9]+/).filter(Boolean).map(word=>word[0].toUpperCase()+word.slice(1)).join('');
+ function examples(lesson){
+  const thing=camel(lesson?.action?.object||'sala')||'Sala',lower=thing[0].toLowerCase()+thing.slice(1);
+  return{string:'const modelo'+thing+' = "modelo B";',number:'const andar'+thing+' = 3;',boolean:'const '+lower+'Ligado = true;',list:'const pecas'+thing+' = ["cabo", "tampa"];',object:'const ficha'+thing+' = { andar: 3 };',variable:'const etiqueta'+thing+' = "verde";',log:'console.log(etiqueta'+thing+');',mutable:'let estado'+thing+' = "desligado";\nestado'+thing+' = "pronto";'};
+ }
+ const caseOf=lesson=>((typeof window!=='undefined'&&window.HospitalCases)||[]).find(entry=>entry.id===lesson?.case);
+ const clueCard=lesson=>{const found=caseOf(lesson);return 'Releia o cartão “Pista da investigação”'+(found?' do caso “'+found.title+'”':'')+', ao lado do cenário';};
  function explainIssue(issue,lesson){
-  const n=issue.name,action=lesson?.action?(lesson.action.name+'('+lesson.action.args.join(', ')+');'):'';
+  const n=issue.name,action=lesson?.action?(lesson.action.name+'('+lesson.action.args.join(', ')+');'):'',ex=examples(lesson);
   switch(issue.code){
-   case 'missing':return{title:'Falta criar '+n,text:'Ainda não encontrei a variável '+n+' no seu programa. Uma variável nasce com const ou let, um nome, o sinal = e um valor. Confira se o nome está igualzinho ao da missão, com as mesmas maiúsculas.',example:'const corDaPorta = "verde";'};
-   case 'type':return{title:n+' está com o tipo errado',text:n+' '+(typeText[issue.expected]||'está com o tipo errado.'),example:typeExample[issue.expected]};
+   case 'missing':return{title:'Falta criar '+n,text:'Ainda não encontrei a variável '+n+' no seu programa. Uma variável nasce com const ou let, um nome, o sinal = e um valor. Confira se o nome está igualzinho ao da missão, com as mesmas maiúsculas.',example:ex.variable};
+   case 'type':return{title:n+' está com o tipo errado',text:n+' '+(typeText[issue.expected]||'está com o tipo errado.'),example:ex[issue.expected]};
    case 'value':
-    if(issue.empty)return{title:n+' ainda está vazia',text:issue.expected==='list'?'A lista '+n+' ainda está vazia. Ela precisa receber itens: confira se o push está dentro do if e do laço.':n+' existe, mas ainda não guarda nada. Releia a pista do caso e coloque a informação no lugar certo.'};
-    return{title:n+' ainda não tem o valor certo',text:issue.expected==='boolean'?'Leia a comparação em voz alta, como uma pergunta, e veja se a resposta seria sim (true) ou não (false).':issue.expected==='number'?n+' é um número, mas não o esperado. Releia a pista e, se houver conta, confira a operação.':issue.expected==='list'?'A lista '+n+' tem itens diferentes do esperado. Mostre a lista no console e compare com a pista.':'Mostre '+n+' no console e compare com a pista, letra por letra: espaços, maiúsculas e pontuação contam.'};
+    if(issue.empty)return{title:n+' ainda está vazia',text:issue.expected==='list'?'A lista '+n+' ainda está vazia. Ela precisa receber itens: confira se o push está dentro do if e do laço.':n+' existe, mas ainda não guarda nada. '+clueCard(lesson)+', e coloque a informação no lugar certo.'};
+    return{title:n+' ainda não tem o valor certo',text:issue.expected==='boolean'?'Leia a comparação em voz alta, como uma pergunta, e veja se a resposta seria sim (true) ou não (false).':issue.expected==='number'?n+' é um número, mas não o esperado. '+clueCard(lesson)+' e, se houver conta, confira a operação.':issue.expected==='list'?'A lista '+n+' tem itens diferentes do esperado. Mostre a lista no console e compare com o cartão “Pista da investigação”.':'Mostre '+n+' no console e compare com o cartão “Pista da investigação”, letra por letra: espaços, maiúsculas e pontuação contam.'};
    case 'function-missing':return{title:'Falta criar a função '+n,text:'Uma função começa com function, o nome, os parâmetros entre parênteses e o corpo entre chaves, com um return.',example:'function dobro(numero) {\n  return numero * 2;\n}'};
    case 'function-test':return{title:'A função '+n+' precisa servir para outros valores',text:'Ela funciona com os dados deste caso, mas não com outros. Confira se ela usa os parâmetros, e não números escritos à mão, e se devolve o resultado com return.'};
    case 'function-error':return{title:'A função '+n+' deu erro',text:'Quando testei com outros valores, ela parou com erro. Confira se tudo o que ela usa existe dentro dela.'};
    case 'dom':return{title:'O texto da página ainda não mudou',text:'Para trocar o texto de um elemento, mude a propriedade textContent dele.',example:'elemento.textContent = "Novo aviso";'};
    case 'variant':return{title:'Funciona hoje, mas e amanhã?',text:'Seu programa acertou com os dados de hoje. Um bom programa acerta com quaisquer dados: se a pista mudar, o resultado deve ser calculado a partir das variáveis, e não escrito à mão. '+(lesson?.conceptHint||'')};
-   case 'console':return{title:'Falta mostrar o resultado',text:'O console.log mostra valores na saída do computador. Coloque entre os parênteses as variáveis que você quer ver.',example:'console.log(corDaPorta);'};
+   case 'console':return{title:'Falta mostrar o resultado',text:'O console.log mostra valores na saída do computador. Coloque entre os parênteses as variáveis que você quer ver.',example:ex.log};
    case 'action-missing':return{title:'Falta a última linha',text:'Falta chamar a função do jogo que usa seus dados no cenário: '+action};
    case 'action-args':return{title:'A ação recebeu outros dados',text:'A função foi chamada, mas com valores diferentes dos que você preparou. Passe as variáveis, sem aspas, como na missão: '+action};
    case 'action-waiting':return{title:'A última linha já está certa',text:'A chamada '+action+' está no lugar. Ela só vai funcionar quando os dados do passo 1 estiverem certos, então foque neles primeiro.'};
-   case 'mutable':return{title:n+' precisa poder mudar',text:'Como o valor de '+n+' muda no meio do programa, ela deve ser criada com let, e não com const.',example:'let placar = 0;\nplacar = 2;'};
+   case 'mutable':return{title:n+' precisa poder mudar',text:'Como o valor de '+n+' muda no meio do programa, ela deve ser criada com let, e não com const.',example:ex.mutable};
    case 'requires':return{title:'Este caso pede '+n,text:'O desafio aqui é praticar '+n+'. Tente resolver usando '+n+', do jeito que a missão pede.'};
    default:return{title:'Vamos olhar juntos',text:'Releia a missão com calma e compare com o seu programa, linha por linha.'};
   }
@@ -117,7 +124,7 @@
   const issues=result.issues||[],data=issues.filter(i=>!['console','action-missing','action-args','action-waiting'].includes(i.code)),rest=issues.filter(i=>!data.includes(i));
   // Várias variáveis faltando viram uma fala só.
   const missing=data.filter(issue=>issue.code==='missing');
-  if(missing.length>1){const names=missing.map(issue=>issue.name),list=names.slice(0,-1).join(', ')+' e '+names.at(-1);return[{title:'Faltam criar '+list,text:'Ainda não encontrei as variáveis '+list+' no seu programa. Cada variável nasce com const ou let, um nome, o sinal = e um valor. Confira se os nomes estão igualzinhos aos da missão, com as mesmas maiúsculas.',example:'const corDaPorta = "verde";'},...data.filter(issue=>issue.code!=='missing').slice(0,1).map(issue=>explainIssue(issue,lesson))];}
+  if(missing.length>1){const names=missing.map(issue=>issue.name),list=names.slice(0,-1).join(', ')+' e '+names.at(-1);return[{title:'Faltam criar '+list,text:'Ainda não encontrei as variáveis '+list+' no seu programa. Cada variável nasce com const ou let, um nome, o sinal = e um valor. Confira se os nomes estão igualzinhos aos da missão, com as mesmas maiúsculas.',example:examples(lesson).variable},...data.filter(issue=>issue.code!=='missing').slice(0,1).map(issue=>explainIssue(issue,lesson))];}
   return(data.length?data:rest).slice(0,2).map(issue=>explainIssue(issue,lesson));
  }
  // ---------- erros do JavaScript em português ----------
@@ -173,13 +180,13 @@
  const close=(a,b)=>a===b||(a.length>=5&&b.length>=5&&a.slice(0,5)===b.slice(0,5));
  function search(question,lessonId){
   const asked=words(question);if(!asked.length)return null;
-  let best=null;
+  let best=null,source=null,currentId=null;
   // Palavras-chave escolhidas valem mais do que palavras soltas do texto da pergunta.
-  const consider=(entry,bonus)=>{const keys=words(entry.k),title=words(entry.q);let score=0;for(const word of asked)score+=keys.some(key=>close(word,key))?1:title.some(key=>close(word,key))?.5:0;if(score&&(!best||score+bonus>best.score))best={entry,score:score+bonus};};
-  for(const entry of faq[lessonId]||[])consider(entry,.5);
-  for(const entry of general)consider(entry,.25);
-  for(const [id,entries]of Object.entries(faq))if(Number(id)!==lessonId)for(const entry of entries)consider(entry,0);
-  return best?.entry||null;
+  const consider=(entry,bonus)=>{const keys=words(entry.k),title=words(entry.q);let score=0;for(const word of asked)score+=keys.some(key=>close(word,key))?1:title.some(key=>close(word,key))?.5:0;if(score&&(!best||score+bonus>best.score)){best={entry,score:score+bonus};source=currentId;}};
+  currentId=lessonId;for(const entry of faq[lessonId]||[])consider(entry,.5);
+  currentId=null;for(const entry of general)consider(entry,.25);
+  for(const [id,entries]of Object.entries(faq))if(Number(id)!==lessonId){currentId=Number(id);for(const entry of entries)consider(entry,0);}
+  return best?{...best.entry,lessonId:source}:null;
  }
  function intent(question){
   const text=normalize(question);
@@ -194,18 +201,33 @@
  const computer=document.getElementById('investigation-computer'),item=window.HospitalActiveCase;
  if(!computer||!item||typeof document.createElement!=='function')return;
  const lesson=(window.HospitalLessons||[]).find(entry=>entry.case===item.id);
- const avatar='<svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><circle cx="24" cy="24" r="24" fill="#275d4d"/><path d="M9 46c2-9 8-13 15-13s13 4 15 13" fill="#f6efd6"/><path d="M19 33l5 6 5-6" fill="#3f8f74"/><circle cx="24" cy="21" r="9" fill="#c98d62"/><path d="M15 20c0-7 4-11 9-11s9 4 9 11c-3-4-6-5-9-5s-6 1-9 5z" fill="#2b1d16"/><circle cx="24" cy="8.5" r="4" fill="#2b1d16"/><circle cx="20.4" cy="21.5" r="2.7" fill="none" stroke="#e8d27a" stroke-width="1.3"/><circle cx="27.6" cy="21.5" r="2.7" fill="none" stroke="#e8d27a" stroke-width="1.3"/><path d="M23.1 21.5h1.8" stroke="#e8d27a" stroke-width="1.2"/><path d="M21.4 26.5q2.6 1.7 5.2 0" stroke="#7a3f2a" stroke-width="1.2" fill="none" stroke-linecap="round"/></svg>';
  const el=(tag,className,text)=>{const node=document.createElement(tag);if(className)node.className=className;if(text!==undefined)node.textContent=text;return node;};
  const panel=el('section','professor-panel');panel.id='professor';panel.setAttribute('aria-labelledby','professor-title');
- const head=el('div','professor-head'),face=el('span','professor-avatar'),titles=el('div');face.innerHTML=avatar;
- const title=el('h3','','Tira-dúvidas');title.id='professor-title';titles.append(title,el('p','','Dra. Ada · professora de JavaScript do Hospital Santa Aurora'));head.append(face,titles);
+ const head=el('div','professor-head'),face=el('span','professor-avatar'),titles=el('div'),portrait=el('img');
+ portrait.src='assets/professor-mica-avatar.jpg';portrait.alt='Retrato da professora Mica, com cabelo preto curto cacheado volumoso e óculos lilás';portrait.width=portrait.height=128;portrait.decoding='async';face.append(portrait);
+ const title=el('h3','','Tira-dúvidas');title.id='professor-title';titles.append(title,el('p','','Mica · professora de JavaScript do Hospital Santa Aurora'));head.append(face,titles);
  const log=el('div','professor-log');log.setAttribute('role','log');log.setAttribute('aria-live','polite');
  const chips=el('div','professor-chips'),checkChip=el('button','professor-chip','🔍 Olhar meu código'),errorChip=el('button','professor-chip professor-chip-alert','⚠ Explicar o erro');
  checkChip.type=errorChip.type='button';errorChip.hidden=true;chips.append(checkChip,errorChip);
  for(const entry of faq[lesson?.id]||[]){const chip=el('button','professor-chip',entry.q);chip.type='button';chip.addEventListener('click',()=>{say('user',entry.q);answerEntry(entry);});chips.append(chip);}
  const form=el('form','professor-ask'),label=el('label','sr','Sua dúvida'),input=el('input'),ask=el('button','small-button','Perguntar');
  input.id='professor-question';label.htmlFor=input.id;input.type='text';input.maxLength=200;input.autocomplete='off';input.placeholder='Escreva sua dúvida… ex.: para que servem as aspas?';ask.type='submit';form.append(label,input,ask);
- panel.append(head,log,chips,form);computer.after(panel);
+ // Fechada por padrão: um botão com o rosto da Mica fica no canto e abre a conversa num pop-up.
+ const closeButton=el('button','professor-close','✕');closeButton.type='button';closeButton.setAttribute('aria-label','Fechar o tira-dúvidas');head.append(closeButton);
+ panel.classList.add('professor-popup');panel.setAttribute('role','dialog');panel.setAttribute('aria-modal','false');panel.hidden=true;
+ const fab=el('button','mica-fab'),fabFace=el('img'),badge=el('span','mica-fab-badge','!');
+ fab.type='button';fab.setAttribute('aria-controls','professor');fab.setAttribute('aria-expanded','false');fab.setAttribute('aria-label','Abrir o tira-dúvidas da professora Mica');
+ fabFace.src=portrait.getAttribute('src');fabFace.alt='';fabFace.width=fabFace.height=96;badge.hidden=true;badge.setAttribute('aria-hidden','true');
+ fab.append(fabFace,el('span','mica-fab-label','Dúvidas?'),badge);
+ panel.append(head,log,chips,form);document.body.append(panel,fab);
+ function openPanel(focusInput){
+  if(panel.hidden){panel.hidden=false;fab.setAttribute('aria-expanded','true');fab.classList.add('is-open');}
+  badge.hidden=true;log.scrollTop=log.scrollHeight;if(focusInput)input.focus({preventScroll:true});
+ }
+ function closePanel(){panel.hidden=true;fab.setAttribute('aria-expanded','false');fab.classList.remove('is-open');fab.focus({preventScroll:true});}
+ fab.addEventListener('click',()=>panel.hidden?openPanel(true):closePanel());
+ closeButton.addEventListener('click',closePanel);
+ panel.addEventListener('keydown',event=>{if(event.key==='Escape')closePanel();});
  // Uma fala na conversa: título, texto, exemplo de código e, se houver, o aviso original do JavaScript.
  function say(who,text,extra={}){
   const bubble=el('div','professor-bubble professor-'+who);
@@ -214,7 +236,7 @@
   if(extra.example){const pre=el('pre','professor-example');pre.textContent=extra.example;bubble.append(pre);}
   if(extra.detail){const small=el('small','professor-detail','Aviso do JavaScript: '+extra.detail);bubble.append(small);}
   log.append(bubble);while(log.children.length>14)log.firstElementChild.remove();
-  log.scrollTop=log.scrollHeight;
+  log.scrollTop=log.scrollHeight;return bubble;
  }
  const teach=explanation=>say('ada',explanation.text,explanation);
  function answerEntry(entry){say('ada',entry.a,{title:entry.q,example:entry.x});}
@@ -239,12 +261,27 @@
   if(wants==='error'&&lastResult&&!lastResult.passed){for(const explanation of explainResult(lastResult,lesson,document.getElementById('code').value))teach(explanation);return;}
   if(wants==='check'||wants==='error'){checkCode();return;}
   const entry=search(question,lesson?.id);
+  // Dúvida de outro caso: avisa qual caso ensina aquilo e volta ao assunto daqui; a resposta fica a um toque.
+  if(entry&&entry.lessonId&&entry.lessonId!==lesson?.id){
+   const other=(window.HospitalLessons||[]).find(candidate=>candidate.id===entry.lessonId);
+   const bubble=say('ada','Boa pergunta! Isso é assunto do Caso '+String(entry.lessonId).padStart(2,'0')+' ('+(other?.concept||'outro conceito')+'), que vem '+(entry.lessonId>lesson.id?'mais adiante':'antes')+'. Aqui, no caso “'+item.title+'”, o foco é '+lesson.concept+'.');
+   const more=el('button','professor-chip professor-more','Mostrar mesmo assim');more.type='button';more.addEventListener('click',()=>{more.remove();answerEntry(entry);});bubble.append(more);return;
+  }
   if(entry){answerEntry(entry);return;}
   say('ada','Essa eu não sei responder ainda. Experimente perguntar com outras palavras, tocar em uma das perguntas abaixo ou pedir para eu olhar o seu código.');
  });
+ // Abre sozinha só quando der erro de JavaScript (sem repetir o mesmo erro) ou depois de duas tentativas erradas.
+ let lastAuto='';
  window.addEventListener('hospital-run-result',event=>{
   lastResult=event.detail;errorChip.hidden=!(lastResult&&(!lastResult.ok||lastResult.timeout));
-  if(!lastResult.passed&&lastResult.failedRuns>=2&&!offered){offered=true;say('ada','Vi que está difícil. Quer que eu olhe o seu código com você? Toque em "Olhar meu código".');panel.classList.add('professor-nudge');}
+  if(lastResult.passed){badge.hidden=true;return;}
+  if(!lastResult.ok||lastResult.timeout){
+   const key=lastResult.timeout?'timeout':String(lastResult.error?.message);
+   // Explicar o erro já é a ajuda: não abre de novo só para oferecer ajuda.
+   if(key!==lastAuto){lastAuto=key;offered=true;openPanel(false);say('ada','Ops, o programa deu erro. Vamos entender o que aconteceu:');for(const explanation of explainResult(lastResult,lesson,document.getElementById('code').value))teach(explanation);return;}
+  }
+  if(lastResult.failedRuns>=2&&!offered){offered=true;openPanel(false);say('ada','Vi que o caso “'+item.title+'” está difícil. Quer que eu olhe o seu código com você? Toque em "Olhar meu código".');return;}
+  if(panel.hidden)badge.hidden=false;
  });
- say('ada','Oi! Eu sou a Dra. Ada. Posso olhar o seu código, explicar um erro ou tirar uma dúvida sobre '+(lesson?.concept||'JavaScript')+'. Eu ajudo a pensar, mas não entrego a resposta pronta.');
+ say('ada','Oi! Eu sou a Mica e vou acompanhar você no caso “'+item.title+'”. Posso olhar o seu código, explicar um erro ou tirar uma dúvida sobre '+(lesson?.concept||'JavaScript')+'. Eu ajudo a pensar, mas não entrego a resposta pronta.');
 })();

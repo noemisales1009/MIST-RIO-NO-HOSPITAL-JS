@@ -10,7 +10,7 @@ function updateLines(){$('line-numbers').textContent=Array.from({length:$('code'
 function storeCode(){if(!account)return;try{localStorage.setItem(codeKey(),$('code').value);}catch{}}
 function setRunning(value){running=value;for(const id of ['run','reset','use-solution','run-investigation','insert-console','insert-action','run-conclusion'])$(id).disabled=value||!account;$('run').textContent=value?'Executando…':'▶ Executar programa';}
 function stopWorker(){if(worker){worker.terminate();worker=null;}clearTimeout(timeout);}
-// Conta o resultado de cada execução para quem acompanha (o tira-dúvidas da Dra. Ada).
+// Conta o resultado de cada execução para quem acompanha (o tira-dúvidas da professora Mica).
 const announce=detail=>window.dispatchEvent(new CustomEvent('hospital-run-result',{detail}));
 function terminalState(state){$('investigation-computer').setAttribute('data-result',state);}
 function playCodeAction(data){return window.HospitalCaseAction?.play(data);}

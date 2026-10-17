@@ -254,11 +254,11 @@ dialog[open]{max-height:min(90dvh,calc(100dvh - var(--safe-top) - var(--safe-bot
 #action-command-help,.program-execute-help{display:none}
 #program-next-step{margin:8px 0 4px}
 @media(prefers-reduced-motion:reduce){.code-highlight{transition:none}}
-/* Tira-dúvidas da Dra. Ada, logo abaixo do computador. */
+/* Tira-dúvidas da professora Mica (a conversa em si; o pop-up e o botão do canto vêm mais abaixo). */
 .professor-panel{margin:18px 0 6px;border:1px solid #b9c8a9;border-radius:10px;background:#fbfaf2;box-shadow:0 3px 0 #dfe6d3;overflow:hidden}
 .professor-panel.professor-nudge{border-color:#c9a640;box-shadow:0 0 0 3px #e8d98955,0 3px 0 #dfe6d3}
 .professor-head{display:flex;align-items:center;gap:12px;padding:12px 14px;background:linear-gradient(135deg,#1f4d3f,#173b35);color:#f6efd6;border-bottom:3px solid #e8d989}
-.professor-avatar{flex:0 0 46px;width:46px;height:46px;border-radius:50%;box-shadow:0 0 0 2px #e8d989}.professor-avatar svg{display:block;width:100%;height:100%}
+.professor-avatar{display:block;flex:0 0 64px;width:64px;height:64px;overflow:hidden;border-radius:50%;background:#c9d4bb;box-shadow:0 0 0 2px #e8d989}.professor-avatar img{display:block;width:100%;height:100%;object-fit:cover;object-position:center;image-rendering:auto}
 .professor-head h3{margin:0;font:600 22px/1 var(--display);letter-spacing:.02em}.professor-head p{margin:3px 0 0;font-size:12px;color:#c9dccf}
 .professor-log{display:flex;flex-direction:column;gap:10px;max-height:420px;overflow:auto;padding:14px}
 .professor-bubble{max-width:92%;padding:10px 12px;border-radius:12px;font-size:14px;line-height:1.5}
@@ -276,4 +276,40 @@ dialog[open]{max-height:min(90dvh,calc(100dvh - var(--safe-top) - var(--safe-bot
 .professor-ask input{flex:1;min-width:0;min-height:42px;padding:8px 12px;border:1px solid #c9d3bb;border-radius:8px;background:#fff;color:#213d35;font:15px var(--body)}
 .professor-ask input:focus-visible{outline:3px solid #c9a640;outline-offset:1px}
 .professor-ask .small-button{min-height:42px}
-@media(max-width:760px){.professor-ask input{font-size:16px}.professor-bubble{max-width:100%}.professor-log{max-height:360px}}
+@media(max-width:760px){.professor-avatar{flex-basis:56px;width:56px;height:56px}.professor-ask input{font-size:16px}.professor-bubble{max-width:100%}.professor-log{max-height:360px}}
+.professor-more{display:block;margin-top:8px}
+/* Computador mais curto: editor com altura máxima e rolagem própria, passos numa faixa, moldura mais fina. */
+.has-highlight #code{line-height:1.7;scrollbar-gutter:stable;scrollbar-width:thin}
+.has-highlight #code.code-scrolls{overflow-y:auto}
+.code-coach{padding:10px 12px 6px}.code-coach h3{margin:0 0 6px;font-size:13px}
+.program-checklist{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:0;padding:0}
+.program-checklist li{display:flex;align-items:center;gap:7px;min-width:0;padding:6px 8px}
+.program-checklist li>div{min-width:0}
+.program-checklist li p,.program-checklist li code,.program-checklist li .program-insert{display:none!important}
+.program-checklist li b{display:block;font-size:12px;line-height:1.2}
+.program-checklist .check-icon{flex:0 0 22px;width:22px;height:22px;font-size:11px}
+#program-next-step{margin:6px 0 2px;font-size:12px;line-height:1.4}
+.computer-workstation .editor-controls{flex-wrap:wrap;gap:6px}
+.editor-insert{min-height:36px;padding:5px 9px;border:1px solid #46604c;border-radius:5px;background:#203a2f;color:#d5e7b8;font:600 11px var(--mono);cursor:pointer}
+.editor-insert:hover{background:#2a4a3c}
+.monitor-top{height:12px}.monitor-chin{height:18px;font-size:6px}.monitor-stand{height:28px;margin-bottom:4px}.monitor-stand:before{height:24px}
+@media(max-width:760px){.monitor-stand,.computer-caption{display:none}.monitor-chin{height:14px}.has-highlight #code{line-height:1.6}.program-checklist li{padding:6px}.program-checklist li b{font-size:11px}}
+/* Mica fechada: botão com o rosto dela no canto; a conversa abre em pop-up. */
+.mica-fab{position:fixed;z-index:850;right:calc(18px + var(--safe-right,0px));bottom:calc(18px + var(--safe-bottom,0px));display:flex;align-items:center;gap:8px;padding:5px 16px 5px 5px;border:2px solid #e8d989;border-radius:40px;background:#173b35;color:#fff7dc;font:700 14px var(--body);box-shadow:0 6px 18px #0c161259;cursor:pointer;transition:transform .15s}
+.mica-fab img{display:block;width:46px;height:46px;border-radius:50%;object-fit:cover}
+.mica-fab:hover{transform:translateY(-2px)}
+.mica-fab-badge{position:absolute;top:-4px;left:38px;display:grid;place-items:center;width:20px;height:20px;border-radius:50%;background:#c0392b;color:#fff;font:700 12px/1 var(--body);box-shadow:0 0 0 2px #fffaf0}
+.mica-fab-badge[hidden]{display:none}
+.professor-popup{position:fixed;z-index:860;right:calc(18px + var(--safe-right,0px));bottom:calc(84px + var(--safe-bottom,0px));display:flex;flex-direction:column;width:min(420px,calc(100vw - 36px));max-height:min(72vh,640px);margin:0;box-shadow:0 18px 50px #0c161266;animation:mica-pop .18s ease-out}
+.professor-popup[hidden]{display:none}
+.professor-popup .professor-log{flex:1;min-height:120px;max-height:none}
+.professor-close{flex:0 0 auto;align-self:flex-start;width:36px;height:36px;margin-left:auto;border:1px solid #e8d98966;border-radius:50%;background:transparent;color:#f6efd6;font-size:16px;cursor:pointer}
+.professor-close:hover{background:#ffffff14}
+@keyframes mica-pop{from{opacity:0;transform:translateY(10px) scale(.98)}to{opacity:1;transform:none}}
+body.case-page{padding-bottom:calc(84px + var(--safe-bottom,0px))}
+@media(max-width:760px){.mica-fab{right:calc(12px + var(--safe-right,0px));bottom:calc(76px + var(--safe-bottom,0px));padding:4px}.mica-fab-label{display:none}.mica-fab img{width:50px;height:50px}.professor-popup{left:calc(8px + var(--safe-left,0px));right:calc(8px + var(--safe-right,0px));bottom:calc(70px + var(--safe-bottom,0px));width:auto;max-height:calc(100dvh - 90px - var(--safe-top,0px) - var(--safe-bottom,0px))}.mica-fab.is-open{display:none}body.case-page{padding-bottom:calc(150px + var(--safe-bottom,0px))}}
+@media(prefers-reduced-motion:reduce){.professor-popup{animation:none}.mica-fab{transition:none}.mica-fab:hover{transform:none}}
+/* Tela baixa (celular deitado): o campo de escrever fica sempre à vista; a conversa rola por dentro e as perguntas prontas viram uma faixa. */
+.professor-popup .professor-head,.professor-popup .professor-chips,.professor-popup .professor-ask{flex-shrink:0}
+@media(max-height:560px){.professor-popup .professor-head{gap:10px;padding:8px 12px}.professor-popup .professor-avatar{flex-basis:40px;width:40px;height:40px}.professor-popup .professor-head p{display:none}.professor-popup .professor-log{min-height:64px;padding:10px 12px}.professor-popup .professor-chips{flex-wrap:nowrap;overflow-x:auto;padding:0 12px 8px;scrollbar-width:thin}.professor-popup .professor-chip{flex:0 0 auto;white-space:nowrap}.professor-popup .professor-ask{padding:8px 12px 10px}}
+@media(max-height:560px) and (min-width:761px){.professor-popup{right:calc(172px + var(--safe-right,0px));bottom:calc(10px + var(--safe-bottom,0px));max-height:calc(100dvh - 20px - var(--safe-top,0px) - var(--safe-bottom,0px))}}

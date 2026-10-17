@@ -89,3 +89,8 @@ As análises seguem o fluxo do jogo SQL de referência: o programa recupera um r
 - **Sincronização:** `public/sync.js`. O jogo continua gravando no navegador e envia uma cópia para a nuvem (caderno, fotos, progresso e código digitado). Ao abrir em outro aparelho, traz de volta. Casos concluídos nunca diminuem ao juntar dois aparelhos; no mais, vale a gravação mais recente.
 - Biblioteca: `public/vendor/supabase.js` é o pacote oficial supabase-js 2.118.0, servido pelo próprio jogo.
 - `app/` e `build/` são da hospedagem original (ChatGPT Sites) e não são usados no modo local.
+
+## Computador e tira-dúvidas
+- O editor do computador (`public/code-editor.js`) mostra o código colorido, quebra linhas longas com os números acompanhando e cresce até mostrar o programa inteiro. Continua sendo o mesmo campo de texto, com uma cópia colorida por baixo.
+- A Dra. Ada (`public/professor.js`) fica abaixo do computador em cada caso: olha o código da jogadora e explica o que falta, traduz os erros do JavaScript para português (inclusive parênteses, chaves e aspas sem par, com a linha), responde dúvidas escritas e traz três perguntas frequentes por caso. Os exemplos nunca usam os dados do caso, para ensinar sem entregar a resposta.
+- O corretor (`public/worker.js`) informa cada problema também como código (`issues`), que o tira-dúvidas usa para escolher a explicação.

@@ -72,3 +72,16 @@
 :root[data-theme="dark"] .folder-suspect{background:radial-gradient(circle at 50% 38%,#3d5146 0 34%,#22332b 35%);color:#e8d27a}
 :root[data-theme="dark"] .folder-suspects small{color:#8fa596}
 :root[data-theme="dark"] .lobby-folder[data-solved=true] .folder-suspects small:after{color:#ff8a7a}
+
+/* Tira-dúvidas no modo escuro */
+:root[data-theme="dark"] .professor-panel{background:#14211c;border-color:#2c4036;box-shadow:0 3px 0 #0b1411}
+:root[data-theme="dark"] .professor-ada{background:#1b2c25;border-color:#2f4a3c;color:#e7e1cc}
+:root[data-theme="dark"] .professor-user{background:#2f7a64;color:#fff7dc}
+:root[data-theme="dark"] .professor-detail{color:#8fa596}
+:root[data-theme="dark"] .professor-chip{background:#0f1a16;border-color:#33503f;color:#a8d5b8}
+:root[data-theme="dark"] .professor-chip:hover{background:#17241e}
+:root[data-theme="dark"] .professor-chip-alert{background:#2a2412;border-color:#8a6d24;color:#f2d27a}
+:root[data-theme="dark"] .professor-ask{border-top-color:#263a31}
+:root[data-theme="dark"] .professor-ask input{background:#0c1612;border-color:#33503f;color:#efe6c8}
+
+:root[data-theme="dark"] .professor-example{background:#0c1612;border:1px solid #2f4a3c}

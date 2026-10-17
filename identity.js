@@ -50,7 +50,9 @@
    const form=el('form',{className:'login-form'},nameRow,emailRow,passRow,submit,message,el('div',{className:'login-links'},switchTab,forgot));
    form.noValidate=true;
    const hero=el('div',{className:'login-hero'},el('span',{className:'login-avatar'},el('img',{src:'assets/detective-v2.png',alt:''})),el('div',{className:'login-brand'},el('strong',{text:'Mistério no Hospital'}),el('small',{text:'Uma aventura com JavaScript'})));
-   const card=el('div',{className:'login-card'},hero,el('div',{className:'login-body'},title,lead,form));
+   // A lupa do cabeçalho vira uma marca d'água na faixa; o carimbo dá o clima de arquivo de investigação.
+   const mark=document.querySelector('.brand-icon svg')?.cloneNode(true);if(mark){mark.classList.add('login-mark');hero.append(mark);}
+   const card=el('div',{className:'login-card'},hero,el('span',{className:'login-stamp',text:'Arquivo confidencial'}),el('div',{className:'login-body'},title,lead,form));
    const overlay=el('div',{className:'login-overlay',role:'dialog'},card);overlay.setAttribute('aria-modal','true');overlay.setAttribute('aria-labelledby','login-title');
    const say=(text,bad)=>{message.textContent=text;message.setAttribute('data-bad',bad?'true':'false');};
    function paint(){

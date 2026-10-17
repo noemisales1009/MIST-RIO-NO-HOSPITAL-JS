@@ -441,6 +441,22 @@
 :root[data-theme="dark"] .tutorial-wait{color:#8a917c}
 :root[data-theme="dark"] .tutorial-skip{background:none;border:0;color:#8a917c;text-decoration:underline}
 :root[data-theme="dark"] .tutorial-restart{background:none;border:1px solid currentColor;color:inherit}
+:root[data-theme="dark"]{color-scheme:dark;}
+:root[data-theme="dark"] .brand .brand-icon{border:0;color:var(--green)}
+:root[data-theme="dark"] .brand-lens{fill:currentColor;stroke:currentColor}
+:root[data-theme="dark"] .brand-handle{stroke:#a8842f}
+:root[data-theme="dark"] .brand-glint{fill:none;stroke:#ffffff}
+:root[data-theme="dark"] .brand-cross{fill:#e06555}
+:root[data-theme="dark"] .notebook-shortcut{background:#191714;border:1px solid #2c6757;color:#7db1a1;text-decoration:none}
+:root[data-theme="dark"] .notebook-shortcut:hover{background:#1a1c17}
+:root[data-theme="dark"] .lobby-folder:before{box-shadow:inset 0 3px 0 var(--room)}
+:root[data-theme="dark"] .lobby-folder .folder-top>span:first-child{color:var(--room)}
+:root[data-theme="dark"] .folder-scene{background-image:url(assets/rooms-v2.png);border:5px solid #22211d;box-shadow:0 6px 16px #3b30163d}
+:root[data-theme="dark"] .folder-scene:before{background:#312c1a;box-shadow:0 1px 1px #0000001a}
+:root[data-theme="dark"] .folder-clue span{background:#203b33f2;color:#fff8df;box-shadow:0 1px 3px #00000066}
+:root[data-theme="dark"] .folder-suspect{background:radial-gradient(circle at 50% 38%,#4b5d51 0 34%,#2e3c34 35%);color:#f6efd6;box-shadow:0 2px 0 #00000026}
+:root[data-theme="dark"] .folder-suspects small{color:#8a917c}
+:root[data-theme="dark"] .lobby-folder[data-solved=true] .folder-suspects small:after{color:#e17d6f}
 :root[data-theme="dark"] footer b{color:#213d35}
 :root[data-theme="dark"] .new-evidence{animation-name:found-clue-dark}
 @keyframes found-clue-dark{0%,40%{background:#4d4520;box-shadow:0 0 0 4px #e9db8c55}100%{box-shadow:0 0 0 0 #e9db8c00}}

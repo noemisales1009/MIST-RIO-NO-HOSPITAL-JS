@@ -3,7 +3,9 @@
   const byId = id => document.getElementById(id);
   const cases = window.HospitalCases;
   let dbName;
-  const contextCase=Number(document.body.dataset.case)||1;
+  const contextCase=Number(document.body.dataset.case)||1,onLobby=!document.body.dataset.case;
+  // Elementos que só existem na página do caso (na tela inicial o caderno abre sem eles).
+  const bind=(id,handler)=>byId(id)?.addEventListener('click',handler);
   const dataFormat = 'hospital-js-notebook';
   const records = new Map();
   let db, selected = 'general', saveTimer, queue = Promise.resolve(), ready = false;
@@ -51,8 +53,8 @@
     id=canonicalEvidence(id);
     if(!evidenceCatalog[id]||found.has(id))return;
     found.add(id);persistBoard();renderBoard();renderFolders();
-    byId('evidence-count').textContent=[...found].filter(evidenceForCase).length;
-    const button=byId('open-evidence-board');button.classList.remove('new-evidence');void button.offsetWidth;button.classList.add('new-evidence');
+    const count=byId('evidence-count');if(count)count.textContent=[...found].filter(evidenceForCase).length;
+    const button=byId('open-evidence-board');if(button){button.classList.remove('new-evidence');void button.offsetWidth;button.classList.add('new-evidence');}
   }
   function picture(kind) {
     const illustrations={
@@ -102,7 +104,7 @@
     });
   }
   function renderBoard() {
-    byId('evidence-count').textContent=[...found].filter(evidenceForCase).length;
+    const count=byId('evidence-count');if(count)count.textContent=[...found].filter(evidenceForCase).length;
     const container=byId('board-cards');container.replaceChildren();
     const entries=[...found].filter(id=>evidenceCatalog[id]&&evidenceForCase(id)).map(id=>({key:'evidence-'+id,type:'evidence',...evidenceCatalog[id]}));
     const record=caseRecord();
@@ -151,7 +153,7 @@
     const title=document.createElement('h3'),description=document.createElement('p'),learning=document.createElement('p');
     title.textContent='Caso '+item.id+' · '+item.title;description.textContent=item.description;learning.textContent='Você vai praticar: '+item.topic+'.';target.append(title,description,learning);
     const list=document.createElement('ul');for(const id of found){if(evidenceCatalog[id]?.case!==item.id)continue;const li=document.createElement('li');li.textContent=evidenceCatalog[id].title;list.append(li);}target.append(list);
-    if(item.id===contextCase){const open=document.createElement('button');open.type='button';open.className='small-button';open.textContent='Abrir quadro desta investigação →';open.addEventListener('click',()=>showPage('board'));target.append(open);}
+    if(item.id===contextCase&&!onLobby){const open=document.createElement('button');open.type='button';open.className='small-button';open.textContent='Abrir quadro desta investigação →';open.addEventListener('click',()=>showPage('board'));target.append(open);}
     target.scrollIntoView({block:'nearest',behavior:'auto'});
   }
 
@@ -376,10 +378,10 @@
   cases.forEach((item,index)=>{const option=document.createElement('option');option.value='case-'+(index+1);option.textContent='Pasta do Caso '+(index+1)+' · '+item.title;folderGroup.append(option);});
   byId('note-scope').append(folderGroup);
   for(const page of ['board','notes','folders','cheats'])byId('tab-'+page).addEventListener('click',()=>showPage(page));
-  byId('open-evidence-board').addEventListener('click',()=>openFile('board'));
-  byId('open-case-folder').addEventListener('click',()=>{openFile('folders');showDossier(contextCase-1);});
-  byId('inspect-computer').addEventListener('click',()=>{discover('case-'+contextCase+'-object');byId('lia-speech').textContent=cases[contextCase-1].description+' A ficha do objeto foi adicionada ao quadro.';});
-  byId('inspect-door').addEventListener('click',()=>{discover('case-'+contextCase+'-clue');byId('lia-speech').textContent=HospitalLessons.find(item=>item.case===contextCase).clue;});
+  bind('open-evidence-board',()=>openFile('board'));
+  bind('open-case-folder',()=>{openFile('folders');showDossier(contextCase-1);});
+  bind('inspect-computer',()=>{discover('case-'+contextCase+'-object');byId('lia-speech').textContent=cases[contextCase-1].description+' A ficha do objeto foi adicionada ao quadro.';});
+  bind('inspect-door',()=>{discover('case-'+contextCase+'-clue');byId('lia-speech').textContent=HospitalLessons.find(item=>item.case===contextCase).clue;});
   byId('board-add-note').addEventListener('click',()=>{if(!ready){boardMessage('Aguarde a abertura do arquivo para escrever.');return;}byId('board-note-form').hidden=false;byId('board-note-input').focus();});
   byId('cancel-board-note').addEventListener('click',()=>{byId('board-note-form').hidden=true;});
   byId('save-board-note').addEventListener('click',()=>{const text=byId('board-note-input').value.trim();if(!text)return;const entry=caseRecord();if(entry.pins.length>=100){boardMessage('Esta pasta já tem 100 post-its. Use as anotações do caderno para continuar.');return;}entry.pins.push(text);touch(entry);byId('board-note-input').value='';byId('board-note-form').hidden=true;renderBoard();if(selected==='case-'+contextCase)renderEntry();boardMessage('Post-it preso no quadro. Você pode arrastá-lo para organizar as pistas.');});
@@ -389,7 +391,7 @@
   window.addEventListener('resize',()=>{if(activePage==='board'&&byId('notebook-dialog').open)updateThreads();});
   document.querySelectorAll('label[for="board-photos"],label[for="note-photos"],label[for="import-notebook"]').forEach(label=>{label.tabIndex=0;label.setAttribute('role','button');label.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();byId(label.htmlFor).click();}});});
   renderMap();renderBoard();renderFolders();
-  byId('open-notebook').addEventListener('click',()=>{openFile('notes');if(ready)byId('note-text').focus();});
+  bind('open-notebook',()=>{openFile('notes');if(ready)byId('note-text').focus();});
   byId('close-notebook').addEventListener('click',()=>{flush();byId('notebook-dialog').close();});
   byId('notebook-dialog').addEventListener('cancel',()=>flush());
   byId('close-photo').addEventListener('click',()=>byId('photo-dialog').close());
@@ -416,8 +418,10 @@
     if(dirty.size){openFile('notes');message('Não consegui salvar a última alteração. Baixe uma cópia do caderno antes de sair para outra tela.',true);return;}
     window.location.assign(target.href);
   });
-  byId('mobile-board').addEventListener('click',()=>openFile('board'));
-  byId('mobile-notes').addEventListener('click',()=>openFile('notes'));
+  bind('mobile-board',()=>openFile('board'));
+  bind('mobile-notes',()=>openFile('notes'));
+  // Na tela inicial não há caso aberto: o quadro de pistas fica dentro de cada caso.
+  if(onLobby)byId('tab-board').hidden=true;
   window.addEventListener('hospital-phase-changed',event=>{if(!ready)return;flush();selected='phase-'+event.detail.phase;byId('note-scope').value=selected;renderEntry();});
   window.addEventListener('hospital-case-solved',event=>{solvedCases.add(event.detail.case);discover('case-'+event.detail.case+'-conclusion');renderFolders();});
   window.HospitalAddCaseNote=text=>{if(!ready)throw new Error('Aguarde a abertura do caderno e tente de novo.');const entry=caseRecord();if(entry.pins.length>=100)throw new Error('Esta pasta já tem 100 post-its.');if(!entry.pins.includes(text)){entry.pins.push(text);touch(entry);renderBoard();if(selected==='case-'+contextCase)renderEntry();}};
@@ -438,7 +442,7 @@
       for(const id of solvedCases){completed.add(id);found.add('case-'+id+'-conclusion');}
       ready=true;
       for(const id of ['note-text','note-photos','board-photos','pin-input','add-pin','export-notebook','import-notebook'])byId(id).disabled=false;
-      selected='phase-'+(window.HospitalCurrentPhase||contextCase);byId('note-scope').value=selected;
+      selected=onLobby?'general':'phase-'+(window.HospitalCurrentPhase||contextCase);byId('note-scope').value=selected;
       renderEntry();renderMap();renderBoard();renderFolders();persistBoard();state('✓ Caderno pronto');
       window.dispatchEvent(new CustomEvent('hospital-progress-loaded',{detail:{completed:[...completed],solvedCases:[...solvedCases],evidence:[...found]}}));
       for(const phase of completed){const lesson=HospitalLessons.find(item=>item.id===phase);if(lesson)found.add(lesson.evidence);}renderBoard();persistBoard();

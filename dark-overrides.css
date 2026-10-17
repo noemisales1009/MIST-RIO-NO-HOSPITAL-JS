@@ -55,3 +55,20 @@
 :root[data-theme="dark"] .recovered-record{background:#17251f;border-color:#6b5c26;box-shadow:2px 3px 0 #00000055}
 :root[data-theme="dark"] .case-conclusion,:root[data-theme="dark"] .success{background:#16241e;border-color:#2f5546}
 :root[data-theme="dark"] .deduction-form{border-top-color:#263a31}
+
+/* Símbolo no modo escuro */
+:root[data-theme="dark"] .brand-icon{border:0;color:#cfe8d9}
+:root[data-theme="dark"] .brand-handle{stroke:#e8d27a}
+:root[data-theme="dark"] .brand-cross{fill:#e0574a}
+:root[data-theme="dark"] .notebook-shortcut{background:#0f1a16;border-color:#3a5646;color:#cfe8d9}
+:root[data-theme="dark"] .notebook-shortcut:hover{background:#17241e}
+
+/* Pastas com foto da sala no modo escuro */
+:root[data-theme="dark"] .lobby-folder.available-folder:before{box-shadow:inset 0 3px 0 var(--room)}
+:root[data-theme="dark"] .room-arquivos{--room:#d0a35f}:root[data-theme="dark"] .room-tecnica{--room:#6fb4cc}:root[data-theme="dark"] .room-recepcao{--room:#e2c35f}:root[data-theme="dark"] .room-laboratorio{--room:#6fd0b4}:root[data-theme="dark"] .room-farmacia{--room:#a6d27e}:root[data-theme="dark"] .room-gestao{--room:#bfa2e6}
+:root[data-theme="dark"] .lobby-folder .folder-top>span:first-child{color:var(--room)}
+:root[data-theme="dark"] .folder-scene{border-color:#efe6c8;box-shadow:0 6px 18px #0009}
+:root[data-theme="dark"] .folder-scene:before{background:#cbbf98}
+:root[data-theme="dark"] .folder-suspect{background:radial-gradient(circle at 50% 38%,#3d5146 0 34%,#22332b 35%);color:#e8d27a}
+:root[data-theme="dark"] .folder-suspects small{color:#8fa596}
+:root[data-theme="dark"] .lobby-folder[data-solved=true] .folder-suspects small:after{color:#ff8a7a}

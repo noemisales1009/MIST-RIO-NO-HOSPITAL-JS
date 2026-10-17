@@ -82,23 +82,23 @@ self.onmessage=async function(event){
     const lesson=HospitalLessons.find(item=>item.id===phase);if(!lesson)throw new Error('Este caso ainda não está disponível.');
     const options={logs,fichas:Array.isArray(event.data?.fichas)?event.data.fichas:[],context:event.data?.context||{},preview:!!event.data?.preview};
     const result=await runProgram(code,lesson,options);
-    const problems=[];
+    const problems=[],issues=[],add=(text,issue)=>{problems.push(text);issues.push(issue);};
     for(const [name,expected]of Object.entries(lesson.expected)){
       const actual=result.values[name];
-      if(!actual.present)problems.push(`Crie a variável ${name} com esse nome.`);
-      else if(actual.type!==typeof expected)problems.push(`${name} precisa ser ${typeof expected==='string'?'um texto entre aspas':typeof expected==='number'?'um número sem aspas':typeof expected==='boolean'?'um booleano (true ou false, sem aspas)':'uma lista ou objeto, conforme a missão'}.`);
-      else if(!equal(actual.value,expected))problems.push(describeMismatch(name,actual.value,expected));
+      if(!actual.present)add(`Crie a variável ${name} com esse nome.`,{code:'missing',name});
+      else if(actual.type!==typeof expected)add(`${name} precisa ser ${typeof expected==='string'?'um texto entre aspas':typeof expected==='number'?'um número sem aspas':typeof expected==='boolean'?'um booleano (true ou false, sem aspas)':'uma lista ou objeto, conforme a missão'}.`,{code:'type',name,expected:Array.isArray(expected)?'list':typeof expected,actual:actual.type});
+      else if(!equal(actual.value,expected))add(describeMismatch(name,actual.value,expected),{code:'value',name,expected:Array.isArray(expected)?'list':typeof expected,empty:actual.value===''||(Array.isArray(actual.value)&&!actual.value.length)});
     }
-    for(const test of lesson.functionTests||[]){const actual=result.values[test.name];if(!actual?.present||actual.type!=='function'){problems.push(`Crie a função ${test.name}.`);break;}try{if(!equal(await actual.value(...test.args),test.expected))problems.push(`A função ${test.name} também precisa funcionar com ${JSON.stringify(test.args)}.`);}catch{problems.push(`Não consegui testar ${test.name} com outras entradas.`);}}
-    for(const [id,text]of Object.entries(lesson.domExpected||{}))if(String(result.elements[id]?.textContent)!==text)problems.push(`O texto do elemento ${id} na página ainda não mudou. Altere ${id}.textContent.`);
-    if(!problems.length)for(const variant of lesson.variants||[])if(!await passesVariant(code,lesson,variant,options)){problems.push('Seu programa acertou com os dados deste caso, mas não quando os dados mudam. '+(lesson.variantHint||'Calcule o resultado a partir das variáveis, em vez de escrever o valor final.'));break;}
+    for(const test of lesson.functionTests||[]){const actual=result.values[test.name];if(!actual?.present||actual.type!=='function'){add(`Crie a função ${test.name}.`,{code:'function-missing',name:test.name});break;}try{if(!equal(await actual.value(...test.args),test.expected))add(`A função ${test.name} também precisa funcionar com ${JSON.stringify(test.args)}.`,{code:'function-test',name:test.name});}catch{add(`Não consegui testar ${test.name} com outras entradas.`,{code:'function-error',name:test.name});}}
+    for(const [id,text]of Object.entries(lesson.domExpected||{}))if(String(result.elements[id]?.textContent)!==text)add(`O texto do elemento ${id} na página ainda não mudou. Altere ${id}.textContent.`,{code:'dom',name:id});
+    if(!problems.length)for(const variant of lesson.variants||[])if(!await passesVariant(code,lesson,variant,options)){add('Seu programa acertou com os dados deste caso, mas não quando os dados mudam. '+(lesson.variantHint||'Calcule o resultado a partir das variáveis, em vez de escrever o valor final.'),{code:'variant'});break;}
     let dataReady=problems.length===0&&result.mutable;
     const call=lesson.action.name+'('+lesson.action.args.join(', ')+');';
-    if(!logs.length)problems.push('Mostre o valor no console: adicione console.log('+(lesson.consoleArgs||Object.keys(lesson.expected)).join(', ')+');');
-    if(!result.actions.length)problems.push(!result.attempts.length?'Use os dados no objeto: adicione '+call:dataReady?lesson.action.name+' foi chamada, mas não com os dados que você preparou. Use '+call:lesson.action.name+' já está no programa. Ela vai funcionar quando os dados do passo 1 estiverem certos.');
-    if(!result.mutable)problems.push(`Use let para ${lesson.mutable}, pois ela precisa aceitar uma nova atribuição.`);
+    if(!logs.length)add('Mostre o valor no console: adicione console.log('+(lesson.consoleArgs||Object.keys(lesson.expected)).join(', ')+');',{code:'console'});
+    if(!result.actions.length)add(!result.attempts.length?'Use os dados no objeto: adicione '+call:dataReady?lesson.action.name+' foi chamada, mas não com os dados que você preparou. Use '+call:lesson.action.name+' já está no programa. Ela vai funcionar quando os dados do passo 1 estiverem certos.',{code:!result.attempts.length?'action-missing':dataReady?'action-args':'action-waiting'});
+    if(!result.mutable)add(`Use let para ${lesson.mutable}, pois ela precisa aceitar uma nova atribuição.`,{code:'mutable',name:lesson.mutable});
     const withoutComments=code.replace(/\/\*[\s\S]*?\*\//g,'').replace(/\/\/[^\n]*/g,'');
-    if(lesson.requires&&!new RegExp('\\b'+lesson.requires+'\\b').test(withoutComments)){dataReady=false;problems.push(`Neste caso, pratique o comando ${lesson.requires}.`);}
-    self.postMessage({ok:true,passed:problems.length===0,problems,checks:{data:dataReady,output:logs.length>0,action:result.actions.length>0},logs,consulted:result.consulted,commands:result.commands,actions:result.actions,data:Object.fromEntries(Object.keys(lesson.expected).filter(name=>result.values[name]?.present).map(name=>[name,result.values[name].value])),dom:lesson.dom?{aviso:String(result.elements.aviso.textContent)}:null});
+    if(lesson.requires&&!new RegExp('\\b'+lesson.requires+'\\b').test(withoutComments)){dataReady=false;add(`Neste caso, pratique o comando ${lesson.requires}.`,{code:'requires',name:lesson.requires});}
+    self.postMessage({ok:true,passed:problems.length===0,problems,issues,checks:{data:dataReady,output:logs.length>0,action:result.actions.length>0},logs,consulted:result.consulted,commands:result.commands,actions:result.actions,data:Object.fromEntries(Object.keys(lesson.expected).filter(name=>result.values[name]?.present).map(name=>[name,result.values[name].value])),dom:lesson.dom?{aviso:String(result.elements.aviso.textContent)}:null});
   }catch(error){self.postMessage({ok:false,logs,error:{name:error.name,message:String(error.message).slice(0,500)}});}
 };

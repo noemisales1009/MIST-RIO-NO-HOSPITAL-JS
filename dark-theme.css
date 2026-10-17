@@ -461,6 +461,33 @@
 :root[data-theme="dark"] .folder-suspects small{color:#8a917c}
 :root[data-theme="dark"] .lobby-folder[data-solved=true] .folder-suspects small:after{color:#e17d6f}
 :root[data-theme="dark"] .folder-scene-art{background-image:url(assets/rooms-v2.png)}
+:root[data-theme="dark"] .code-highlight{color:#edf1c9;background:none;border:0}
+:root[data-theme="dark"] .has-highlight #code{color:transparent;-webkit-text-fill-color:transparent;background:transparent}
+:root[data-theme="dark"] .has-highlight #code::selection{background:#38320759;-webkit-text-fill-color:transparent}
+:root[data-theme="dark"] .tok-comment{color:#8fa98f}
+:root[data-theme="dark"] .tok-string{color:#f2cf73}
+:root[data-theme="dark"] .tok-number{color:#8fd3ff}
+:root[data-theme="dark"] .tok-boolean{color:#ff9e7a}
+:root[data-theme="dark"] .tok-keyword{color:#9ee6a8}
+:root[data-theme="dark"] .tok-game{color:#e0b8ff}
+:root[data-theme="dark"] .tok-call{color:#7fe0d0}
+:root[data-theme="dark"] .tok-punct{color:#c9d6bd}
+:root[data-theme="dark"] .tok-name{color:#edf1c9}
+:root[data-theme="dark"] .professor-panel{border:1px solid #3d4336;background:#181815;box-shadow:0 3px 0 #2c2f28}
+:root[data-theme="dark"] .professor-panel.professor-nudge{border-color:#64542b;box-shadow:0 0 0 3px #453f1d55,0 3px 0 #2c2f28}
+:root[data-theme="dark"] .professor-head{background:linear-gradient(135deg,#1f4d3f,#173b35);color:#f6efd6;border-bottom:3px solid #453f1d}
+:root[data-theme="dark"] .professor-avatar{box-shadow:0 0 0 2px #453f1d}
+:root[data-theme="dark"] .professor-head p{color:#c9dccf}
+:root[data-theme="dark"] .professor-ada{background:#1c1e18;border:1px solid #33382c;color:#b9cfc4}
+:root[data-theme="dark"] .professor-user{background:#275d4d;color:#fff9e6}
+:root[data-theme="dark"] .professor-example{background:#182f26;color:#edf1c9}
+:root[data-theme="dark"] .professor-detail{color:#8a917c}
+:root[data-theme="dark"] .professor-chip{border:1px solid #3d4336;background:#141414;color:#89b9a8}
+:root[data-theme="dark"] .professor-chip:hover{background:#1c1e18}
+:root[data-theme="dark"] .professor-chip-alert{border-color:#68502b;background:#201c14;color:#c99d6b}
+:root[data-theme="dark"] .professor-ask{border-top:1px solid #2b2c26}
+:root[data-theme="dark"] .professor-ask input{border:1px solid #363a31;background:#141414;color:#b0cdc4}
+:root[data-theme="dark"] .professor-ask input:focus-visible{outline:3px solid #c9a640}
 :root[data-theme="dark"] footer b{color:#213d35}
 :root[data-theme="dark"] .new-evidence{animation-name:found-clue-dark}
 @keyframes found-clue-dark{0%,40%{background:#4d4520;box-shadow:0 0 0 4px #e9db8c55}100%{box-shadow:0 0 0 0 #e9db8c00}}

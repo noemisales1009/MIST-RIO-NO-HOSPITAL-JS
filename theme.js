@@ -1,5 +1,7 @@
 'use strict';
 // Tema claro/escuro. Carregado sem defer no <head> para aplicar o tema antes da pintura.
+// Também esconde a página até o identity.js saber quem está jogando (nada do arquivo aparece antes de entrar).
+document.documentElement.classList.add('auth-pending');
 (()=>{
  const key='hospital-theme',root=document.documentElement,system=window.matchMedia('(prefers-color-scheme: dark)');
  const saved=()=>{try{const value=localStorage.getItem(key);return value==='dark'||value==='light'?value:null;}catch{return null;}};

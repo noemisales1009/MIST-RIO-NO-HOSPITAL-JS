@@ -192,8 +192,11 @@
 .tutorial-restart{margin-left:auto;padding:5px 10px;background:none;border:1px solid currentColor;border-radius:4px;color:inherit;font:inherit;font-size:12px;cursor:pointer}.tutorial-restart[hidden]{display:none}
 @media(max-width:760px){.tutorial-card{bottom:76px;padding:14px 16px}.tutorial-card h2{font-size:24px}.tutorial-text{font-size:14px}}@media(prefers-reduced-motion:reduce){.tutorial-spotlight{transition:none}}
 @media(max-width:760px){.folder-culprit{width:74px;top:54px;right:14px}.lobby-folder[data-solved=true] h3,.lobby-folder[data-solved=true]>p{max-width:calc(100% - 88px)}.culprit-stamp{font-size:9px}}/* Zona de segurança do celular e do tablet: relógio e câmera em cima, barra de gestos embaixo, câmera nas laterais com o aparelho deitado. */
-:root{--safe-top:env(safe-area-inset-top,0px);--safe-right:env(safe-area-inset-right,0px);--safe-bottom:env(safe-area-inset-bottom,0px);--safe-left:env(safe-area-inset-left,0px)}
+/* No aplicativo Android, o WebView às vezes devolve 0 em env(); o Capacitor manda os valores certos em --safe-area-inset-*. Vale o maior. */
+:root{--safe-top:max(env(safe-area-inset-top,0px),var(--safe-area-inset-top,0px));--safe-right:max(env(safe-area-inset-right,0px),var(--safe-area-inset-right,0px));--safe-bottom:max(env(safe-area-inset-bottom,0px),var(--safe-area-inset-bottom,0px));--safe-left:max(env(safe-area-inset-left,0px),var(--safe-area-inset-left,0px))}
 body{padding-top:var(--safe-top);padding-right:var(--safe-right);padding-bottom:var(--safe-bottom);padding-left:var(--safe-left)}
+/* Faixa da cor da página atrás da hora e da bateria: ao rolar, o texto não passa por baixo delas. Sem zona de segurança, tem altura 0. */
+body::before{content:"";position:fixed;z-index:899;top:0;right:0;left:0;height:var(--safe-top);background:var(--bg);pointer-events:none}
 .world-panel{top:var(--safe-top)}
 .mobile-case-nav{padding-right:calc(10px + var(--safe-right));padding-bottom:max(8px,var(--safe-bottom));padding-left:calc(10px + var(--safe-left))}
 dialog[open]{max-height:min(90dvh,calc(100dvh - var(--safe-top) - var(--safe-bottom) - 24px))}

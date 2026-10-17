@@ -445,6 +445,7 @@
 :root[data-theme="dark"] .tutorial-skip{background:none;border:0;color:#8a917c;text-decoration:underline}
 :root[data-theme="dark"] .tutorial-restart{background:none;border:1px solid currentColor;color:inherit}
 :root[data-theme="dark"]{color-scheme:dark;}
+:root[data-theme="dark"] body::before{background:var(--bg)}
 :root[data-theme="dark"] .brand .brand-icon{border:0;color:var(--green)}
 :root[data-theme="dark"] .brand-lens{fill:currentColor;stroke:currentColor}
 :root[data-theme="dark"] .brand-handle{stroke:#a8842f}

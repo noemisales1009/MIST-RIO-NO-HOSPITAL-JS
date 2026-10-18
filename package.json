@@ -4,16 +4,14 @@
   "private": true,
   "description": "Mistério no Hospital JS: jogo de detetive para aprender JavaScript (site estático em HTML, CSS e JavaScript, com login e progresso no Supabase).",
   "scripts": {
-    "build": "node scripts/build-dark-theme.mjs",
+    "build": "node scripts/build-dark-theme.mjs && node scripts/build-dist.mjs",
     "test": "node --test tests/*.cjs",
     "local": "node servidor-local.mjs",
     "tema": "node scripts/build-dark-theme.mjs",
-    "start": "serve -l ${PORT:-3000} ."
+    "start": "node server.js"
   },
   "engines": {
     "node": ">=18"
   },
-  "dependencies": {
-    "serve": "14.2.4"
-  }
+  "main": "server.js"
 }

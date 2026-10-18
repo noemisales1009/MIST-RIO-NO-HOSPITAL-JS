@@ -7,9 +7,13 @@
     "build": "node scripts/build-dark-theme.mjs",
     "test": "node --test tests/*.cjs",
     "local": "node servidor-local.mjs",
-    "tema": "node scripts/build-dark-theme.mjs"
+    "tema": "node scripts/build-dark-theme.mjs",
+    "start": "serve ."
   },
   "engines": {
     "node": ">=18"
+  },
+  "dependencies": {
+    "serve": "14.2.4"
   }
 }

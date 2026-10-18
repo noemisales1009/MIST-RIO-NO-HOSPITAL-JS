@@ -8,7 +8,7 @@
     "test": "node --test tests/*.cjs",
     "local": "node servidor-local.mjs",
     "tema": "node scripts/build-dark-theme.mjs",
-    "start": "serve ."
+    "start": "serve -l ${PORT:-3000} ."
   },
   "engines": {
     "node": ">=18"

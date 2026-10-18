@@ -58,29 +58,69 @@
    if(!input.value.trim()){status.textContent='Digite seu nome.';input.focus();return;}
    const name=cleanName(input.value);save.disabled=true;status.textContent='Salvando…';
    try{
-    if(client){const {error}=await client.auth.updateUser({data:{nome:name}});if(error)throw error;}
+    if(client)await saveProfileName(user,name);
     else{try{localStorage.setItem(LOCAL_NAME,name);}catch{}}
     user.name=name;$$('[data-player-name]').forEach(node=>node.textContent=name);remember();dialog.close();
    }catch(error){
-    // Sessão cancelada no servidor (saiu em outro aparelho antes da correção do Sair): entra de novo.
-    if(error&&(error.status===403||error.code==='session_not_found')){status.textContent='Sua conta precisa entrar de novo neste aparelho. Um instante…';try{await client.auth.signOut({scope:'local'});}catch{}setTimeout(()=>location.reload(),1500);return;}
+    if(sessionRevoked(error)){dialog.close();revoked(user);return;}
     status.textContent=friendly(error);
    }finally{save.disabled=false;}
   });
   // Tocar no nome do topo abre o pop-up.
   $$('[data-player-badge]').forEach(chip=>{if(chip.dataset.nameDialog)return;chip.dataset.nameDialog='1';chip.title='Mudar meu nome';chip.setAttribute('role','button');chip.tabIndex=0;chip.style.cursor='pointer';chip.addEventListener('click',open);chip.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();open();}});});
-  // Primeira vez na tela inicial sem nome guardado: pergunta sozinho.
+  dialog.openNameDialog=open;
+ }
+ // Primeira vez na tela inicial sem nome guardado: pergunta sozinho (depois de conferir a tabela, na nuvem).
+ function maybeAskName(user){
   let asked=false;try{asked=!!localStorage.getItem(ASKED+user.id);}catch{}
-  if(document.getElementById('player-greeting')&&user.name==='Detetive'&&!asked)setTimeout(open,600);
+  const dialog=document.getElementById('name-dialog');
+  if(dialog&&document.getElementById('player-greeting')&&user.name==='Detetive'&&!asked)setTimeout(dialog.openNameDialog,600);
+ }
+ // ---------- nome na tabela hospital_perfis (supabase/perfis.sql) ----------
+ // A tabela é a fonte do nome; a conta guarda uma cópia (user_metadata.nome) como reserva, inclusive
+ // enquanto a tabela ainda não foi criada no projeto.
+ const PROFILES='hospital_perfis',missingTable=error=>!!error&&(error.code==='42P01'||/hospital_perfis/.test(String(error.message||''))&&/not find|does not exist|schema cache/i.test(String(error.message||'')));
+ const sessionRevoked=error=>!!error&&(error.status===403||error.code==='session_not_found');
+ async function saveProfileName(user,name){
+  const {error}=await client.from(PROFILES).upsert({user_id:user.id,nome:name},{onConflict:'user_id'});
+  if(error&&!missingTable(error))throw error;
+  const meta=await client.auth.updateUser({data:{nome:name}});
+  if(meta.error&&(error||sessionRevoked(meta.error)))throw meta.error;
+ }
+ async function loadProfileName(user){
+  try{
+   const controller=new AbortController(),giveUp=setTimeout(()=>controller.abort(),5000);
+   const {data,error}=await client.from(PROFILES).select('nome').eq('user_id',user.id).abortSignal(controller.signal).maybeSingle();
+   clearTimeout(giveUp);
+   if(error||!data||typeof data.nome!=='string')return;
+   const name=cleanName(data.nome);if(name===user.name)return;
+   user.name=name;$$('[data-player-name]').forEach(node=>node.textContent=name);
+  }catch{}
+ }
+ // Sessão cancelada no servidor (saída em outro aparelho antes da correção do Sair): a tela de entrar
+ // abre sozinha, com o e-mail preenchido. Depois de entrar, a página recarrega com a conta renovada.
+ let revoking=false,signingOut=false;
+ async function revoked(user,email){
+  if(revoking)return;revoking=true;
+  try{email=email||user.email||'';try{await client.auth.signOut({scope:'local'});}catch{}
+   await showLogin(undefined,{email,notice:'Sua conta foi desconectada neste aparelho. Entre de novo para continuar: seu arquivo está guardado.'});
+   location.reload();
+  }catch{revoking=false;}
+ }
+ async function checkSession(user){
+  if(navigator.onLine===false)return false;
+  try{const {error}=await client.auth.getUser();if(sessionRevoked(error)){revoked(user);return true;}}catch{}
+  return false;
  }
  async function signOut(){
   // scope local: sair aqui não derruba a conta nos outros aparelhos (o padrão, global, deslogava o celular quando se saía no computador).
+  signingOut=true;
   try{if(client)await client.auth.signOut({scope:'local'});else localStorage.removeItem(LOCAL_NAME);}catch{}
   location.href='index.html';
  }
- function fromSession(session){const meta=session.user.user_metadata||{};return{id:String(session.user.id),name:cleanName(meta.nome||meta.name)};}
+ function fromSession(session){const meta=session.user.user_metadata||{};return{id:String(session.user.id),name:cleanName(meta.nome||meta.name),email:typeof session.user.email==='string'?session.user.email:''};}
  // ---------- tela de entrada ----------
- function showLogin(mode){
+ function showLogin(mode,options={}){
   return new Promise(resolve=>{
    let tab='entrar',failures=0,lockedUntil=0;const recovery=mode==='recovery';
    const title=el('h2',{id:'login-title'}),lead=el('p',{className:'login-lead'});
@@ -144,7 +184,9 @@
    });
    clearTimeout(waitTimer);waiting?.remove();
    document.documentElement.classList.add('login-open');document.body.append(overlay);paint();
-   (remote&&!recovery?emailInput:nameInput).focus();
+   if(options.email&&emailOk(options.email))emailInput.value=options.email;
+   if(options.notice)say(options.notice);
+   (remote&&!recovery?(emailInput.value?passInput:emailInput):nameInput).focus();
   });
  }
  window.HospitalAuth={mode:remote?'nuvem':'local',client,signOut};
@@ -152,7 +194,8 @@
   try{
    let user=null;
    if(client){
-    client.auth.onAuthStateChange(event=>{if(event==='SIGNED_OUT'&&window.HospitalUser)location.reload();});
+    // A biblioteca apaga a sessão sozinha quando o servidor a recusa (403): em vez de recarregar, abre a tela de entrar preenchida.
+    client.auth.onAuthStateChange(event=>{if(event==='SIGNED_OUT'&&window.HospitalUser&&!revoking&&!signingOut)revoked(window.HospitalUser);});
     // Link de "esqueci a senha": a biblioteca cria uma sessão temporária; o endereço traz type=recovery.
     const recovering=/type=recovery/.test(location.hash||'');
     // Depois de um tempo sem abrir, o acesso precisa ser renovado pela internet. Se a rede do celular
@@ -168,7 +211,12 @@
     if(saved)user={id:'local',name:cleanName(saved)};
    }
    if(!user)user=await showLogin();
-   fillPage(user);return user;
+   fillPage(user);
+   if(client){
+    // Sem travar a tela: confere se a sessão ainda vale no servidor, lê o nome da tabela e só então pergunta o nome se faltar.
+    (async()=>{if(await checkSession(user))return;await loadProfileName(user);maybeAskName(user);})();
+   }else maybeAskName(user);
+   return user;
   }catch{
    clearTimeout(waitTimer);if(!waiting){waiting=el('p',{className:'auth-waiting',role:'status'});document.body.append(waiting);}
    waiting.textContent='Não foi possível abrir seu arquivo. Feche e abra de novo.';return null;

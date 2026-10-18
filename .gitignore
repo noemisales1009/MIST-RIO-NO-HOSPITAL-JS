@@ -60,3 +60,6 @@ next-env.d.ts
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# cópia estática do jogo gerada pelo build (scripts/static-out.mjs)
+out/

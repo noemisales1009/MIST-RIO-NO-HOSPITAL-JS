@@ -1,5 +1,5 @@
 const fs=require('fs'),vm=require('vm'),assert=require('assert'),path=require('path');
-const root=path.join(__dirname,'../public/');
+const root=path.join(__dirname,'../');
 class Element{constructor(){this.dataset={};this.hidden=false;this.textContent='';this.innerHTML='';}}
 const casesContext={window:{}};
 vm.runInNewContext(fs.readFileSync(path.join(root,'cases.js'),'utf8'),casesContext);

@@ -1,4 +1,4 @@
-const fs=require('fs'),vm=require('vm'),assert=require('assert'),root=require('path').join(__dirname,'../public/');
+const fs=require('fs'),vm=require('vm'),assert=require('assert'),root=require('path').join(__dirname,'../');
 const sandbox={};vm.runInNewContext(fs.readFileSync(root+'lessons.js','utf8'),sandbox);const lessons=sandbox.HospitalLessons;
 const cast={window:{}};vm.runInNewContext(fs.readFileSync(root+'cases.js','utf8'),cast);const cases=cast.window.HospitalCases,people=cast.window.HospitalCast;
 const code=fs.readFileSync(root+'worker.js','utf8');

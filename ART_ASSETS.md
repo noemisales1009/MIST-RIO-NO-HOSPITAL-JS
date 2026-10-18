@@ -2,9 +2,9 @@
 
 ## Retrato atual da professora Mica
 
-A professora do tira-dúvidas se chama Mica (nos prompts abaixo ainda aparece o nome provisório Dra. Ada). O jogo mostra o recorte leve `public/assets/professor-mica-avatar.jpg`: região 1134×1134 do retrato v3 a partir de x=60, y=10 (recorte solto, com cabelo e ombros), reduzida para 256×256 e salva em JPEG qualidade 90 (cerca de 21 KB), para não baixar os 2 MB do original em cada caso.
+A professora do tira-dúvidas se chama Mica (nos prompts abaixo ainda aparece o nome provisório Dra. Ada). O jogo mostra o recorte leve `assets/professor-mica-avatar.jpg`: região 1134×1134 do retrato v3 a partir de x=60, y=10 (recorte solto, com cabelo e ombros), reduzida para 256×256 e salva em JPEG qualidade 90 (cerca de 21 KB), para não baixar os 2 MB do original em cada caso.
 
-`public/assets/professor-ada-v3.png`: versão atual, criada a partir da referência visual enviada pela usuária. Cabelo preto curto com volume nas laterais, franja de cachos e óculos grandes translúcidos lilás. Jaleco e blusa ameixa identificam a professora; rosto e silhueta próprios a diferenciam da Brisa. Gerado com a ferramenta integrada de imagens, sem CLI; PNG copiado sem alteração. Aplicado ao tira-dúvidas dos 24 casos.
+`assets/professor-ada-v3.png`: versão atual, criada a partir da referência visual enviada pela usuária. Cabelo preto curto com volume nas laterais, franja de cachos e óculos grandes translúcidos lilás. Jaleco e blusa ameixa identificam a professora; rosto e silhueta próprios a diferenciam da Brisa. Gerado com a ferramenta integrada de imagens, sem CLI; PNG copiado sem alteração. Aplicado ao tira-dúvidas dos 24 casos.
 
 Prompt final:
 
@@ -13,7 +13,7 @@ Use case: illustration-story. Create a new final standalone portrait of professo
 ## Retrato anterior da professora (substituído)
 
 
-`public/assets/professor-ada-v2.png`: versão atual do tira-dúvidas dos 24 casos, com cabelo curto, preto e cacheado e óculos de armação vinho. Rosto maduro, mandíbula mais quadrada, nariz largo, brincos pequenos de pérola e blusa ameixa diferenciam a professora da Brisa. A ferramenta integrada de imagens foi usada para criação e edição, sem CLI. O PNG final é copiado sem alteração; a apresentação circular continua com 64 px no computador e 56 px no celular.
+`assets/professor-ada-v2.png`: versão atual do tira-dúvidas dos 24 casos, com cabelo curto, preto e cacheado e óculos de armação vinho. Rosto maduro, mandíbula mais quadrada, nariz largo, brincos pequenos de pérola e blusa ameixa diferenciam a professora da Brisa. A ferramenta integrada de imagens foi usada para criação e edição, sem CLI. O PNG final é copiado sem alteração; a apresentação circular continua com 64 px no computador e 56 px no celular.
 
 Prompt de criação da identidade:
 
@@ -26,7 +26,7 @@ Use case: precise-object-edit. Edit target: attached portrait of Dra. Ada, the u
 ## Retrato inicial da professora (substituído)
 
 
-`public/assets/professor-ada-v1.png`: retrato exclusivo usado no cabeçalho do tira-dúvidas dos 24 casos. Gerado com a ferramenta integrada de imagens (sem CLI), usando `people-cases-1.png` como referência de estilo, e copiado sem alteração. Mantém pele morena, coque cacheado, óculos redondos dourados, jaleco e blusa verde. O avatar é apresentado em círculo, com 64 px no computador e 56 px no celular.
+`assets/professor-ada-v1.png`: retrato exclusivo usado no cabeçalho do tira-dúvidas dos 24 casos. Gerado com a ferramenta integrada de imagens (sem CLI), usando `people-cases-1.png` como referência de estilo, e copiado sem alteração. Mantém pele morena, coque cacheado, óculos redondos dourados, jaleco e blusa verde. O avatar é apresentado em círculo, com 64 px no computador e 56 px no celular.
 
 Prompt final:
 
@@ -36,10 +36,10 @@ Use case: illustration-story. Create ONE standalone square head-and-shoulders ch
 
 Ferramenta integrada de geração de imagens, com a personagem existente como referência; não foi usado o modo CLI. Os PNGs foram copiados sem alteração. Os recortes e a sequência são feitos durante a apresentação no jogo.
 
-- `public/assets/archive-interaction-v1.png`: seis quadros em grade 3×2, 1536×1024, com a detetive abrindo a gaveta dos arquivos, retirando uma pasta e examinando o registro. Cada quadro é apresentado com uma margem interna para excluir os separadores claros do atlas.
-- `public/assets/detective-interactions-v1.png`: doze poses com transparência em grade 4×3, 1254×1254. Poses de repouso, alcance, botão, puxador, retirada, pasta, leitura, anotação, chave, ajuste, operação de painel e pasta ao lado. Os pés são alinhados por âncoras próprias para evitar saltos ao trocar de pose.
+- `assets/archive-interaction-v1.png`: seis quadros em grade 3×2, 1536×1024, com a detetive abrindo a gaveta dos arquivos, retirando uma pasta e examinando o registro. Cada quadro é apresentado com uma margem interna para excluir os separadores claros do atlas.
+- `assets/detective-interactions-v1.png`: doze poses com transparência em grade 4×3, 1254×1254. Poses de repouso, alcance, botão, puxador, retirada, pasta, leitura, anotação, chave, ajuste, operação de painel e pasta ao lado. Os pés são alinhados por âncoras próprias para evitar saltos ao trocar de pose.
 
-As duas artes preservam o rosto, cabelo, casaco, camisa, calça e botas da referência. A inspeção dos quadros não encontrou braços extras. As 24 sequências e efeitos estão em `public/interactions.js`; cada caso usa o gesto e o objeto da própria história. A integração visual em navegador e celular ainda precisa ser conferida.
+As duas artes preservam o rosto, cabelo, casaco, camisa, calça e botas da referência. A inspeção dos quadros não encontrou braços extras. As 24 sequências e efeitos estão em `interactions.js`; cada caso usa o gesto e o objeto da própria história. A integração visual em navegador e celular ainda precisa ser conferida.
 
 ### Prompt da sequência de arquivos
 
@@ -52,22 +52,22 @@ Use case: identity-preserve. Asset type: game interaction animation atlas. Edit 
 Modo: ferramenta integrada de geração e edição de imagens. Arquivos copiados para o projeto sem editar os PNGs. O recorte dos atlas acontece na apresentação; os oito quadros de caminhada são isolados em memória antes da exibição.
 
 ## Caminhada corrigida
-Caminho: `public/assets/detective-walk-v4.png` — oito poses em grade 4×2, fundo transparente.
+Caminho: `assets/detective-walk-v4.png` — oito poses em grade 4×2, fundo transparente.
 
 Prompt final de edição: manter as oito poses, identidade, rosto, cabelo, casaco e cores da detetive em pixel art. Corrigir a anatomia para exatamente dois braços e duas mãos em cada quadro: braço direito segurando o caderno junto ao peito e um único braço esquerdo pendendo ao lado da coxa. Remover o braço esquerdo duplicado que cruzava a cintura. Nenhuma mão flutuante, manga ou cotovelo extra. Grade 1536×1024 com células 384×512; sem fundo, névoa, sombra, texto ou linhas.
 
 ## 72 retratos exclusivos
-Caminhos: `public/assets/people-cases-1.png`, `public/assets/people-cases-2.png`, `public/assets/people-cases-3.png`. Cada imagem contém 24 retratos em grade 6×4. Os nomes e recortes estão em `public/cases.js`: cada caso usa três pessoas próprias, totalizando 72.
+Caminhos: `assets/people-cases-1.png`, `assets/people-cases-2.png`, `assets/people-cases-3.png`. Cada imagem contém 24 retratos em grade 6×4. Os nomes e recortes estão em `cases.js`: cada caso usa três pessoas próprias, totalizando 72.
 
 Prompt final do conjunto: criar 24 retratos adultos distintos por folha, no estilo de pixel art detalhada da protagonista, com fundo verde-sálvia claro. Grade exata de seis colunas por quatro linhas, uma cabeça e ombros em cada célula, mesma escala e linha dos olhos, sem textos, números, bordas ou objetos. Variar idade, pele, gênero, cabelo, barba, óculos e roupas. Três folhas com elencos diferentes. Folha 1 inclui Brisa, Cora, Teo, Vera, Nilo, Hugo e mais dezoito pessoas; folha 2 inclui Augusto, Marisa, Alice, Dalila, Kenji, Ícaro e outras dezoito; folha 3 inclui Rafael, Aline, Sofia, Leandro, Haru, Irene e outras dezoito. Profissões e fichas fictícias são definidas pelo caso.
 
 ## Salas e repouso
-`public/assets/rooms-v2.png`: seis salas em grade 3×2 — arquivos, técnica, recepção, laboratório, farmácia e gestão. Prompt: interiores detalhados de hospital em pixel art, câmera frontal levemente elevada, iluminação quente e de janela, paleta creme, verde e madeira, móveis na parte superior e corredor inferior livre; sem pessoas, textos ou marcas.
+`assets/rooms-v2.png`: seis salas em grade 3×2 — arquivos, técnica, recepção, laboratório, farmácia e gestão. Prompt: interiores detalhados de hospital em pixel art, câmera frontal levemente elevada, iluminação quente e de janela, paleta creme, verde e madeira, móveis na parte superior e corredor inferior livre; sem pessoas, textos ou marcas.
 
-`public/assets/detective-v2.png`: arte em repouso mantida. Prompt: detetive de pele morena, cabelo cacheado escuro, casaco creme, camisa verde, calça escura, botas e caderno, corpo inteiro em pixel art com fundo transparente.
+`assets/detective-v2.png`: arte em repouso mantida. Prompt: detetive de pele morena, cabelo cacheado escuro, casaco creme, camisa verde, calça escura, botas e caderno, corpo inteiro em pixel art com fundo transparente.
 
 As artes foram inspecionadas; a caminhada corrigida mostra dois braços em todas as oito poses. A escala no jogo é comum ao repouso e à animação e considera a altura dos móveis. Testes de execução e integração não substituem a conferência visual em navegador e aparelho físico.
 
 ## Símbolo do jogo e ícone do aplicativo
 
-Pasta de caso em degradê verde, com uma foto do prédio do hospital presa por um clipe e uma lupa que amplia o prédio. É vetor puro (sem imagem raster), gerado por `scratchpad/gerar-icone-jogo.cjs` em `public/favicon.svg` e inserido inline no `<span class="brand-icon">` de todas as páginas (viewBox 18 18 72 72, ids com prefixo `mh`). O aplicativo Android usa as mesmas camadas como ícone adaptável (fundo em degradê, frente com a pasta, a foto e a lupa) nos PNGs de `misterio-hospital-android/android/app/src/main/res/mipmap-*`.
+Pasta de caso em degradê verde, com uma foto do prédio do hospital presa por um clipe e uma lupa que amplia o prédio. É vetor puro (sem imagem raster), gerado por `scratchpad/gerar-icone-jogo.cjs` em `favicon.svg` e inserido inline no `<span class="brand-icon">` de todas as páginas (viewBox 18 18 72 72, ids com prefixo `mh`). O aplicativo Android usa as mesmas camadas como ícone adaptável (fundo em degradê, frente com a pasta, a foto e a lupa) nos PNGs de `misterio-hospital-android/android/app/src/main/res/mipmap-*`.

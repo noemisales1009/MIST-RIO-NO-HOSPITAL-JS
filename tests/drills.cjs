@@ -1,4 +1,4 @@
-const fs=require('fs'),vm=require('vm'),assert=require('assert'),root=require('path').join(__dirname,'../public/');
+const fs=require('fs'),vm=require('vm'),assert=require('assert'),root=require('path').join(__dirname,'../');
 // Treinos extras: cada um tem os campos que a tela usa, a solução passa no corretor, o início não passa,
 // escrever o resultado pronto não passa, e o corretor em modo treino não exige a ação no cenário.
 const sandbox={};vm.runInNewContext(fs.readFileSync(root+'lessons.js','utf8'),sandbox);vm.runInNewContext(fs.readFileSync(root+'drills.js','utf8'),sandbox);

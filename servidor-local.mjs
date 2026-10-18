@@ -1,4 +1,4 @@
-// Servidor local do jogo: serve apenas a pasta public/ neste computador.
+// Servidor local do jogo: serve apenas a pasta do jogo (esta pasta) neste computador.
 // Uso: node servidor-local.mjs   (ou dê dois cliques em INICIAR-JOGO.bat)
 import http from 'node:http';
 import { readFile, stat } from 'node:fs/promises';
@@ -6,7 +6,7 @@ import { exec } from 'node:child_process';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const root = path.join(path.dirname(fileURLToPath(import.meta.url)), 'public');
+const root = path.dirname(fileURLToPath(import.meta.url));
 const port = Number(process.env.PORT) || 5174;
 const host = '127.0.0.1'; // só este computador acessa
 
@@ -36,7 +36,7 @@ const server = http.createServer(async (req, res) => {
     if (pathname.includes('\0')) return fail(400, 'Endereço inválido');
     if (pathname.endsWith('/')) pathname += 'index.html';
     const file = path.resolve(root, '.' + pathname);
-    // Impede sair da pasta public/ (path traversal).
+    // Impede sair da pasta do jogo (path traversal).
     if (file !== root && !file.startsWith(root + path.sep)) return fail(403, 'Acesso negado');
     const info = await stat(file).catch(() => null);
     if (!info || !info.isFile()) return fail(404, 'Página não encontrada');

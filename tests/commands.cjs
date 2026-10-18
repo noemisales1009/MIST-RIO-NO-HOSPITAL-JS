@@ -1,4 +1,4 @@
-const fs=require('fs'),vm=require('vm'),assert=require('assert'),root=require('path').join(__dirname,'../public/');const c={};vm.runInNewContext(fs.readFileSync(root+'lessons.js','utf8'),c);const lessons=c.HospitalLessons;
+const fs=require('fs'),vm=require('vm'),assert=require('assert'),root=require('path').join(__dirname,'../');const c={};vm.runInNewContext(fs.readFileSync(root+'lessons.js','utf8'),c);const lessons=c.HospitalLessons;
 async function run(phase,code,extra={}){let result;const context={self:{postMessage:data=>result=data},importScripts:()=>context.HospitalLessons=lessons};vm.runInNewContext(fs.readFileSync(root+'worker.js','utf8'),context);await context.self.onmessage({data:{phase,code,context:{title:'Ocorrência de teste',description:'História da ocorrência',location:'Arquivos',reveal:'Registro recuperado'},...extra}});return result;}
 (async()=>{
  const noAction=await run(1,'const senha="4271"; console.log(senha);');assert(!noAction.passed);assert(noAction.problems.some(text=>text.includes('abrirPorta')));

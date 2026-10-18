@@ -1,35 +1,32 @@
 MISTÉRIO NO HOSPITAL JS — LEIA PRIMEIRO
 
-Este ZIP contém o código completo da versão atual do jogo, com os 24 casos,
-personagens, imagens, animações, caderno, análises e conclusões por JavaScript.
+Este é o código completo do jogo, com os 24 casos, personagens, imagens,
+animações, caderno, treinos, análises e conclusões por JavaScript.
 
-COMO USAR OS ARQUIVOS
-1. Extraia o ZIP (no Windows, clique com o botão direito e escolha Extrair Tudo).
-2. Abra a pasta misterio-hospital-js no Visual Studio Code.
-3. Leia README.md para conhecer a estrutura e o funcionamento.
+O jogo é um site estático: HTML, CSS e JavaScript, sem servidor próprio.
+O login e o progresso ficam no Supabase (e-mail e senha), com cópia no
+navegador. Sem a configuração do Supabase, o jogo funciona em modo local,
+só com um nome.
 
 ONDE ESTÁ CADA PARTE
-- public/: páginas e código do jogo.
-- public/caso1.html até public/caso24.html: os 24 casos.
-- public/assets/: imagens e animações.
-- public/lessons.js: desafios de JavaScript.
-- public/cases.js: histórias, personagens e análises.
-- tests/: testes automatizados.
-- app/: integração com a autenticação do site.
+- index.html: tela inicial com as 24 pastas.
+- caso1.html até caso24.html: os 24 casos.
+- lessons.js: desafios de JavaScript. drills.js: treinos extras.
+- cases.js: histórias, personagens e análises.
+- assets/: imagens e animações. fonts/: fontes. vendor/: biblioteca do Supabase.
+- supabase-config.js: endereço e chave pública do seu projeto Supabase.
+- supabase/: SQL das tabelas (schema.sql e perfis.sql), para o SQL Editor.
+- tests/: testes automatizados (npm test).
+- scripts/build-dark-theme.mjs: gera dark-theme.css a partir de style.css.
 
-SOBRE EXECUTAR O JOGO
-Esta é a cópia do código da versão publicada no ChatGPT Sites.
-O login depende da autenticação dessa plataforma. Para hospedar fora dela,
-será necessário adaptar a autenticação e o endpoint /api/profile.
-Abrir o HTML diretamente com dois cliques não substitui essa integração.
+COMO RODAR NO COMPUTADOR
+Dê dois cliques em INICIAR-JOGO.bat (precisa do Node.js) e abra o endereço
+que aparecer. Ou use: node servidor-local.mjs
 
-JOGO PUBLICADO
-https://misterio-hospital-js-noemi.yellow-fly-6205.chatgpt.site
+COMO PUBLICAR
+Qualquer hospedagem de site estático serve (a Hostinger, por exemplo): o
+jogo fica na raiz do repositório, sem etapa de compilação. Leia README.md.
 
 SEU PROGRESSO
-O ZIP contém o projeto. As anotações, fotos e o progresso pessoal ficam no
-navegador em que você joga. Para guardá-los também, use a opção de exportar
-uma cópia completa pelo caderno do jogo e salve o arquivo JSON.
-
-A pasta node_modules e os arquivos temporários não fazem parte deste ZIP.
-Versão do código: e663f1fb3befdc608a983c37a74470dddc5e3516
+Fica na sua conta do Supabase e no navegador. O caderno permite baixar uma
+cópia completa (JSON) a qualquer momento.

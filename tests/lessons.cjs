@@ -1,5 +1,5 @@
 const fs=require('fs'),vm=require('vm'),assert=require('assert');
-const root=require('path').join(__dirname,'../public/');const sandbox={};vm.runInNewContext(fs.readFileSync(root+'lessons.js','utf8'),sandbox);const lessons=sandbox.HospitalLessons;
+const root=require('path').join(__dirname,'../');const sandbox={};vm.runInNewContext(fs.readFileSync(root+'lessons.js','utf8'),sandbox);const lessons=sandbox.HospitalLessons;
 const code=fs.readFileSync(root+'worker.js','utf8');async function run(phase,source){let output;const context={self:{postMessage:data=>{output=data}},importScripts:()=>{context.HospitalLessons=lessons}};vm.runInNewContext(code,context);await context.self.onmessage({data:{phase,code:source}});return output;}
 (async()=>{
 assert.equal(lessons.length,24);

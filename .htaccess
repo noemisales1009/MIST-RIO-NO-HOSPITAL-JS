@@ -1,0 +1,4 @@
+# Tipos de arquivo que algumas hospedagens nao conhecem
+AddType application/javascript .js
+AddType image/svg+xml .svg
+AddType font/woff2 .woff2

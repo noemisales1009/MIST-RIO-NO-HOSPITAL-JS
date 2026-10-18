@@ -1,4 +1,4 @@
-const fs=require('fs'),vm=require('vm'),assert=require('assert'),root=require('path').join(__dirname,'../public/');
+const fs=require('fs'),vm=require('vm'),assert=require('assert'),root=require('path').join(__dirname,'../');
 class E{constructor(){this.children=[];this.attrs={};this.listeners={};}append(...children){this.children.push(...children)}setAttribute(k,v){this.attrs[k]=v}removeAttribute(k){delete this.attrs[k]}addEventListener(k,fn){this.listeners[k]=fn}click(extra={}){this.listeners.click({button:0,...extra})}}
 const elements=new Map(),get=id=>{if(!elements.has(id))elements.set(id,new E());return elements.get(id)},win={HospitalStorageReady:Promise.resolve({completed:[1,2],solvedCases:[1]}),addEventListener:(type,fn)=>win[type]=fn},c={window:win,document:{getElementById:get,createElement:()=>new E()}};
 vm.runInNewContext(fs.readFileSync(root+'cases.js','utf8'),c);c.HospitalCases=win.HospitalCases;vm.runInNewContext(fs.readFileSync(root+'lobby.js','utf8'),c);

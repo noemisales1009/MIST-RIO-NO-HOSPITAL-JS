@@ -1,4 +1,4 @@
-// Gera public/dark-theme.css a partir de public/style.css.
+// Gera dark-theme.css a partir de style.css.
 // Uso: node scripts/build-dark-theme.mjs  (rode de novo sempre que style.css mudar)
 //
 // Cada regra com propriedades de cor ganha uma cópia prefixada por
@@ -11,8 +11,8 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
-const source = path.join(root, 'public/style.css');
-const target = path.join(root, 'public/dark-theme.css');
+const source = path.join(root, 'style.css');
+const target = path.join(root, 'dark-theme.css');
 const PREFIX = ':root[data-theme="dark"]';
 
 // Seletores de arte ou de destaque que mantêm as cores originais.

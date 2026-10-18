@@ -5,7 +5,7 @@ function harness(reducedMotion=false){
  for(const id of ['investigation-room','detective-position','detective-depth','detective-facing','detective-shadow','detective-walk','detective-idle','walk-target','detective-walk-sheet','detective-frame-clip'])els.set(id,element());
  const win=element(),doc={getElementById:id=>els.get(id),addEventListener(){},createElement(name){assert.equal(name,'canvas');const id=canvasId++;return{getContext:()=>({drawImage(...args){draws.push(args.slice(1))}}),toDataURL:()=>`data:image/png;base64,frame${id}`};}};
  const ctx={window:win,document:doc,Image:class{set src(value){this.onload?.()}},matchMedia:()=>({matches:reducedMotion,addEventListener(){}}),performance:{now:()=>now},requestAnimationFrame:f=>{const id=nextId++;frames.set(id,f);return id;},cancelAnimationFrame:id=>frames.delete(id),Math,Number};
- vm.runInNewContext(fs.readFileSync(__dirname+'/../public/movement.js','utf8'),ctx);
+ vm.runInNewContext(fs.readFileSync(__dirname+'/../movement.js','utf8'),ctx);
  const read=()=>els.get('detective-position').attrs.transform.match(/translate\(([-.\d]+) ([-.\d]+)\)/).slice(1).map(Number);
  function tick(ms=1000/60){now+=ms;const list=[...frames.values()];frames.clear();for(const f of list)f(now);const scale=Number(els.get('detective-depth').attrs.transform.match(/scale\(([^)]+)\)/)[1]);assert(scale>=1.84&&scale<=2.041);const [x,y]=read();assert(x>=84&&x<=678&&y>=302&&y<=369);return[x,y];}
  return{win,els,frames,read,tick,draws};

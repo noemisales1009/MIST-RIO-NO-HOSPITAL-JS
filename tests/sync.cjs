@@ -1,4 +1,4 @@
-const fs=require('fs'),vm=require('vm'),assert=require('assert'),root=require('path').join(__dirname,'../public/');
+const fs=require('fs'),vm=require('vm'),assert=require('assert'),root=require('path').join(__dirname,'../');
 // Sincronização com o Supabase: o código digitado vai para a nuvem, inclusive nos casos reescritos (chave com versão).
 (async()=>{
  const uid='3f2a9c1e-8b7d-4e6f-9a0b-1c2d3e4f5a6b',sent=[];

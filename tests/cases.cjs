@@ -1,4 +1,4 @@
-const fs=require('fs'),vm=require('vm'),assert=require('assert');const root=require('path').join(__dirname,'../public/');
+const fs=require('fs'),vm=require('vm'),assert=require('assert');const root=require('path').join(__dirname,'../');
 class E{constructor(){this.children=[];this.style={};this.value='';this.hidden=false;this.textContent='';this.listeners={};this.attrs={};this.classList={add(){},remove(){}};}append(...a){this.children.push(...a)}replaceChildren(...a){this.children=[...a]}addEventListener(k,f){(this.listeners[k]??=[]).push(f)}async emit(k,e={}){for(const f of this.listeners[k]||[])await f({preventDefault(){},...e})}setAttribute(k,v){this.attrs[k]=v}showModal(){}close(){} }
 async function check(id){
  const elements=new Map(),get=id=>{if(!elements.has(id))elements.set(id,new E());return elements.get(id)},events=new E(),settings=new Map();let puts=0;

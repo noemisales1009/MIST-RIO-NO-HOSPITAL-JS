@@ -13,7 +13,8 @@
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
     "db:generate": "drizzle-kit generate",
     "test": "node --test tests/*.cjs",
-    "local": "node servidor-local.mjs"
+    "local": "node servidor-local.mjs",
+    "site": "git subtree split --prefix=public -b site && git push origin site"
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",

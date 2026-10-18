@@ -6,7 +6,7 @@
 // Sem login na nuvem (modo local), não faz nada.
 (()=>{
  const BASE='misterio-hospital-js-caderno:',CODE_PREFIX='hospital-code:',TABLE='hospital_dados';
- const UUID=/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+ const UUID=/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i,CODE_KEY=/^hospital-code:([^:]+):(\d{1,3}(?::v\d{1,3})?(?::[a-z]\w{0,15})?)$/;
  const KEY_OK=/^[A-Za-z0-9_.:-]{1,120}$/,TYPES=new Set(['nota','config','codigo']);
  const MAX_VALUE=6000000,BATCH_BYTES=1500000; // limite por registro e por envio
  const DEVICE_ONLY=new Set(['legacy-migrated','legacy-owner']); // controle interno deste navegador, não sincroniza
@@ -87,7 +87,8 @@
    try{
     if(!suppress&&this===window.localStorage&&typeof key==='string'&&key.startsWith(CODE_PREFIX)){
      // O código pode ter versão (ex.: 7:v2) quando o desafio do caso foi reescrito.
-     const match=/^hospital-code:([^:]+):(\d{1,3}(?::v\d{1,3})?)$/.exec(key);if(match)enqueue(match[1],'codigo',match[2],String(value));
+     // Também pode ter o modo de treino (7:v2:zero, 7:v2:t1) ou o progresso dos treinos (7:v2:treino).
+     const match=CODE_KEY.exec(key);if(match)enqueue(match[1],'codigo',match[2],String(value));
     }
    }catch{}
   };
@@ -107,6 +108,8 @@
   if(key==='config/board'){const older=remoteNewer?local:remote,newer=remoteNewer?remote:local;return{...older,...newer,id:'board',found:union(local.found,remote.found),positions:{...(older.positions||{}),...(newer.positions||{})}};}
   return undefined;
  }
+ // Treinos feitos nunca diminuem: junta as listas dos dois lados.
+ function mergeTraining(mine,theirs){try{const a=JSON.parse(mine),b=JSON.parse(theirs);if(!Array.isArray(a)||!Array.isArray(b))return undefined;return JSON.stringify(union(a,b));}catch{return undefined;}}
  function validRemote(row){
   if(!row||!TYPES.has(row.tipo)||!KEY_OK.test(String(row.chave))||row.valor==null)return false;
   if(row.tipo==='codigo')return typeof row.valor==='string'&&row.valor.length<=200000;
@@ -127,7 +130,7 @@
    const local=new Map();
    for(const note of notes)local.set('nota/'+note.id,note);
    for(const setting of settings)if(!DEVICE_ONLY.has(setting.id))local.set('config/'+setting.id,setting);
-   for(let i=0;i<localStorage.length;i++){const key=localStorage.key(i),match=key&&key.startsWith(CODE_PREFIX+uid+':')?/^hospital-code:[^:]+:(\d{1,3}(?::v\d{1,3})?)$/.exec(key):null;if(match)local.set('codigo/'+match[1],localStorage.getItem(key));}
+   for(let i=0;i<localStorage.length;i++){const key=localStorage.key(i),match=key&&key.startsWith(CODE_PREFIX+uid+':')?CODE_KEY.exec(key):null;if(match)local.set('codigo/'+match[2],localStorage.getItem(key));}
    const remote=new Map(rows.map(row=>[row.tipo+'/'+row.chave,row])),mt=loadMt(uid),toLocal=[],toRemote=[],now=Date.now();
    for(const key of new Set([...local.keys(),...remote.keys()])){
     const [tipo,...rest]=key.split('/'),chave=rest.join('/'),mine=local.get(key),theirs=remote.get(key);
@@ -135,7 +138,7 @@
     if(!theirs){toRemote.push({tipo,chave,valor:mine,at:mineAt||now});continue;}
     if(mine===undefined){toLocal.push({tipo,chave,valor:theirs.valor,at:theirsAt});continue;}
     if(same(mine,theirs.valor)){mt[key]=Math.max(mineAt,theirsAt);continue;}
-    const merged=tipo==='config'?mergeProgress(key,mine,theirs.valor,theirsAt>mineAt):undefined;
+    const merged=tipo==='config'?mergeProgress(key,mine,theirs.valor,theirsAt>mineAt):tipo==='codigo'&&chave.endsWith(':treino')?mergeTraining(mine,theirs.valor):undefined;
     if(merged!==undefined){
      if(!same(merged,theirs.valor))toRemote.push({tipo,chave,valor:merged,at:now});
      if(!same(merged,mine))toLocal.push({tipo,chave,valor:merged,at:now});

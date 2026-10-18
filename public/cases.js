@@ -446,7 +446,7 @@ window.HospitalCast = [
       "width": 1254,
       "height": 1254
     },
-    "statement": "Meu identificador é LAB-10A. Confiro etiquetas e fichas de materiais fictícios. Meu registro faz parte da ocorrência “O plantão que não batia”."
+    "statement": "Meu crachá estava válido, mas eu trabalho de manhã: quando a escala foi publicada, eu já tinha ido embora."
   },
   {
     "id": "c10-p2",
@@ -462,7 +462,7 @@ window.HospitalCast = [
       "width": 1254,
       "height": 1254
     },
-    "statement": "Meu identificador é GES-10B. Reviso os relatórios e a escala. Meu registro faz parte da ocorrência “O plantão que não batia”."
+    "statement": "Fiquei no plantão da noite com o crachá em dia. Mexi no sistema de escalas, mas achei que estava só conferindo."
   },
   {
     "id": "c10-p3",
@@ -478,7 +478,7 @@ window.HospitalCast = [
       "width": 1254,
       "height": 1254
     },
-    "statement": "Meu identificador é TI-10C. Configuro os terminais e os arquivos digitais. Meu registro faz parte da ocorrência “O plantão que não batia”."
+    "statement": "Estava de plantão à noite, mas meu crachá estava bloqueado para renovação. O sistema nem me deixou entrar."
   },
   {
     "id": "c11-p1",
@@ -734,7 +734,7 @@ window.HospitalCast = [
       "width": 1254,
       "height": 1254
     },
-    "statement": "Meu identificador é REC-16A. Preparo as fichas e os pedidos de identificação. Meu registro faz parte da ocorrência “O estoque divergente”."
+    "statement": "Conferi a prateleira dos soros e anotei 7. Estava tudo cheio."
   },
   {
     "id": "c16-p2",
@@ -750,7 +750,7 @@ window.HospitalCast = [
       "width": 1254,
       "height": 1254
     },
-    "statement": "Meu identificador é MAN-16B. Confiro os equipamentos e os testes de configuração. Meu registro faz parte da ocorrência “O estoque divergente”."
+    "statement": "Contei 4 caixas na prateleira de luvas e anotei certinho."
   },
   {
     "id": "c16-p3",
@@ -766,7 +766,7 @@ window.HospitalCast = [
       "width": 1254,
       "height": 1254
     },
-    "statement": "Meu identificador é FAR-16C. Cuido das caixas e da conferência do estoque. Meu registro faz parte da ocorrência “O estoque divergente”."
+    "statement": "Conferi duas prateleiras no fim do turno. Anotei o que vi, mas estava com pressa e não avisei ninguém."
   },
   {
     "id": "c17-p1",
@@ -830,7 +830,7 @@ window.HospitalCast = [
       "width": 1254,
       "height": 1254
     },
-    "statement": "Meu identificador é ARQ-18A. Organizo os documentos e os registros de retirada. Meu registro faz parte da ocorrência “O nome em dobro”."
+    "statement": "Digitei \" Ana Paula \", com o sobrenome, para não confundir com ninguém."
   },
   {
     "id": "c18-p2",
@@ -846,7 +846,7 @@ window.HospitalCast = [
       "width": 1254,
       "height": 1254
     },
-    "statement": "Meu identificador é GES-18B. Reviso os relatórios e a escala. Meu registro faz parte da ocorrência “O nome em dobro”."
+    "statement": "Digitei \"  ANA  \" em maiúsculas, rápido, antes de a tela fechar. Não procurei se já existia."
   },
   {
     "id": "c18-p3",
@@ -862,7 +862,7 @@ window.HospitalCast = [
       "width": 1254,
       "height": 1254
     },
-    "statement": "Meu identificador é FAR-18C. Cuido das caixas e da conferência do estoque. Meu registro faz parte da ocorrência “O nome em dobro”."
+    "statement": "Cadastrei \"ana lima\", que é outra paciente, com o nome completo."
   },
   {
     "id": "c19-p1",
@@ -926,7 +926,7 @@ window.HospitalCast = [
       "width": 1254,
       "height": 1254
     },
-    "statement": "Meu identificador é MAN-20A. Confiro os equipamentos e os testes de configuração. Meu registro faz parte da ocorrência “O sensor descalibrado”."
+    "statement": "Reduzi 2 em cada leitura para compensar o calor da sala. Achei que era isso que o manual pedia."
   },
   {
     "id": "c20-p2",
@@ -942,7 +942,7 @@ window.HospitalCast = [
       "width": 1254,
       "height": 1254
     },
-    "statement": "Meu identificador é AUD-20B. Examino os históricos e as autorizações. Meu registro faz parte da ocorrência “O sensor descalibrado”."
+    "statement": "Só conferi o histórico do sensor. Não alterei nenhum valor."
   },
   {
     "id": "c20-p3",
@@ -958,7 +958,7 @@ window.HospitalCast = [
       "width": 1254,
       "height": 1254
     },
-    "statement": "Meu identificador é TI-20C. Configuro os terminais e os arquivos digitais. Meu registro faz parte da ocorrência “O sensor descalibrado”."
+    "statement": "Somei 1 em todas as leituras na semana passada, mas a revisão desfez o meu ajuste."
   },
   {
     "id": "c21-p1",
@@ -1158,7 +1158,11 @@ window.HospitalCases = [
     "id": 1,
     "title": "A porta dos arquivos",
     "room": "arquivos",
-    "sceneFocus": { "label": "Terminal", "x": 260, "y": 132 },
+    "sceneFocus": {
+      "label": "Terminal",
+      "x": 260,
+      "y": 132
+    },
     "location": "Arquivo central",
     "culprit": "c01-p3",
     "reveal": "Um registro de manutenção confirma a alteração com o crachá TI-01C.",
@@ -1175,13 +1179,22 @@ window.HospitalCases = [
     "topic": "const · texto · console.log",
     "concepts": [
       "const · texto · console.log"
-    ]
+    ],
+    "analysis": {
+      "question": "Qual crachá aparece na alteração que trancou os arquivos?",
+      "compare": "Compare o registro de manutenção com o campo crachá de cada ficha.",
+      "explanation": "O histórico de manutenção liga esse crachá à mudança de configuração que trancou os arquivos."
+    }
   },
   {
     "id": 2,
     "title": "O rádio que ficou mudo",
     "room": "tecnica",
-    "sceneFocus": { "label": "Rádio", "x": 195, "y": 146 },
+    "sceneFocus": {
+      "label": "Rádio",
+      "x": 195,
+      "y": 146
+    },
     "location": "Sala de rádio",
     "culprit": "c02-p2",
     "reveal": "O teste que deixou o rádio bloqueado foi iniciado pelo crachá MAN-02B.",
@@ -1198,13 +1211,22 @@ window.HospitalCases = [
     "topic": "let · atribuição",
     "concepts": [
       "let · atribuição"
-    ]
+    ],
+    "analysis": {
+      "question": "Quem iniciou o teste que bloqueou o rádio?",
+      "compare": "Use o identificador do teste, e não apenas o cargo de manutenção.",
+      "explanation": "O registro do teste mostra qual crachá iniciou o bloqueio do rádio."
+    }
   },
   {
     "id": 3,
     "title": "A ficha sem identificação",
     "room": "recepcao",
-    "sceneFocus": { "label": "Ficha", "x": 420, "y": 160 },
+    "sceneFocus": {
+      "label": "Ficha",
+      "x": 420,
+      "y": 160
+    },
     "location": "Recepção principal",
     "culprit": "c03-p2",
     "reveal": "O protocolo da ficha identifica o crachá ARQ-03B como responsável pelo registro incompleto.",
@@ -1221,13 +1243,22 @@ window.HospitalCases = [
     "topic": "nomes de variáveis · maiúsculas e minúsculas",
     "concepts": [
       "nomes de variáveis · maiúsculas e minúsculas"
-    ]
+    ],
+    "analysis": {
+      "question": "Quem deixou a ficha sem identificação?",
+      "compare": "Compare o responsável indicado no protocolo com as fichas das três pessoas.",
+      "explanation": "O protocolo vincula esse crachá ao preenchimento incompleto da ficha."
+    }
   },
   {
     "id": 4,
     "title": "O código que perdeu os zeros",
     "room": "laboratorio",
-    "sceneFocus": { "label": "Impressora", "x": 440, "y": 142 },
+    "sceneFocus": {
+      "label": "Impressora",
+      "x": 440,
+      "y": 142
+    },
     "location": "Laboratório de etiquetas",
     "culprit": "c04-p1",
     "reveal": "A impressão que removeu os zeros foi feita no terminal do crachá LAB-04A.",
@@ -1244,13 +1275,22 @@ window.HospitalCases = [
     "topic": "number · string · typeof",
     "concepts": [
       "number · string · typeof"
-    ]
+    ],
+    "analysis": {
+      "question": "De qual terminal saiu a etiqueta sem os zeros?",
+      "compare": "Procure nas fichas o crachá associado à impressão recuperada.",
+      "explanation": "O histórico de impressão liga esse terminal à etiqueta que perdeu os zeros iniciais."
+    }
   },
   {
     "id": 5,
     "title": "A gaveta trocada",
     "room": "farmacia",
-    "sceneFocus": { "label": "Gaveta", "x": 565, "y": 160 },
+    "sceneFocus": {
+      "label": "Gaveta",
+      "x": 565,
+      "y": 160
+    },
     "location": "Farmácia central",
     "culprit": "c05-p3",
     "reveal": "O livro de etiquetas mostra a retirada da folha pelo crachá FAR-05C.",
@@ -1267,13 +1307,22 @@ window.HospitalCases = [
     "topic": "concatenação · operador +",
     "concepts": [
       "concatenação · operador +"
-    ]
+    ],
+    "analysis": {
+      "question": "Quem retirou a folha usada na etiqueta trocada?",
+      "compare": "Cruze o crachá do livro de etiquetas com os crachás das fichas.",
+      "explanation": "O livro de etiquetas registra a retirada da folha com esse crachá, ligando a pessoa à troca."
+    }
   },
   {
     "id": 6,
     "title": "O relatório incompleto",
     "room": "gestao",
-    "sceneFocus": { "label": "Relatório", "x": 480, "y": 160 },
+    "sceneFocus": {
+      "label": "Relatório",
+      "x": 480,
+      "y": 160
+    },
     "location": "Gabinete da gestão",
     "culprit": "c06-p1",
     "reveal": "O histórico do relatório aponta o crachá GES-06A na última edição incompleta.",
@@ -1290,13 +1339,22 @@ window.HospitalCases = [
     "topic": "revisão · variáveis e textos",
     "concepts": [
       "revisão · variáveis e textos"
-    ]
+    ],
+    "analysis": {
+      "question": "Quem fez a última edição do relatório incompleto?",
+      "compare": "Use o histórico de edição recuperado para comparar os identificadores.",
+      "explanation": "A última edição incompleta do relatório foi registrada com esse crachá."
+    }
   },
   {
     "id": 7,
     "title": "O alarme da madrugada",
     "room": "tecnica",
-    "sceneFocus": { "label": "Alarme", "x": 235, "y": 125 },
+    "sceneFocus": {
+      "label": "Alarme",
+      "x": 235,
+      "y": 125
+    },
     "location": "Central de alarmes",
     "culprit": "c07-p3",
     "deduction": "codigo",
@@ -1314,13 +1372,22 @@ window.HospitalCases = [
     "topic": "comparação · boolean",
     "concepts": [
       "comparação · boolean"
-    ]
+    ],
+    "analysis": {
+      "question": "Quem passou pelo corredor de madrugada, quando o teste disparou o alarme?",
+      "compare": "Veja qual comparação resultou em true no console e leia o depoimento dessa pessoa.",
+      "explanation": "Das três comparações, só horaJonas < 6 resultou em true: Jonas passou pela porta do corredor às 2h, na madrugada do teste. Elisa saiu às 23h e Celina só chegou às 8h."
+    }
   },
   {
     "id": 8,
     "title": "O leitor em modo de teste",
     "room": "recepcao",
-    "sceneFocus": { "label": "Leitor", "x": 350, "y": 155 },
+    "sceneFocus": {
+      "label": "Leitor",
+      "x": 350,
+      "y": 155
+    },
     "location": "Portaria de crachás",
     "culprit": "c08-p2",
     "reveal": "A ativação do modo de teste foi registrada com o crachá AUD-08B.",
@@ -1337,13 +1404,22 @@ window.HospitalCases = [
     "topic": "if · bloco de código",
     "concepts": [
       "if · bloco de código"
-    ]
+    ],
+    "analysis": {
+      "question": "Quem ativou o modo de teste do leitor?",
+      "compare": "Procure o crachá da ativação nas fichas; o cargo sozinho não confirma a resposta.",
+      "explanation": "O registro de configuração mostra que esse crachá ativou o modo de teste do leitor."
+    }
   },
   {
     "id": 9,
     "title": "A sala que recusou a entrada",
     "room": "arquivos",
-    "sceneFocus": { "label": "Leitor", "x": 260, "y": 155 },
+    "sceneFocus": {
+      "label": "Leitor",
+      "x": 260,
+      "y": 155
+    },
     "location": "Arquivo morto",
     "culprit": "c09-p1",
     "reveal": "O crachá de teste vencido havia sido anexado ao pedido pelo crachá REC-09A.",
@@ -1360,17 +1436,27 @@ window.HospitalCases = [
     "topic": "else · caminho alternativo",
     "concepts": [
       "else · caminho alternativo"
-    ]
+    ],
+    "analysis": {
+      "question": "Quem anexou o crachá vencido ao pedido?",
+      "compare": "Compare quem preparou o pedido com o crachá revelado na mensagem de recusa.",
+      "explanation": "O pedido vincula esse crachá ao cartão de teste vencido que causou a recusa."
+    }
   },
   {
     "id": 10,
     "title": "O plantão que não batia",
     "room": "gestao",
-    "sceneFocus": { "label": "Escala", "x": 510, "y": 135 },
+    "sceneFocus": {
+      "label": "Escala",
+      "x": 510,
+      "y": 135
+    },
     "location": "Sala de escalas",
     "culprit": "c10-p2",
-    "reveal": "A escala inconsistente foi publicada pelo crachá GES-10B.",
-    "description": "O turno e o crachá precisam ser conferidos juntos. A escala tem um registro que só aparece quando as duas condições são analisadas.",
+    "deduction": "codigo",
+    "reveal": "O sistema só aceita publicar a escala com crachá válido e turno da noite ao mesmo tempo. O console mostra para quem as duas condições resultaram em true.",
+    "description": "A escala do plantão da noite foi publicada com erros. Só quem tinha crachá válido e estava no turno da noite podia publicar. Use && para descobrir quem cumpria as duas condições.",
     "suspects": [
       "c10-p1",
       "c10-p2",
@@ -1378,18 +1464,27 @@ window.HospitalCases = [
     ],
     "level": "Decisões",
     "phases": [
-      "Duas condições ao mesmo tempo"
+      "Quem podia publicar?"
     ],
     "topic": "&& · igualdade estrita ===",
     "concepts": [
       "&& · igualdade estrita ==="
-    ]
+    ],
+    "analysis": {
+      "question": "Quem cumpria as duas condições para publicar a escala?",
+      "compare": "Veja qual variável resultou em true no console e leia o depoimento dessa pessoa nas fichas.",
+      "explanation": "Só kenjiPodia resultou em true: Kenji tinha crachá válido e estava no turno da noite. Dalila trabalhava de manhã, e o crachá de Ícaro não era válido naquele dia."
+    }
   },
   {
     "id": 11,
     "title": "O perfil suspeito",
     "room": "tecnica",
-    "sceneFocus": { "label": "Perfil", "x": 535, "y": 155 },
+    "sceneFocus": {
+      "label": "Perfil",
+      "x": 535,
+      "y": 155
+    },
     "location": "Sala de auditoria técnica",
     "culprit": "c11-p2",
     "reveal": "A ficha de cargo identifica o crachá MAN-11B na tentativa de consulta fora do perfil.",
@@ -1406,13 +1501,22 @@ window.HospitalCases = [
     "topic": "|| · alternativas",
     "concepts": [
       "|| · alternativas"
-    ]
+    ],
+    "analysis": {
+      "question": "Quem tentou consultar usando um perfil indevido?",
+      "compare": "Cruze o crachá da tentativa com o cargo informado na ficha.",
+      "explanation": "A ficha de cargo e o registro da tentativa mostram o uso de um perfil de consulta indevido."
+    }
   },
   {
     "id": 12,
     "title": "A entrada irregular",
     "room": "recepcao",
-    "sceneFocus": { "label": "Acesso", "x": 360, "y": 165 },
+    "sceneFocus": {
+      "label": "Acesso",
+      "x": 360,
+      "y": 165
+    },
     "location": "Entrada do pronto atendimento",
     "culprit": "c12-p2",
     "reveal": "O acesso foi registrado pelo crachá TI-12B, cujo cargo de TI não estava entre os autorizados neste teste.",
@@ -1429,13 +1533,22 @@ window.HospitalCases = [
     "topic": "revisão · if/else · && · ||",
     "concepts": [
       "revisão · if/else · && · ||"
-    ]
+    ],
+    "analysis": {
+      "question": "Qual pessoa não atendia às duas regras de entrada?",
+      "compare": "Compare o crachá do acesso e o cargo da ficha com os cargos autorizados na missão.",
+      "explanation": "O acesso usou um crachá de TI, cargo que não estava entre os autorizados neste teste."
+    }
   },
   {
     "id": 13,
     "title": "As pulseiras trocadas",
     "room": "recepcao",
-    "sceneFocus": { "label": "Pulseiras", "x": 225, "y": 155 },
+    "sceneFocus": {
+      "label": "Pulseiras",
+      "x": 225,
+      "y": 155
+    },
     "location": "Balcão de pulseiras",
     "culprit": "c13-p1",
     "reveal": "A ficha de separação das pulseiras foi assinada pelo crachá REC-13A.",
@@ -1452,13 +1565,22 @@ window.HospitalCases = [
     "topic": "arrays · índice zero",
     "concepts": [
       "arrays · índice zero"
-    ]
+    ],
+    "analysis": {
+      "question": "Quem assinou a separação das pulseiras trocadas?",
+      "compare": "Procure nas fichas o crachá que assina a separação recuperada.",
+      "explanation": "A assinatura da ficha de separação liga esse crachá à caixa de pulseiras fora de ordem."
+    }
   },
   {
     "id": 14,
     "title": "A chave que sumiu da lista",
     "room": "arquivos",
-    "sceneFocus": { "label": "Chaves", "x": 550, "y": 150 },
+    "sceneFocus": {
+      "label": "Chaves",
+      "x": 550,
+      "y": 150
+    },
     "location": "Sala dos chaveiros",
     "culprit": "c14-p2",
     "reveal": "O inventário foi encerrado sem a última chave pelo crachá ARQ-14B.",
@@ -1475,13 +1597,22 @@ window.HospitalCases = [
     "topic": "arrays · push · includes",
     "concepts": [
       "arrays · push · includes"
-    ]
+    ],
+    "analysis": {
+      "question": "Quem encerrou o inventário sem a última chave?",
+      "compare": "Compare o identificador do encerramento do inventário com os crachás das fichas.",
+      "explanation": "O histórico mostra que o inventário foi encerrado com esse crachá antes de incluir a última chave."
+    }
   },
   {
     "id": 15,
     "title": "O corredor em repetição",
     "room": "tecnica",
-    "sceneFocus": { "label": "Roteiro", "x": 590, "y": 160 },
+    "sceneFocus": {
+      "label": "Roteiro",
+      "x": 590,
+      "y": 160
+    },
     "location": "Central de rondas",
     "culprit": "c15-p2",
     "reveal": "A configuração do roteiro repetido foi salva pelo crachá MAN-15B.",
@@ -1498,17 +1629,27 @@ window.HospitalCases = [
     "topic": "for...of · repetição",
     "concepts": [
       "for...of · repetição"
-    ]
+    ],
+    "analysis": {
+      "question": "Quem salvou o roteiro que repetia o mesmo setor?",
+      "compare": "Use o registro da configuração da rota para encontrar a ficha correspondente.",
+      "explanation": "O histórico do roteiro vincula esse crachá à configuração que repetia o mesmo setor."
+    }
   },
   {
     "id": 16,
     "title": "O estoque divergente",
     "room": "farmacia",
-    "sceneFocus": { "label": "Estoque", "x": 570, "y": 150 },
+    "sceneFocus": {
+      "label": "Estoque",
+      "x": 570,
+      "y": 150
+    },
     "location": "Almoxarifado da farmácia",
     "culprit": "c16-p3",
-    "reveal": "A última conferência que deixou os zeros de fora pertence ao crachá FAR-16C.",
-    "description": "Duas prateleiras estão sem caixas, mas o painel mostra tudo normal. Separe as quantidades zeradas para revelar a conferência.",
+    "deduction": "codigo",
+    "reveal": "A lista separada pelo seu programa mostra as conferências com zero. O nome que aparece nelas é de quem encontrou as prateleiras vazias e não avisou.",
+    "description": "A conferência do estoque veio com prateleiras vazias que ninguém avisou. Cada linha diz quem conferiu e quanto encontrou. Percorra a lista com for...of para separar as linhas com zero.",
     "suspects": [
       "c16-p1",
       "c16-p2",
@@ -1516,18 +1657,27 @@ window.HospitalCases = [
     ],
     "level": "Dados e listas",
     "phases": [
-      "Separando o que falta"
+      "Quem deixou os zeros?"
     ],
     "topic": "for...of · if · listas",
     "concepts": [
       "for...of · if · listas"
-    ]
+    ],
+    "analysis": {
+      "question": "Quem anotou as prateleiras vazias e não avisou?",
+      "compare": "Leia o nome que aparece nas linhas da lista comZero no console e confira o depoimento dessa pessoa.",
+      "explanation": "As duas linhas com zero são de Bianca: foi ela quem conferiu as prateleiras vazias e deixou passar sem aviso. André e Teresa anotaram quantidades maiores que zero."
+    }
   },
   {
     "id": 17,
     "title": "A ficha rasurada",
     "room": "laboratorio",
-    "sceneFocus": { "label": "Ficha", "x": 350, "y": 155 },
+    "sceneFocus": {
+      "label": "Ficha",
+      "x": 350,
+      "y": 155
+    },
     "location": "Laboratório de análises",
     "culprit": "c17-p1",
     "reveal": "O histórico da ficha aponta o crachá LAB-17A na alteração do setor.",
@@ -1544,17 +1694,27 @@ window.HospitalCases = [
     "topic": "objetos · propriedades",
     "concepts": [
       "objetos · propriedades"
-    ]
+    ],
+    "analysis": {
+      "question": "Quem alterou o setor da ficha rasurada?",
+      "compare": "Compare o crachá do histórico da ficha com os identificadores das três pessoas.",
+      "explanation": "O histórico de alterações liga esse crachá à mudança do setor da ficha."
+    }
   },
   {
     "id": 18,
     "title": "O nome em dobro",
     "room": "gestao",
-    "sceneFocus": { "label": "Cadastro", "x": 485, "y": 155 },
+    "sceneFocus": {
+      "label": "Cadastro",
+      "x": 485,
+      "y": 155
+    },
     "location": "Sala de cadastros",
     "culprit": "c18-p2",
-    "reveal": "O segundo cadastro foi aberto pelo crachá GES-18B.",
-    "description": "Um nome com espaços e letras diferentes criou dois cadastros. Padronize o texto e confira a origem da duplicação.",
+    "deduction": "codigo",
+    "reveal": "O programa limpou os três nomes e comparou com o cadastro original. O console mostra qual deles era, na verdade, o mesmo nome digitado de outro jeito.",
+    "description": "A mesma paciente apareceu duas vezes no sistema. Três pessoas digitaram nomes naquele dia; uma delas repetiu um cadastro que já existia, só com espaços e maiúsculas diferentes. Limpe os textos para descobrir qual era o mesmo nome.",
     "suspects": [
       "c18-p1",
       "c18-p2",
@@ -1562,18 +1722,27 @@ window.HospitalCases = [
     ],
     "level": "Dados e listas",
     "phases": [
-      "Padronizar antes de comparar"
+      "Dois cadastros, um nome"
     ],
     "topic": "strings · trim · toLowerCase",
     "concepts": [
       "strings · trim · toLowerCase"
-    ]
+    ],
+    "analysis": {
+      "question": "Quem digitou o cadastro repetido?",
+      "compare": "Veja qual variável resultou em true no console e descubra nas fichas quem digitou aquele nome.",
+      "explanation": "Só repetido1 resultou em true: \"  ANA  \" vira \"ana\" depois de trim e toLowerCase, igual ao original. Haru digitou esse nome e abriu o cadastro em dobro. \"Ana Paula\" e \"ana lima\" são outras pacientes."
+    }
   },
   {
     "id": 19,
     "title": "A gaveta escondida",
     "room": "arquivos",
-    "sceneFocus": { "label": "Gaveta secreta", "x": 500, "y": 165 },
+    "sceneFocus": {
+      "label": "Gaveta secreta",
+      "x": 500,
+      "y": 165
+    },
     "location": "Arquivo reservado",
     "culprit": "c19-p1",
     "deduction": "codigo",
@@ -1591,17 +1760,27 @@ window.HospitalCases = [
     "topic": "funções · parâmetros · return",
     "concepts": [
       "funções · parâmetros · return"
-    ]
+    ],
+    "analysis": {
+      "question": "Quem estava na sala dos arquivos às 21h?",
+      "compare": "Veja qual chamada da função devolveu true. Depois, leia o depoimento dessa pessoa e o de quem saiu pouco antes.",
+      "explanation": "A regra estavaNaSala devolveu true só para Nelson, que ficou na sala das 19h às 23h. Marina saiu às 20h, uma hora antes de a ficha ser escondida, e Clara trabalha de manhã."
+    }
   },
   {
     "id": 20,
     "title": "O sensor descalibrado",
     "room": "laboratorio",
-    "sceneFocus": { "label": "Sensor", "x": 430, "y": 140 },
+    "sceneFocus": {
+      "label": "Sensor",
+      "x": 430,
+      "y": 140
+    },
     "location": "Laboratório de sensores",
     "culprit": "c20-p1",
-    "reveal": "O ajuste incorreto foi aplicado pelo crachá MAN-20A.",
-    "description": "Um sensor de treino está deslocado em duas unidades. Corrija a lista de leituras para acessar o registro de ajuste.",
+    "deduction": "codigo",
+    "reveal": "O programa mostrou que todas as leituras estavam 2 abaixo da referência: alguém tirou 2 de cada valor.",
+    "description": "As leituras do sensor estão todas deslocadas em relação ao painel de referência. Três pessoas mexeram na calibração. Use map para corrigir as leituras e descobrir de quanto foi o erro.",
     "suspects": [
       "c20-p1",
       "c20-p2",
@@ -1609,18 +1788,27 @@ window.HospitalCases = [
     ],
     "level": "Aplicações",
     "phases": [
-      "Transformar uma lista"
+      "O ajuste que faltou"
     ],
     "topic": "map · função de transformação",
     "concepts": [
       "map · função de transformação"
-    ]
+    ],
+    "analysis": {
+      "question": "Quem aplicou o ajuste que deslocou as leituras?",
+      "compare": "Veja o valor de erro no console: ele diz quanto foi tirado de cada leitura. Procure nas fichas quem aplicou exatamente esse ajuste.",
+      "explanation": "O erro é 2: as leituras estavam 2 abaixo da referência. Renan subtraiu 2 de cada leitura, e foi esse ajuste que descalibrou o sensor. Sora não alterou valores, e o ajuste de Thiago já tinha sido desfeito."
+    }
   },
   {
     "id": 21,
     "title": "O arquivo corrompido",
     "room": "tecnica",
-    "sceneFocus": { "label": "Arquivo", "x": 550, "y": 145 },
+    "sceneFocus": {
+      "label": "Arquivo",
+      "x": 550,
+      "y": 145
+    },
     "location": "Sala de servidores",
     "culprit": "c21-p3",
     "deduction": "codigo",
@@ -1638,13 +1826,22 @@ window.HospitalCases = [
     "topic": "JSON · JSON.parse",
     "concepts": [
       "JSON · JSON.parse"
-    ]
+    ],
+    "analysis": {
+      "question": "Quem usava o terminal do arquivo no horário em que ele foi salvo?",
+      "compare": "Abra as três fichas. Procure quem usa o terminal mostrado no console e confira quem estava no hospital naquele horário.",
+      "explanation": "O JSON mostrou o terminal T-07 às 02:14. Tânia usa outro terminal. Pedro também usa o T-07, mas só à tarde, e saiu às 17h. Flávia estava de plantão no T-07 até as 3h: só ela poderia ter salvado o arquivo."
+    }
   },
   {
     "id": 22,
     "title": "A mensagem que chegou tarde",
     "room": "gestao",
-    "sceneFocus": { "label": "Mensagem", "x": 480, "y": 165 },
+    "sceneFocus": {
+      "label": "Mensagem",
+      "x": 480,
+      "y": 165
+    },
     "location": "Sala de comunicação",
     "culprit": "c22-p2",
     "reveal": "A confirmação identifica o crachá AUD-22B no fechamento antes da chegada da resposta.",
@@ -1661,13 +1858,22 @@ window.HospitalCases = [
     "topic": "Promise · await",
     "concepts": [
       "Promise · await"
-    ]
+    ],
+    "analysis": {
+      "question": "Quem fechou o painel antes da confirmação?",
+      "compare": "Espere a resposta e compare o crachá da confirmação com as fichas.",
+      "explanation": "A confirmação recebida depois da espera identifica o fechamento antes da chegada da resposta."
+    }
   },
   {
     "id": 23,
     "title": "O painel sabotado",
     "room": "tecnica",
-    "sceneFocus": { "label": "Painel", "x": 560, "y": 150 },
+    "sceneFocus": {
+      "label": "Painel",
+      "x": 560,
+      "y": 150
+    },
     "location": "Sala de painéis",
     "culprit": "c23-p2",
     "reveal": "A auditoria do painel mostra a alteração feita pelo crachá GES-23B.",
@@ -1684,13 +1890,22 @@ window.HospitalCases = [
     "topic": "DOM · getElementById · textContent",
     "concepts": [
       "DOM · getElementById · textContent"
-    ]
+    ],
+    "analysis": {
+      "question": "Quem alterou o aviso do painel?",
+      "compare": "Compare o crachá da auditoria com as fichas depois de recuperar o texto da página.",
+      "explanation": "A auditoria do painel associa esse crachá à alteração do aviso."
+    }
   },
   {
     "id": 24,
     "title": "O arquivo conectado",
     "room": "gestao",
-    "sceneFocus": { "label": "Tabela", "x": 470, "y": 165 },
+    "sceneFocus": {
+      "label": "Tabela",
+      "x": 470,
+      "y": 165
+    },
     "location": "Diretoria de dados",
     "culprit": "c24-p3",
     "reveal": "O registro recuperado identifica o crachá FAR-24C no arquivamento incorreto da última ficha.",
@@ -1707,43 +1922,14 @@ window.HospitalCases = [
     "topic": "Supabase · dados · conexão SQL",
     "concepts": [
       "Supabase · dados · conexão SQL"
-    ]
+    ],
+    "analysis": {
+      "question": "Quem arquivou a última ficha no lugar errado?",
+      "compare": "Leia o crachá retornado pela tabela de treino e encontre a ficha com o mesmo identificador.",
+      "explanation": "O registro consultado na tabela de treino liga esse crachá ao arquivamento incorreto da última ficha."
+    }
   }
 ];
-
-// A análise orienta a leitura do registro; o desfecho só aparece após a conclusão correta.
-{
-  const analyses = [
-    ['Qual crachá aparece na alteração que trancou os arquivos?', 'Compare o registro de manutenção com o campo crachá de cada ficha.', 'O histórico de manutenção liga esse crachá à mudança de configuração que trancou os arquivos.'],
-    ['Quem iniciou o teste que bloqueou o rádio?', 'Use o identificador do teste, e não apenas o cargo de manutenção.', 'O registro do teste mostra qual crachá iniciou o bloqueio do rádio.'],
-    ['Quem deixou a ficha sem identificação?', 'Compare o responsável indicado no protocolo com as fichas das três pessoas.', 'O protocolo vincula esse crachá ao preenchimento incompleto da ficha.'],
-    ['De qual terminal saiu a etiqueta sem os zeros?', 'Procure nas fichas o crachá associado à impressão recuperada.', 'O histórico de impressão liga esse terminal à etiqueta que perdeu os zeros iniciais.'],
-    ['Quem retirou a folha usada na etiqueta trocada?', 'Cruze o crachá do livro de etiquetas com os crachás das fichas.', 'O livro de etiquetas registra a retirada da folha com esse crachá, ligando a pessoa à troca.'],
-    ['Quem fez a última edição do relatório incompleto?', 'Use o histórico de edição recuperado para comparar os identificadores.', 'A última edição incompleta do relatório foi registrada com esse crachá.'],
-    ['Quem passou pelo corredor de madrugada, quando o teste disparou o alarme?', 'Veja qual comparação resultou em true no console e leia o depoimento dessa pessoa.', 'Das três comparações, só horaJonas < 6 resultou em true: Jonas passou pela porta do corredor às 2h, na madrugada do teste. Elisa saiu às 23h e Celina só chegou às 8h.'],
-    ['Quem ativou o modo de teste do leitor?', 'Procure o crachá da ativação nas fichas; o cargo sozinho não confirma a resposta.', 'O registro de configuração mostra que esse crachá ativou o modo de teste do leitor.'],
-    ['Quem anexou o crachá vencido ao pedido?', 'Compare quem preparou o pedido com o crachá revelado na mensagem de recusa.', 'O pedido vincula esse crachá ao cartão de teste vencido que causou a recusa.'],
-    ['Quem publicou a escala que não batia?', 'Compare o crachá da publicação com as fichas após conferir turno e autorização.', 'O histórico de publicação liga esse crachá à escala inconsistente.'],
-    ['Quem tentou consultar usando um perfil indevido?', 'Cruze o crachá da tentativa com o cargo informado na ficha.', 'A ficha de cargo e o registro da tentativa mostram o uso de um perfil de consulta indevido.'],
-    ['Qual pessoa não atendia às duas regras de entrada?', 'Compare o crachá do acesso e o cargo da ficha com os cargos autorizados na missão.', 'O acesso usou um crachá de TI, cargo que não estava entre os autorizados neste teste.'],
-    ['Quem assinou a separação das pulseiras trocadas?', 'Procure nas fichas o crachá que assina a separação recuperada.', 'A assinatura da ficha de separação liga esse crachá à caixa de pulseiras fora de ordem.'],
-    ['Quem encerrou o inventário sem a última chave?', 'Compare o identificador do encerramento do inventário com os crachás das fichas.', 'O histórico mostra que o inventário foi encerrado com esse crachá antes de incluir a última chave.'],
-    ['Quem salvou o roteiro que repetia o mesmo setor?', 'Use o registro da configuração da rota para encontrar a ficha correspondente.', 'O histórico do roteiro vincula esse crachá à configuração que repetia o mesmo setor.'],
-    ['Quem deixou as prateleiras vazias fora da conferência?', 'Compare o crachá da última conferência com as fichas, depois de separar as quantidades zeradas.', 'A última conferência foi registrada com esse crachá e deixou as quantidades zeradas de fora.'],
-    ['Quem alterou o setor da ficha rasurada?', 'Compare o crachá do histórico da ficha com os identificadores das três pessoas.', 'O histórico de alterações liga esse crachá à mudança do setor da ficha.'],
-    ['Quem abriu o segundo cadastro do mesmo nome?', 'Use o crachá do segundo cadastro; a diferença de espaços e letras não indica outra pessoa.', 'O histórico identifica esse crachá na abertura do cadastro duplicado.'],
-    ['Quem estava na sala dos arquivos às 21h?', 'Veja qual chamada da função devolveu true. Depois, leia o depoimento dessa pessoa e o de quem saiu pouco antes.', 'A regra estavaNaSala devolveu true só para Nelson, que ficou na sala das 19h às 23h. Marina saiu às 20h, uma hora antes de a ficha ser escondida, e Clara trabalha de manhã.'],
-    ['Quem aplicou o ajuste incorreto no sensor?', 'Após corrigir as leituras, compare o crachá do ajuste com as fichas.', 'O histórico do sensor associa esse crachá ao ajuste que deslocou as leituras.'],
-    ['Quem usava o terminal do arquivo no horário em que ele foi salvo?', 'Abra as três fichas. Procure quem usa o terminal mostrado no console e confira quem estava no hospital naquele horário.', 'O JSON mostrou o terminal T-07 às 02:14. Tânia usa outro terminal. Pedro também usa o T-07, mas só à tarde, e saiu às 17h. Flávia estava de plantão no T-07 até as 3h: só ela poderia ter salvado o arquivo.'],
-    ['Quem fechou o painel antes da confirmação?', 'Espere a resposta e compare o crachá da confirmação com as fichas.', 'A confirmação recebida depois da espera identifica o fechamento antes da chegada da resposta.'],
-    ['Quem alterou o aviso do painel?', 'Compare o crachá da auditoria com as fichas depois de recuperar o texto da página.', 'A auditoria do painel associa esse crachá à alteração do aviso.'],
-    ['Quem arquivou a última ficha no lugar errado?', 'Leia o crachá retornado pela tabela de treino e encontre a ficha com o mesmo identificador.', 'O registro consultado na tabela de treino liga esse crachá ao arquivamento incorreto da última ficha.']
-  ];
-  for (const item of window.HospitalCases) {
-    const [question, compare, explanation] = analyses[item.id - 1];
-    item.analysis = {question, compare, explanation};
-  }
-}
 
 // Foto da pessoa identificada, com carimbo, para as pastas dos casos concluídos.
 window.HospitalCulpritPhoto = item => {

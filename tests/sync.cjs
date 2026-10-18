@@ -13,10 +13,16 @@ const fs=require('fs'),vm=require('vm'),assert=require('assert'),root=require('p
  localStorage.setItem('hospital-code:'+uid+':3','const setor = "Arquivos";');
  localStorage.setItem('hospital-attempts:'+uid+':7:v2','2');
  localStorage.setItem('hospital-tutorial:'+uid,'done');
+ // Modos de treino (código próprio) e progresso dos treinos também vão como "codigo": a tabela só aceita nota, config e codigo.
+ localStorage.setItem('hospital-code:'+uid+':7:v2:zero','const horaJonas = 2;');
+ localStorage.setItem('hospital-code:'+uid+':7:v2:t1','const febre = temperatura > 37.5;');
+ localStorage.setItem('hospital-code:'+uid+':7:v2:treino','["zero","t1"]');
+ localStorage.setItem('hospital-code:'+uid+':7:v2:Invalido','x');
  await new Promise(r=>setTimeout(r,60));
  const rows=sent.flatMap(batch=>batch.rows);
  assert(sent.every(batch=>batch.table==='hospital_dados'));
- assert.deepEqual(rows.map(row=>row.chave).sort(),['3','7:v2'],'Só o código digitado sincroniza, inclusive com versão');
+ assert.deepEqual(rows.map(row=>row.chave).sort(),['3','7:v2','7:v2:t1','7:v2:treino','7:v2:zero'],'Só o código digitado sincroniza, inclusive com versão e modo de treino');
+ assert(rows.every(row=>/^[A-Za-z0-9_.:-]{1,120}$/.test(row.chave)),'Toda chave respeita a regra da tabela');
  assert(rows.every(row=>row.tipo==='codigo'&&row.user_id===uid));
  assert.equal(rows.find(row=>row.chave==='7:v2').valor,'const jonasCedo = horaJonas < 6;');
  assert(/^[A-Za-z0-9_.:-]{1,120}$/.test('7:v2'),'A chave com versão respeita a regra da tabela');

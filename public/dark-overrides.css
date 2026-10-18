@@ -86,3 +86,11 @@
 
 :root[data-theme="dark"] .professor-example{background:#0c1612;border:1px solid #2f4a3c}
 :root[data-theme="dark"] .mica-fab{background:#0f2a22;border-color:#c9a640;color:#efe6c8}
+
+:root[data-theme="dark"] .training{border-color:#2c4036;background:#14211c}
+:root[data-theme="dark"] .training h3{color:#cfe8d9}
+:root[data-theme="dark"] .training>p{color:#9fb0a5}
+:root[data-theme="dark"] .training-list button{border-color:#2c4036;background:#1a2822;color:#cfe8d9}
+:root[data-theme="dark"] .training-list button small{color:#9fb0a5}
+:root[data-theme="dark"] .training-list button[aria-pressed=true]{border-color:#c9a640;background:#20302a}
+:root[data-theme="dark"] .symbol-bar{background:#0f2a22;border-top-color:#c9a640}

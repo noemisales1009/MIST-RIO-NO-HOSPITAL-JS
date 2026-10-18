@@ -4,6 +4,20 @@ html.login-open body{overflow:hidden}
 html.auth-pending body>*:not(.login-overlay):not(.auth-waiting){visibility:hidden}
 html.auth-pending .login-overlay{background:radial-gradient(120% 90% at 50% 0%,#24493f,#0e211b)}
 :root[data-theme="dark"].auth-pending .login-overlay{background:radial-gradient(120% 90% at 50% 0%,#0f2a22,#050c0a)}
+/* Pop-up do nome do detetive: abre na primeira vez (conta sem nome) e ao tocar no nome no topo. */
+.name-dialog{width:min(460px,calc(100vw - 32px));padding:22px 24px;border:1px solid #b9c8a9;border-radius:12px;background:#fffcf5;color:#213d35;box-shadow:0 18px 50px #0c161266}
+.name-dialog::backdrop{background:#0c161299}
+.name-dialog h2{margin:4px 0 6px;font:600 28px/1.1 var(--display)}
+.name-dialog-lead{margin:0 0 14px;font-size:14px;line-height:1.5;color:#5f7251}
+.name-dialog-form{display:flex;flex-wrap:wrap;gap:8px}
+.name-dialog-form input{flex:1 1 100%;min-width:0;min-height:44px;padding:8px 12px;border:1px solid #c9d3bb;border-radius:8px;background:#fff;color:#213d35;font:16px var(--body)}
+.name-dialog-form input:focus-visible{outline:3px solid #c9a640;outline-offset:1px}
+.name-dialog-form .run{flex:1 1 auto}
+.name-dialog-status{flex-basis:100%;margin:0;font-size:13px;color:#7a4e10}
+:root[data-theme="dark"] .name-dialog{border-color:#2c4036;background:#14211c;color:#e7e1cc}
+:root[data-theme="dark"] .name-dialog-lead{color:#9fb0a5}
+:root[data-theme="dark"] .name-dialog-form input{border-color:#2c4036;background:#0f1c17;color:#e7e1cc}
+:root[data-theme="dark"] .name-dialog-status{color:#e8d27a}
 .auth-waiting{position:fixed;inset:0;z-index:999;display:grid;place-items:center;margin:0;padding:24px;color:var(--muted);font:600 15px var(--body);text-align:center}
 .login-overlay{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;padding:calc(16px + var(--safe-top,0px)) calc(16px + var(--safe-right,0px)) calc(16px + var(--safe-bottom,0px)) calc(16px + var(--safe-left,0px));background:radial-gradient(120% 90% at 50% 0%,#24493fe6,#0e211bf0);backdrop-filter:blur(4px);overflow:auto}
 .login-card{width:min(420px,100%);overflow:hidden;background:#fffaf0;color:#213d35;border:1px solid #e3d6ae;border-radius:14px;box-shadow:0 24px 60px #06110d66;font-family:var(--body)}

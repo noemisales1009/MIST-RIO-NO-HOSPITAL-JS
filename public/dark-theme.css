@@ -328,7 +328,6 @@
 :root[data-theme="dark"] .case-scene{background:#34443a}
 :root[data-theme="dark"] .scene-focus-ring{stroke:var(--focus-color,#f5e7a5)}
 :root[data-theme="dark"] .scene-mote{fill:#fff8df}
-:root[data-theme="dark"] .scene-screen-scan{fill:#bfe8ff}
 :root[data-theme="dark"] .scene-walk-hint{background:#2b271e;color:#a5a38c;border-color:#454137}
 :root[data-theme="dark"] .suspect-card>.person-portrait{border:1px solid #bdc6ae;background:linear-gradient(135deg,#e8e0c7,#c9d2b9)}
 :root[data-theme="dark"] .person-portrait>img{border:0!important}
@@ -496,6 +495,16 @@
 :root[data-theme="dark"] .professor-popup{box-shadow:0 18px 50px #0c161266}
 :root[data-theme="dark"] .professor-close{border:1px solid #453f1d66;background:transparent;color:#f6efd6}
 :root[data-theme="dark"] .professor-close:hover{background:#14141414}
+:root[data-theme="dark"] .symbol-bar{background:#173b35;border-top:2px solid #453f1d}
+:root[data-theme="dark"] .symbol-bar button{border:1px solid #46604c;background:#203a2f;color:#edf1c9}
+:root[data-theme="dark"] .symbol-bar button:active{background:#2f5541}
+:root[data-theme="dark"] .training{border:1px solid #3d4336;background:#1a1b17}
+:root[data-theme="dark"] .training h3{color:#9ac3b3}
+:root[data-theme="dark"] .training>p{color:#8a9c7d}
+:root[data-theme="dark"] .training-list button{border:1px solid #3d4336;background:#141414;color:#9ac3b3}
+:root[data-theme="dark"] .training-list button small{color:#8a917c}
+:root[data-theme="dark"] .training-list button[aria-pressed=true]{border-color:#64542b;box-shadow:0 0 0 3px #453f1d55;background:#1f1c12}
+:root[data-theme="dark"] .training-list button[data-done=true] span::before{color:#6ba276}
 :root[data-theme="dark"] footer b{color:#213d35}
 :root[data-theme="dark"] .new-evidence{animation-name:found-clue-dark}
 @keyframes found-clue-dark{0%,40%{background:#4d4520;box-shadow:0 0 0 4px #e9db8c55}100%{box-shadow:0 0 0 0 #e9db8c00}}

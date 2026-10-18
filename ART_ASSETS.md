@@ -67,3 +67,7 @@ Prompt final do conjunto: criar 24 retratos adultos distintos por folha, no esti
 `public/assets/detective-v2.png`: arte em repouso mantida. Prompt: detetive de pele morena, cabelo cacheado escuro, casaco creme, camisa verde, calça escura, botas e caderno, corpo inteiro em pixel art com fundo transparente.
 
 As artes foram inspecionadas; a caminhada corrigida mostra dois braços em todas as oito poses. A escala no jogo é comum ao repouso e à animação e considera a altura dos móveis. Testes de execução e integração não substituem a conferência visual em navegador e aparelho físico.
+
+## Símbolo do jogo e ícone do aplicativo
+
+Pasta de caso em degradê verde, com uma foto do prédio do hospital presa por um clipe e uma lupa que amplia o prédio. É vetor puro (sem imagem raster), gerado por `scratchpad/gerar-icone-jogo.cjs` em `public/favicon.svg` e inserido inline no `<span class="brand-icon">` de todas as páginas (viewBox 18 18 72 72, ids com prefixo `mh`). O aplicativo Android usa as mesmas camadas como ícone adaptável (fundo em degradê, frente com a pasta, a foto e a lupa) nos PNGs de `misterio-hospital-android/android/app/src/main/res/mipmap-*`.

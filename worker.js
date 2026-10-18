@@ -1,5 +1,5 @@
 'use strict';
-importScripts('lessons.js');
+importScripts('lessons.js','drills.js');
 const AsyncFunction=Object.getPrototypeOf(async function(){}).constructor;
 function canonical(value){if(Array.isArray(value))return value.map(canonical);if(value&&typeof value==='object')return Object.fromEntries(Object.keys(value).sort().map(key=>[key,canonical(value[key])]));return value;}
 const equal=(left,right)=>JSON.stringify(canonical(left))===JSON.stringify(canonical(right));
@@ -77,9 +77,15 @@ async function passesVariant(code,lesson,variant,options){
 self.onmessage=async function(event){
   const logs=[];
   try{
-    const {code,phase}=event.data||{};
+    const {code,phase,drill}=event.data||{};
     if(typeof code!=='string'||code.length>20000)throw new Error('Código muito longo ou inválido. Experimente uma solução menor.');
-    const lesson=HospitalLessons.find(item=>item.id===phase);if(!lesson)throw new Error('Este caso ainda não está disponível.');
+    const base=HospitalLessons.find(item=>item.id===phase);if(!base)throw new Error('Este caso ainda não está disponível.');
+    // Treino extra: mesmo corretor, mas com os dados do treino e sem exigir a ação no cenário.
+    let lesson=base;
+    if(drill!==undefined){
+      const extra=((typeof HospitalDrills!=='undefined'?HospitalDrills:{})[phase]||[]).find(item=>item.id===drill);if(!extra)throw new Error('Este treino ainda não está disponível.');
+      lesson={...base,...extra,action:base.action,evidence:base.evidence,variants:extra.variants||[],functionTests:extra.functionTests||[],domExpected:extra.domExpected||{},requires:extra.requires,mutable:extra.mutable,consoleArgs:extra.consoleArgs,variantHint:extra.variantHint,dom:!!extra.domExpected,drill:true};
+    }
     const options={logs,fichas:Array.isArray(event.data?.fichas)?event.data.fichas:[],context:event.data?.context||{},preview:!!event.data?.preview};
     const result=await runProgram(code,lesson,options);
     const problems=[],issues=[],add=(text,issue)=>{problems.push(text);issues.push(issue);};
@@ -95,10 +101,10 @@ self.onmessage=async function(event){
     let dataReady=problems.length===0&&result.mutable;
     const call=lesson.action.name+'('+lesson.action.args.join(', ')+');';
     if(!logs.length)add('Mostre o valor no console: adicione console.log('+(lesson.consoleArgs||Object.keys(lesson.expected)).join(', ')+');',{code:'console'});
-    if(!result.actions.length)add(!result.attempts.length?'Use os dados no objeto: adicione '+call:dataReady?lesson.action.name+' foi chamada, mas não com os dados que você preparou. Use '+call:lesson.action.name+' já está no programa. Ela vai funcionar quando os dados do passo 1 estiverem certos.',{code:!result.attempts.length?'action-missing':dataReady?'action-args':'action-waiting'});
+    if(!lesson.drill&&!result.actions.length)add(!result.attempts.length?'Use os dados no objeto: adicione '+call:dataReady?lesson.action.name+' foi chamada, mas não com os dados que você preparou. Use '+call:lesson.action.name+' já está no programa. Ela vai funcionar quando os dados do passo 1 estiverem certos.',{code:!result.attempts.length?'action-missing':dataReady?'action-args':'action-waiting'});
     if(!result.mutable)add(`Use let para ${lesson.mutable}, pois ela precisa aceitar uma nova atribuição.`,{code:'mutable',name:lesson.mutable});
     const withoutComments=code.replace(/\/\*[\s\S]*?\*\//g,'').replace(/\/\/[^\n]*/g,'');
     if(lesson.requires&&!new RegExp('\\b'+lesson.requires+'\\b').test(withoutComments)){dataReady=false;add(`Neste caso, pratique o comando ${lesson.requires}.`,{code:'requires',name:lesson.requires});}
-    self.postMessage({ok:true,passed:problems.length===0,problems,issues,checks:{data:dataReady,output:logs.length>0,action:result.actions.length>0},logs,consulted:result.consulted,commands:result.commands,actions:result.actions,data:Object.fromEntries(Object.keys(lesson.expected).filter(name=>result.values[name]?.present).map(name=>[name,result.values[name].value])),dom:lesson.dom?{aviso:String(result.elements.aviso.textContent)}:null});
+    self.postMessage({ok:true,passed:problems.length===0,problems,issues,checks:{data:dataReady,output:logs.length>0,action:lesson.drill?true:result.actions.length>0},logs,consulted:result.consulted,commands:result.commands,actions:result.actions,data:Object.fromEntries(Object.keys(lesson.expected).filter(name=>result.values[name]?.present).map(name=>[name,result.values[name].value])),dom:lesson.dom?{aviso:String(result.elements.aviso.textContent)}:null});
   }catch(error){self.postMessage({ok:false,logs,error:{name:error.name,message:String(error.message).slice(0,500)}});}
 };

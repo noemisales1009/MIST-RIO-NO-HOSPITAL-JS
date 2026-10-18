@@ -18,11 +18,9 @@
   const zoom=variant.zoom,panX=(760-760/zoom)*variant.pan,panY=400-400/zoom;
   item.sceneFocus=window.HospitalSceneFocusFor(item,variant);
   const focus=item.sceneFocus;
-  // Efeito ambiente coerente com a sala: telas varrendo em técnica/laboratório, luz da janela nas demais e poeira no ar em todas.
+  // Efeito ambiente: luz da janela respirando e poeira no ar. (A faixa que varria a cena inteira parecia um defeito e saiu.)
   const motes=[0,1,2,3,4].map(n=>`<circle class="scene-mote" cx="${90+((id*97+n*131)%580)}" cy="${120+((id*53+n*47)%160)}" r="${1.4+n%2*.8}" style="animation-delay:${-(n*2.3+id%3)}s"/>`).join('');
-  const roomEffect=(['tecnica','laboratorio'].includes(item.room)
-    ?'<rect class="scene-screen-scan" y="-6" width="760" height="6"/>'
-    :'<rect class="scene-window-light" x="30" y="0" width="150" height="300" fill="#fff3c5"/>')+motes;
+  const roomEffect='<rect class="scene-window-light" x="30" y="0" width="150" height="300" fill="#fff3c5"/>'+motes;
   const sceneClues={
     1:'<rect x="-17" y="-17" width="34" height="34" rx="4" fill="#e9dfbd" stroke="#536d52" stroke-width="2"/><rect x="-11" y="-11" width="22" height="6" rx="1" fill="#263f32"/><g fill="#617958"><circle cx="-7" cy="2" r="2"/><circle cy="2" r="2"/><circle cx="7" cy="2" r="2"/><circle cx="-7" cy="9" r="2"/><circle cy="9" r="2"/><circle cx="7" cy="9" r="2"/></g>',
     2:'<rect x="-16" y="-17" width="32" height="34" rx="5" fill="#526d58" stroke="#e3d6ac" stroke-width="2"/><rect x="-10" y="-10" width="14" height="8" rx="1" fill="#1c3229"/><path d="M-10 3h18m-18 5h13M8-12l7-9" stroke="#e3d6ac" stroke-width="2"/><circle cx="9" cy="10" r="4" fill="#d3b878"/>',

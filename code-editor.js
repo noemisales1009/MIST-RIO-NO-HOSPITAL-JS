@@ -64,4 +64,27 @@
  const watch=()=>{schedule();requestAnimationFrame(watch);};
  document.fonts?.ready?.then(()=>{last=null;schedule();});
  render();requestAnimationFrame(watch);
+ // Barra de símbolos: no celular e no tablet, { } ( ) [ ] " ; ficam escondidos no teclado.
+ // Aparece acima do teclado enquanto um campo de código está em foco.
+ const touch=(window.matchMedia?.('(pointer:coarse)').matches)||navigator.maxTouchPoints>0;
+ if(touch&&document.body){
+  const bar=document.createElement('div');bar.className='symbol-bar';bar.setAttribute('role','toolbar');bar.setAttribute('aria-label','Símbolos do JavaScript');bar.hidden=true;
+  const keys=[['{ }','{}','chaves'],['( )','()','parênteses'],['[ ]','[]','colchetes'],['" "','""','aspas'],[';',';','ponto e vírgula'],['=','=','igual'],['<','<','menor'],['>','>','maior'],['+','+','mais'],['.','.','ponto'],[',',',','vírgula'],['!','!','exclamação'],['&&','&&','e'],['||','||','ou'],['=>','=>','seta'],['⇥','  ','recuo'],['↵','\n','nova linha']];
+  let field=null;
+  for(const [label,text,name]of keys){
+   const button=document.createElement('button');button.type='button';button.textContent=label;button.setAttribute('aria-label','Inserir '+name);
+   // pointerdown sem ação padrão: o campo não perde o foco e o teclado continua aberto.
+   button.addEventListener('pointerdown',event=>event.preventDefault());
+   button.addEventListener('click',()=>{if(!field)return;const start=field.selectionStart,end=field.selectionEnd;field.setRangeText(text,start,end,'end');if(text.length===2&&label.includes(' '))field.setSelectionRange(start+1,start+1);field.dispatchEvent(new Event('input',{bubbles:true}));});
+   bar.append(button);
+  }
+  document.body.append(bar);
+  // A barra acompanha o teclado: fica no fim da parte visível da tela.
+  const place=()=>{const vv=window.visualViewport;if(!vv){bar.style.transform='';return;}bar.style.transform='translateY('+(vv.offsetTop+vv.height-document.documentElement.clientHeight)+'px)';};
+  const show=target=>{field=target;bar.hidden=false;document.body.classList.add('symbols-open');place();};
+  const hide=()=>{field=null;bar.hidden=true;document.body.classList.remove('symbols-open');};
+  for(const id of ['code','investigation-code','conclusion-code']){const target=document.getElementById(id);if(!target)continue;target.addEventListener('focus',()=>show(target));target.addEventListener('blur',()=>setTimeout(()=>{if(document.activeElement!==field)hide();},60));}
+  window.visualViewport?.addEventListener('resize',place);window.visualViewport?.addEventListener('scroll',place);
+  if(document.activeElement&&['code','investigation-code','conclusion-code'].includes(document.activeElement.id))show(document.activeElement);
+ }
 })();

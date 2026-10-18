@@ -122,11 +122,9 @@
 @keyframes ambient-breathe{0%,100%{opacity:.08}50%{opacity:.26}}
 .scene-mote{pointer-events:none;fill:#fff8df;animation:scene-mote 12s ease-in-out infinite}
 @keyframes scene-mote{0%,100%{opacity:0;transform:translate(0,0)}30%{opacity:.5}70%{opacity:.35;transform:translate(10px,-26px)}}
-.scene-screen-scan{pointer-events:none;fill:#bfe8ff;opacity:.07;animation:scene-scan 7s linear infinite}
-@keyframes scene-scan{0%{transform:translateY(0)}100%{transform:translateY(400px)}}
 .scene-window-light{pointer-events:none;mix-blend-mode:soft-light;animation:scene-window 11s ease-in-out infinite}
 @keyframes scene-window{0%,100%{opacity:.05;transform:translateX(-10px)}50%{opacity:.28;transform:translateX(14px)}}
-@media(prefers-reduced-motion:reduce){.scene-focus-glow{animation:none;opacity:.7}.scene-ambient,.scene-mote,.scene-screen-scan,.scene-window-light{animation:none}.scene-mote{opacity:.3}}
+@media(prefers-reduced-motion:reduce){.scene-focus-glow{animation:none;opacity:.7}.scene-ambient,.scene-mote,.scene-window-light{animation:none}.scene-mote{opacity:.3}}
 .scene-walk-hint{background:#e6ddc4;color:#615f47;border-color:#c5bca4}
 #detective-idle,#detective-walk{transition:none}
 .suspect-card>.person-portrait{width:100%;aspect-ratio:1.03;position:relative;overflow:hidden;border:1px solid #bdc6ae;border-radius:4px;background:linear-gradient(135deg,#e8e0c7,#c9d2b9)}
@@ -320,3 +318,22 @@ body.case-page{padding-bottom:calc(84px + var(--safe-bottom,0px))}
 .professor-popup .professor-head,.professor-popup .professor-chips,.professor-popup .professor-ask{flex-shrink:0}
 @media(max-height:560px){.professor-popup .professor-head{gap:10px;padding:8px 12px}.professor-popup .professor-avatar{flex-basis:40px;width:40px;height:40px}.professor-popup .professor-head p{display:none}.professor-popup .professor-log{min-height:64px;padding:10px 12px}.professor-popup .professor-chips{flex-wrap:nowrap;overflow-x:auto;padding:0 12px 8px;scrollbar-width:thin}.professor-popup .professor-chip{flex:0 0 auto;white-space:nowrap}.professor-popup .professor-ask{padding:8px 12px 10px}}
 @media(max-height:560px) and (min-width:761px){.professor-popup{right:calc(172px + var(--safe-right,0px));bottom:calc(10px + var(--safe-bottom,0px));max-height:calc(100dvh - 20px - var(--safe-top,0px) - var(--safe-bottom,0px))}}
+
+/* Barra de símbolos do código (celular e tablet): aparece acima do teclado enquanto um campo de código está em foco. */
+.symbol-bar{position:fixed;left:0;right:0;bottom:0;z-index:950;display:flex;gap:6px;padding:6px calc(8px + var(--safe-right,0px)) calc(6px + var(--safe-bottom,0px)) calc(8px + var(--safe-left,0px));overflow-x:auto;background:#173b35;border-top:2px solid #e8d989;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.symbol-bar::-webkit-scrollbar{display:none}
+.symbol-bar[hidden]{display:none}
+.symbol-bar button{flex:0 0 auto;min-width:44px;height:40px;padding:0 10px;border:1px solid #46604c;border-radius:7px;background:#203a2f;color:#edf1c9;font:700 17px/1 var(--mono);touch-action:manipulation;cursor:pointer}
+.symbol-bar button:active{background:#2f5541}
+body.symbols-open .mica-fab,body.symbols-open .mobile-case-nav{display:none}
+/* Treino depois do caso: escrever do zero e treinos extras. */
+.training{margin:18px 0 6px;padding:16px 18px;border:1px solid #b9c8a9;border-radius:10px;background:#f4f6ea}
+.training[hidden]{display:none}
+.training h3{margin:0 0 4px;font:600 22px/1.1 var(--display);color:#234f40}
+.training>p{margin:0 0 12px;font-size:14px;line-height:1.5;color:#5f7251}
+.training-list{display:flex;flex-wrap:wrap;gap:8px}
+.training-list button{display:flex;flex-direction:column;align-items:flex-start;gap:3px;flex:1 1 200px;max-width:100%;min-height:44px;padding:9px 12px;border:1px solid #b9c8a9;border-radius:8px;background:#fff;color:#234f40;font:600 13px/1.25 var(--body);cursor:pointer;text-align:left}
+.training-list button small{font:400 12px/1.3 var(--body);color:#6f7660}
+.training-list button[aria-pressed=true]{border-color:#c9a640;box-shadow:0 0 0 3px #e8d98955;background:#fff8dc}
+.training-list button[data-done=true] span::before{content:'✓ ';color:#3f7d4e}
+.training-back{margin-top:12px}

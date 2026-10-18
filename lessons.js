@@ -7,7 +7,7 @@ globalThis.HospitalLessons = [
     "concept": "const · texto · console.log",
     "story": "A sala de arquivos amanheceu trancada. Um bilhete esquecido pode revelar quem trocou a configuração do terminal.",
     "explanation": "Uma variável é como uma caixinha com uma etiqueta. const cria a variável; = guarda o valor; as aspas indicam um texto. abrirPorta é uma função pronta do jogo: ela usa os dados do seu código para agir no cenário.",
-    "mission": "Crie a variável senha e guarde nela o texto \"4271\". Mostre o valor no console. Depois, chame abrirPorta(senha); para aplicar os dados no caso.",
+    "mission": "A senha de hoje está no bilhete. Guarde esse valor em senha, como texto, e mostre no console. Depois, aplique no caso com abrirPorta(senha);",
     "clue": "A senha de hoje é 4271.",
     "starter": "// Guarde a senha do bilhete.\nconst senha = \"\";\n\nconsole.log(senha);\n\n// Aplique os dados no objeto do caso.\nabrirPorta(senha);",
     "solution": "const senha = \"4271\";\nconsole.log(senha);\nabrirPorta(senha);",
@@ -38,7 +38,7 @@ globalThis.HospitalLessons = [
     "concept": "let · atribuição",
     "story": "O rádio da equipe parou de responder durante um teste. Atualize o estado do painel para abrir a ficha técnica.",
     "explanation": "Use let quando a variável precisar receber outro valor. Depois de criar a variável, escreva o nome, = e o novo valor. Você não repete let para atualizar. ligarRadio é uma função pronta do jogo: ela usa os dados do seu código para agir no cenário.",
-    "mission": "Crie acesso com let, começando em \"bloqueado\". Depois mude o valor para \"liberado\" e mostre no console. Depois, chame ligarRadio(acesso); para aplicar os dados no caso.",
+    "mission": "O rádio começa bloqueado e precisa terminar liberado. Crie acesso começando em \"bloqueado\" e, mais adiante, troque o valor para \"liberado\". Mostre o valor final no console e aplique no caso com ligarRadio(acesso);",
     "clue": "Estado inicial: bloqueado → estado final: liberado.",
     "starter": "let acesso = \"bloqueado\";\n\n// Atualize acesso aqui.\n\nconsole.log(acesso);\n\n// Aplique os dados no objeto do caso.\nligarRadio(acesso);",
     "solution": "let acesso = \"bloqueado\";\nacesso = \"liberado\";\nconsole.log(acesso);\nligarRadio(acesso);",
@@ -70,7 +70,7 @@ globalThis.HospitalLessons = [
     "concept": "nomes de variáveis · maiúsculas e minúsculas",
     "story": "Uma ficha chegou à recepção sem identificação. Recupere o setor e o código antes que ela seja arquivada no lugar errado.",
     "explanation": "Os nomes ajudam a entender o que cada variável guarda. setor e codigoFicha são nomes diferentes. JavaScript distingue letras maiúsculas e minúsculas: setor é diferente de Setor. identificarFicha é uma função pronta do jogo: ela usa os dados do seu código para agir no cenário.",
-    "mission": "Crie setor com o texto \"Arquivos\" e codigoFicha com o texto \"B-0042\". Mostre os dois valores no console. Depois, chame identificarFicha(setor, codigoFicha); para aplicar os dados no caso.",
+    "mission": "A ficha traz duas informações: o setor Arquivos e o código B-0042. Guarde cada uma na própria variável, setor e codigoFicha, mostre as duas no console e aplique no caso com identificarFicha(setor, codigoFicha);",
     "clue": "Setor: Arquivos · ficha: B-0042.",
     "starter": "// Dê um nome a cada informação.\nconst setor = \"\";\nconst codigoFicha = \"\";\n\nconsole.log(setor, codigoFicha);\n\n// Aplique os dados no objeto do caso.\nidentificarFicha(setor, codigoFicha);",
     "solution": "const setor = \"Arquivos\";\nconst codigoFicha = \"B-0042\";\nconsole.log(setor, codigoFicha);\nidentificarFicha(setor, codigoFicha);",
@@ -103,7 +103,7 @@ globalThis.HospitalLessons = [
     "concept": "number · string · typeof",
     "story": "A etiqueta de uma caixa perdeu os primeiros zeros. Separe texto de número para recuperar o código completo.",
     "explanation": "Um número serve para cálculos e comparações. Um texto preserva caracteres, inclusive os zeros à esquerda. typeof mostra o tipo de um valor: number para número e string para texto. imprimirEtiqueta é uma função pronta do jogo: ela usa os dados do seu código para agir no cenário.",
-    "mission": "Guarde 217 como número em horario e \"0042\" como texto em codigo. Mostre os valores e seus tipos no console. Depois, chame imprimirEtiqueta(codigo); para aplicar os dados no caso.",
+    "mission": "A etiqueta precisa do horário como número (217) e do código como texto (0042), porque o zero da frente não pode sumir. Guarde em horario e codigo, mostre os valores e os tipos no console e aplique no caso com imprimirEtiqueta(codigo);",
     "clue": "Horário numérico: 217 · código completo: 0042.",
     "starter": "const horario = 0;\nconst codigo = \"\";\n\nconsole.log(horario, typeof horario);\nconsole.log(codigo, typeof codigo);\n\n// Aplique os dados no objeto do caso.\nimprimirEtiqueta(codigo);",
     "solution": "const horario = 217;\nconst codigo = \"0042\";\nconsole.log(horario, typeof horario);\nconsole.log(codigo, typeof codigo);\nimprimirEtiqueta(codigo);",
@@ -135,7 +135,7 @@ globalThis.HospitalLessons = [
     "concept": "concatenação · operador +",
     "story": "Uma gaveta recebeu uma etiqueta de outra ala. Monte o destino correto para descobrir a origem da troca.",
     "explanation": "O sinal + também pode juntar textos. Espaços e pontuação precisam fazer parte desses textos. Por exemplo, \"Sala \" + \"A\" produz \"Sala A\". abrirGaveta é uma função pronta do jogo: ela usa os dados do seu código para agir no cenário.",
-    "mission": "Use ala e sala para montar destino com o texto exato \"Ala B - Arquivos\". Mostre destino no console. Depois, chame abrirGaveta(destino); para aplicar os dados no caso.",
+    "mission": "A gaveta fica na ala B, sala Arquivos, e a etiqueta precisa dizer exatamente \"Ala B - Arquivos\". Monte destino a partir de ala e sala, sem digitar o texto final, mostre no console e aplique no caso com abrirGaveta(destino);",
     "clue": "A etiqueta deve dizer: Ala B - Arquivos.",
     "starter": "const ala = \"B\";\nconst sala = \"Arquivos\";\n\nconst destino = \"\";\nconsole.log(destino);\n\n// Aplique os dados no objeto do caso.\nabrirGaveta(destino);",
     "solution": "const ala = \"B\";\nconst sala = \"Arquivos\";\nconst destino = \"Ala \" + ala + \" - \" + sala;\nconsole.log(destino);\nabrirGaveta(destino);",
@@ -180,7 +180,7 @@ globalThis.HospitalLessons = [
     "concept": "revisão · variáveis e textos",
     "story": "Um relatório ficou pela metade no fim do turno. Junte as informações para descobrir qual registro o interrompeu.",
     "explanation": "Um pequeno programa pode guardar informações, montar uma mensagem e exibir o resultado. Vamos juntar os passos que você já usou, sem adicionar um comando novo. recuperarRelatorio é uma função pronta do jogo: ela usa os dados do seu código para agir no cenário.",
-    "mission": "Guarde setor = \"Arquivos\" e status = \"liberado\". Monte relatorio com o texto \"Setor: Arquivos | Status: liberado\" e mostre no console. Depois, chame recuperarRelatorio(relatorio); para aplicar os dados no caso.",
+    "mission": "O relatório junta o setor Arquivos e o status liberado no formato \"Setor: Arquivos | Status: liberado\". Guarde setor e status, monte relatorio a partir deles, mostre no console e aplique no caso com recuperarRelatorio(relatorio);",
     "clue": "Relatório esperado: Setor: Arquivos | Status: liberado.",
     "starter": "const setor = \"Arquivos\";\nconst status = \"liberado\";\n\nconst relatorio = \"\";\nconsole.log(relatorio);\n\n// Aplique os dados no objeto do caso.\nrecuperarRelatorio(relatorio);",
     "solution": "const setor = \"Arquivos\";\nconst status = \"liberado\";\nconst relatorio = \"Setor: \" + setor + \" | Status: \" + status;\nconsole.log(relatorio);\nrecuperarRelatorio(relatorio);",
@@ -225,7 +225,7 @@ globalThis.HospitalLessons = [
     "concept": "comparação · boolean",
     "story": "Um teste disparou o alarme da sala técnica de madrugada. A porta do corredor registrou o horário de passagem de cada pessoa. Use comparações para descobrir quem passou por lá antes das 6h.",
     "explanation": "Uma comparação produz um valor booleano: true ou false. O operador < significa menor que: 3 < 5 resulta em true, e 9 < 5 resulta em false. verificarAlarme é uma função pronta do jogo: ela usa os dados do seu código para agir no cenário.",
-    "mission": "Compare o horário de cada pessoa com 6 e guarde o resultado (true ou false) nas três variáveis. Mostre as três no console. Depois, chame verificarAlarme(elisaCedo, celinaCedo, jonasCedo); para aplicar os dados no caso.",
+    "mission": "Descubra quem passou pela porta antes das 6h: para cada pessoa, guarde em elisaCedo, celinaCedo e jonasCedo se o horário dela é menor que 6 (true ou false, calculado a partir da hora). Mostre as três no console e aplique no caso com verificarAlarme(elisaCedo, celinaCedo, jonasCedo);",
     "clue": "A porta do corredor guarda o horário de passagem de cada pessoa. O alarme disparou antes das 6h.",
     "starter": "// Hora em que cada pessoa passou pela porta (0 a 23).\nconst horaElisa = 23;\nconst horaCelina = 8;\nconst horaJonas = 2;\n\n// O alarme disparou de madrugada: antes das 6h.\n// Compare cada hora com 6. A primeira já está pronta.\nconst elisaCedo = horaElisa < 6;\nconst celinaCedo = false;\nconst jonasCedo = false;\n\nconsole.log(elisaCedo, celinaCedo, jonasCedo);\n\n// Aplique os dados no objeto do caso.\nverificarAlarme(elisaCedo, celinaCedo, jonasCedo);",
     "solution": "const horaElisa = 23;\nconst horaCelina = 8;\nconst horaJonas = 2;\nconst elisaCedo = horaElisa < 6;\nconst celinaCedo = horaCelina < 6;\nconst jonasCedo = horaJonas < 6;\nconsole.log(elisaCedo, celinaCedo, jonasCedo);\nverificarAlarme(elisaCedo, celinaCedo, jonasCedo);",
@@ -296,7 +296,7 @@ globalThis.HospitalLessons = [
     "concept": "if · bloco de código",
     "story": "O leitor de crachás ficou em modo de teste. Faça o painel responder à autorização e confira quem ativou essa configuração.",
     "explanation": "if significa “se”. O código dentro das chaves só roda quando a condição entre parênteses é verdadeira. validarCracha é uma função pronta do jogo: ela usa os dados do seu código para agir no cenário.",
-    "mission": "Se autorizado for true, mude mensagem para \"Acesso liberado\". Use if e mostre a mensagem no console. Depois, chame validarCracha(mensagem); para aplicar os dados no caso.",
+    "mission": "Quando autorizado for true, mensagem precisa virar \"Acesso liberado\"; se não for, ela continua vazia. Faça essa decisão no código, mostre a mensagem no console e aplique no caso com validarCracha(mensagem);",
     "clue": "O leitor de teste retornou autorizado = true.",
     "starter": "const autorizado = true;\nlet mensagem = \"\";\n\n// Escreva a condição aqui.\n\nconsole.log(mensagem);\n\n// Aplique os dados no objeto do caso.\nvalidarCracha(mensagem);",
     "solution": "const autorizado = true;\nlet mensagem = \"\";\nif (autorizado) {\n  mensagem = \"Acesso liberado\";\n}\nconsole.log(mensagem);\nvalidarCracha(mensagem);",
@@ -340,7 +340,7 @@ globalThis.HospitalLessons = [
     "concept": "else · caminho alternativo",
     "story": "Um crachá de teste foi recusado, mas o painel não explicou o motivo. Crie o caminho alternativo para recuperar a mensagem.",
     "explanation": "else significa “senão”. Ele define o caminho que será seguido quando a condição do if for falsa. explicarRecusa é uma função pronta do jogo: ela usa os dados do seu código para agir no cenário.",
-    "mission": "Use if e else: mostre \"Acesso liberado\" quando autorizado for true e \"Acesso negado\" quando for false. Depois, chame explicarRecusa(mensagem); para aplicar os dados no caso.",
+    "mission": "Desta vez autorizado é false. mensagem precisa ser \"Acesso liberado\" quando autorizado for true e \"Acesso negado\" quando for false, decidido no código. Mostre no console e aplique no caso com explicarRecusa(mensagem);",
     "clue": "Neste teste, autorizado = false.",
     "starter": "const autorizado = false;\nlet mensagem = \"\";\n\nif (autorizado) {\n  mensagem = \"Acesso liberado\";\n}\n// Acrescente o caminho alternativo.\n\nconsole.log(mensagem);\n\n// Aplique os dados no objeto do caso.\nexplicarRecusa(mensagem);",
     "solution": "const autorizado = false;\nlet mensagem = \"\";\nif (autorizado) {\n  mensagem = \"Acesso liberado\";\n} else {\n  mensagem = \"Acesso negado\";\n}\nconsole.log(mensagem);\nexplicarRecusa(mensagem);",
@@ -380,40 +380,55 @@ globalThis.HospitalLessons = [
   {
     "id": 10,
     "case": 10,
-    "title": "Duas condições ao mesmo tempo",
+    "title": "Quem podia publicar?",
     "concept": "&& · igualdade estrita ===",
-    "story": "O turno e o crachá precisam ser conferidos juntos. A escala tem um registro que só aparece quando as duas condições são analisadas.",
-    "explanation": "&& significa “e”: as duas condições precisam ser verdadeiras. === compara o valor e o tipo. Para comparar o turno, usamos turno === \"noite\". conferirEscala é uma função pronta do jogo: ela usa os dados do seu código para agir no cenário.",
-    "mission": "Crie podeEntrar usando crachaValido && turno === \"noite\". Mostre o resultado no console. Depois, chame conferirEscala(podeEntrar); para aplicar os dados no caso.",
-    "clue": "Crachá válido: true · turno: noite.",
-    "starter": "const crachaValido = true;\nconst turno = \"noite\";\n\nconst podeEntrar = false;\nconsole.log(podeEntrar);\n\n// Aplique os dados no objeto do caso.\nconferirEscala(podeEntrar);",
-    "solution": "const crachaValido = true;\nconst turno = \"noite\";\nconst podeEntrar = crachaValido && turno === \"noite\";\nconsole.log(podeEntrar);\nconferirEscala(podeEntrar);",
-    "conceptHint": "&& só resulta em true quando as duas condições são verdadeiras. === confere se dois valores são iguais.",
-    "hint": "Use && para unir o crachá válido à comparação do turno com \"noite\". Termine com conferirEscala(podeEntrar);",
-    "explainSolution": "As duas condições são verdadeiras, por isso podeEntrar recebe true. Se qualquer uma fosse falsa, o resultado seria false. A última linha executa a ação visível no caso.",
+    "story": "A escala do plantão da noite foi publicada com erros. Só quem tinha crachá válido e estava no turno da noite podia publicar. Três pessoas mexeram no sistema naquele dia: descubra quem cumpria as duas condições.",
+    "explanation": "&& é o \"e\": só resulta em true quando os dois lados são true. === confere se dois valores são exatamente iguais, como turno === \"noite\". conferirEscala é uma função pronta do jogo: ela usa os dados do seu código para agir no cenário.",
+    "mission": "Descubra quem podia publicar a escala: para cada pessoa, guarde em dalilaPodia, kenjiPodia e icaroPodia se o crachá era válido e, ao mesmo tempo, o turno era \"noite\" (calculado a partir dos dados, não digitado). Mostre as três no console e aplique no caso com conferirEscala(dalilaPodia, kenjiPodia, icaroPodia);",
+    "clue": "Para publicar a escala era preciso crachá válido e turno da noite, as duas coisas ao mesmo tempo.",
+    "starter": "// Crachá válido e turno de cada pessoa, segundo o sistema.\nconst crachaDalila = true;\nconst turnoDalila = \"manhã\";\nconst crachaKenji = true;\nconst turnoKenji = \"noite\";\nconst crachaIcaro = false;\nconst turnoIcaro = \"noite\";\n\n// Quem podia publicar: crachá válido E turno da noite.\n// A primeira pessoa já está pronta.\nconst dalilaPodia = crachaDalila && turnoDalila === \"noite\";\nconst kenjiPodia = false;\nconst icaroPodia = false;\n\nconsole.log(dalilaPodia, kenjiPodia, icaroPodia);\n\n// Aplique os dados no objeto do caso.\nconferirEscala(dalilaPodia, kenjiPodia, icaroPodia);",
+    "solution": "const crachaDalila = true;\nconst turnoDalila = \"manhã\";\nconst crachaKenji = true;\nconst turnoKenji = \"noite\";\nconst crachaIcaro = false;\nconst turnoIcaro = \"noite\";\nconst dalilaPodia = crachaDalila && turnoDalila === \"noite\";\nconst kenjiPodia = crachaKenji && turnoKenji === \"noite\";\nconst icaroPodia = crachaIcaro && turnoIcaro === \"noite\";\nconsole.log(dalilaPodia, kenjiPodia, icaroPodia);\nconferirEscala(dalilaPodia, kenjiPodia, icaroPodia);",
+    "conceptHint": "&& só resulta em true quando as duas condições são verdadeiras. A primeira pessoa já está calculada: repita a ideia para as outras duas, com as variáveis delas.",
+    "hint": "Escreva kenjiPodia = crachaKenji && turnoKenji === \"noite\" e faça o mesmo para Ícaro. Não escreva true ou false direto. Termine com conferirEscala(dalilaPodia, kenjiPodia, icaroPodia);",
+    "explainSolution": "Cada variável junta duas condições com &&. Só kenjiPodia resulta em true: Kenji tinha crachá válido e estava no turno da noite. Dalila trabalhava de manhã e o crachá de Ícaro não era válido. A última linha executa a ação visível no caso.",
     "expected": {
-      "crachaValido": true,
-      "turno": "noite",
-      "podeEntrar": true
+      "crachaDalila": true,
+      "turnoDalila": "manhã",
+      "crachaKenji": true,
+      "turnoKenji": "noite",
+      "crachaIcaro": false,
+      "turnoIcaro": "noite",
+      "dalilaPodia": false,
+      "kenjiPodia": true,
+      "icaroPodia": false
     },
-    "variantHint": "Calcule podeEntrar com crachaValido e turno, em vez de escrever true ou false.",
+    "consoleArgs": [
+      "dalilaPodia",
+      "kenjiPodia",
+      "icaroPodia"
+    ],
+    "variantHint": "Calcule cada variável com && a partir do crachá e do turno, como na primeira linha, em vez de escrever true ou false.",
     "variants": [
       {
         "given": {
-          "crachaValido": true,
-          "turno": "dia"
+          "turnoDalila": "noite",
+          "crachaKenji": false
         },
         "expected": {
-          "podeEntrar": false
+          "dalilaPodia": true,
+          "kenjiPodia": false,
+          "icaroPodia": false
         }
       },
       {
         "given": {
-          "crachaValido": false,
-          "turno": "noite"
+          "crachaIcaro": true,
+          "turnoKenji": "manhã"
         },
         "expected": {
-          "podeEntrar": false
+          "dalilaPodia": false,
+          "kenjiPodia": false,
+          "icaroPodia": true
         }
       }
     ],
@@ -423,13 +438,16 @@ globalThis.HospitalLessons = [
     "action": {
       "name": "conferirEscala",
       "args": [
-        "podeEntrar"
+        "dalilaPodia",
+        "kenjiPodia",
+        "icaroPodia"
       ],
       "object": "escala",
       "type": "file",
       "title": "Escala conferida",
-      "description": "O sistema conferiu o crachá e o turno juntos."
-    }
+      "description": "O sistema cruzou o crachá e o turno de cada pessoa."
+    },
+    "version": 2
   },
   {
     "id": 11,
@@ -438,7 +456,7 @@ globalThis.HospitalLessons = [
     "concept": "|| · alternativas",
     "story": "Uma ficha de manutenção recebeu um perfil de consulta indevido. Confira as alternativas permitidas antes de abrir a auditoria.",
     "explanation": "|| significa “ou”. O resultado é true se pelo menos uma das comparações for verdadeira. revisarPerfil é uma função pronta do jogo: ela usa os dados do seu código para agir no cenário.",
-    "mission": "Compare cargo com \"auditor\" ou \"gestor\", usando ||. Guarde a resposta em podeConsultar. Para manutenção, o resultado deve ser false. Depois, chame revisarPerfil(podeConsultar); para aplicar os dados no caso.",
+    "mission": "Só auditor ou gestor pode consultar o perfil. Guarde em podeConsultar se cargo é um desses dois, calculando a partir da variável (para manutencao, o resultado é false). Mostre no console e aplique no caso com revisarPerfil(podeConsultar);",
     "clue": "Crachá MAN-11B · cargo: manutencao.",
     "starter": "const cargo = \"manutencao\";\n\nconst podeConsultar = true;\nconsole.log(podeConsultar);\n\n// Aplique os dados no objeto do caso.\nrevisarPerfil(podeConsultar);",
     "solution": "const cargo = \"manutencao\";\nconst podeConsultar = cargo === \"auditor\" || cargo === \"gestor\";\nconsole.log(podeConsultar);\nrevisarPerfil(podeConsultar);",
@@ -489,7 +507,7 @@ globalThis.HospitalLessons = [
     "concept": "revisão · if/else · && · ||",
     "story": "Uma entrada exige crachá válido e um cargo autorizado. Combine as regras para descobrir qual registro precisa de revisão.",
     "explanation": "Você pode agrupar alternativas entre parênteses e combiná-las com outra condição. Os parênteses deixam claro o que será verificado junto. revisarAcesso é uma função pronta do jogo: ela usa os dados do seu código para agir no cenário.",
-    "mission": "Se temCracha for true e cargo for \"auditor\" ou \"gestor\", guarde \"Acesso autorizado\" em resultado. Caso contrário, guarde \"Revisar acesso\". Depois, chame revisarAcesso(resultado); para aplicar os dados no caso.",
+    "mission": "A entrada é autorizada só com crachá (temCracha true) e cargo auditor ou gestor. Quando as regras forem cumpridas, guarde \"Acesso autorizado\" em resultado; caso contrário, \"Revisar acesso\". Mostre no console e aplique no caso com revisarAcesso(resultado);",
     "clue": "Registro TI-12B: temCracha = true · cargo = ti.",
     "starter": "const temCracha = true;\nconst cargo = \"ti\";\nlet resultado = \"\";\n\n// Combine as condições e preencha resultado.\n\nconsole.log(resultado);\n\n// Aplique os dados no objeto do caso.\nrevisarAcesso(resultado);",
     "solution": "const temCracha = true;\nconst cargo = \"ti\";\nlet resultado = \"\";\nif (temCracha && (cargo === \"auditor\" || cargo === \"gestor\")) {\n  resultado = \"Acesso autorizado\";\n} else {\n  resultado = \"Revisar acesso\";\n}\nconsole.log(resultado);\nrevisarAcesso(resultado);",
@@ -542,7 +560,7 @@ globalThis.HospitalLessons = [
     "title": "A primeira posição",
     "concept": "arrays · índice zero",
     "explanation": "Um array guarda uma lista. A primeira posição tem índice 0; a segunda tem índice 1. Para ler um item, use o nome da lista e o índice entre colchetes. conferirPulseira é uma função pronta do jogo: ela usa os dados do seu código para agir no cenário.",
-    "mission": "Guarde em primeira o primeiro código de pulseiras e mostre no console. Depois, chame conferirPulseira(primeira); para aplicar os dados no caso.",
+    "mission": "A lista pulseiras tem três códigos. Guarde em primeira o que está na primeira posição, lendo da lista, mostre no console e aplique no caso com conferirPulseira(primeira);",
     "clue": "Lista: A-12, B-07 e C-19. Qual vem primeiro?",
     "starter": "const pulseiras = [\"A-12\", \"B-07\", \"C-19\"];\nconst primeira = \"\";\nconsole.log(primeira);\n\n// Aplique os dados no objeto do caso.\nconferirPulseira(primeira);",
     "solution": "const pulseiras = [\"A-12\", \"B-07\", \"C-19\"];\nconst primeira = pulseiras[0];\nconsole.log(primeira);\nconferirPulseira(primeira);",
@@ -588,7 +606,7 @@ globalThis.HospitalLessons = [
     "title": "Uma lista que cresce",
     "concept": "arrays · push · includes",
     "explanation": "push adiciona um item ao final da lista. includes confere se um item existe e retorna true ou false. registrarChave é uma função pronta do jogo: ela usa os dados do seu código para agir no cenário.",
-    "mission": "Adicione \"Sala 3\" a chaves usando push. Guarde em existe o resultado de procurar \"Sala 3\" com includes. Depois, chame registrarChave(chaves); para aplicar os dados no caso.",
+    "mission": "A chave Sala 3 precisa entrar na lista chaves. Acrescente a chave à lista e guarde em existe se a lista agora contém \"Sala 3\". Mostre no console e aplique no caso com registrarChave(chaves);",
     "clue": "A chave Sala 3 precisa voltar ao inventário.",
     "starter": "const chaves = [\"Sala 1\", \"Sala 2\"];\n// Adicione a chave aqui.\nconst existe = false;\nconsole.log(chaves, existe);\n\n// Aplique os dados no objeto do caso.\nregistrarChave(chaves);",
     "solution": "const chaves = [\"Sala 1\", \"Sala 2\"];\nchaves.push(\"Sala 3\");\nconst existe = chaves.includes(\"Sala 3\");\nconsole.log(chaves, existe);\nregistrarChave(chaves);",
@@ -641,7 +659,7 @@ globalThis.HospitalLessons = [
     "title": "Uma pista de cada vez",
     "concept": "for...of · repetição",
     "explanation": "for...of percorre os itens de uma lista, um de cada vez. O nome depois de const recebe o item atual. += junta um novo trecho ao texto que já existe. reconstruirRota é uma função pronta do jogo: ela usa os dados do seu código para agir no cenário.",
-    "mission": "Percorra setores e acrescente cada setor seguido de ; ao texto roteiro. Depois, chame reconstruirRota(roteiro); para aplicar os dados no caso.",
+    "mission": "O roteiro é um texto com cada setor da lista seguido de ponto e vírgula: UTI;Farmácia;Laboratório;. Monte roteiro percorrendo a lista setores, item por item, mostre no console e aplique no caso com reconstruirRota(roteiro);",
     "clue": "Roteiro esperado: UTI;Farmácia;Laboratório;",
     "starter": "const setores = [\"UTI\", \"Farmácia\", \"Laboratório\"];\nlet roteiro = \"\";\n// Percorra os setores.\nconsole.log(roteiro);\n\n// Aplique os dados no objeto do caso.\nreconstruirRota(roteiro);",
     "solution": "const setores = [\"UTI\", \"Farmácia\", \"Laboratório\"];\nlet roteiro = \"\";\nfor (const setor of setores) {\n  roteiro += setor + \";\";\n}\nconsole.log(roteiro);\nreconstruirRota(roteiro);",
@@ -684,62 +702,65 @@ globalThis.HospitalLessons = [
   },
   {
     "id": 16,
-    "title": "Separando o que falta",
+    "title": "Quem deixou os zeros?",
     "concept": "for...of · if · listas",
-    "explanation": "Você pode combinar uma repetição com uma condição: percorra as quantidades e guarde apenas as que forem iguais a zero. conferirEstoque é uma função pronta do jogo: ela usa os dados do seu código para agir no cenário.",
-    "mission": "Preencha emFalta apenas com as duas quantidades zeradas. Use for...of, if e push. Depois, chame conferirEstoque(emFalta); para aplicar os dados no caso.",
-    "clue": "Quantidades: 0, 4, 0 e 7. Há duas posições zeradas.",
-    "starter": "const quantidades = [0, 4, 0, 7];\nconst emFalta = [];\n// Separe os zeros aqui.\nconsole.log(emFalta);\n\n// Aplique os dados no objeto do caso.\nconferirEstoque(emFalta);",
-    "solution": "const quantidades = [0, 4, 0, 7];\nconst emFalta = [];\nfor (const quantidade of quantidades) {\n  if (quantidade === 0) {\n    emFalta.push(quantidade);\n  }\n}\nconsole.log(emFalta);\nconferirEstoque(emFalta);",
-    "conceptHint": "Percorra a lista com for...of. Para cada quantidade, pergunte com if se ela é zero; se for, use push.",
-    "hint": "Dentro do for, confira quantidade === 0 antes de adicionar o valor a emFalta. Termine com conferirEstoque(emFalta);",
-    "explainSolution": "Somente os valores que cumprem a condição entram na nova lista. A última linha executa a ação visível no caso.",
+    "explanation": "for...of visita cada item de uma lista, um por vez. Dentro do laço, if decide se o item interessa e push guarda numa lista nova. Textos também têm includes: \"Sala: 0\".includes(\": 0\") é true. conferirEstoque é uma função pronta do jogo: ela usa os dados do seu código para agir no cenário.",
+    "mission": "Percorra a lista conferencias e guarde em comZero só as linhas que contêm \": 0\". Mostre a lista no console e aplique no caso com conferirEstoque(comZero);",
+    "clue": "Cada conferência foi anotada como \"Nome: quantidade\". As prateleiras vazias têm quantidade 0.",
+    "starter": "// Conferências registradas na farmácia: \"Nome: quantidade\".\nconst conferencias = [\"Teresa: 4\", \"Bianca: 0\", \"André: 7\", \"Bianca: 0\"];\nconst comZero = [];\n\n// Percorra a lista e guarde em comZero as linhas que contêm \": 0\".\n\nconsole.log(comZero);\n\n// Aplique os dados no objeto do caso.\nconferirEstoque(comZero);",
+    "solution": "const conferencias = [\"Teresa: 4\", \"Bianca: 0\", \"André: 7\", \"Bianca: 0\"];\nconst comZero = [];\nfor (const conferencia of conferencias) {\n  if (conferencia.includes(\": 0\")) {\n    comZero.push(conferencia);\n  }\n}\nconsole.log(comZero);\nconferirEstoque(comZero);",
+    "conceptHint": "Percorra a lista com for...of. Para cada linha, pergunte com if se ela contém \": 0\"; se contiver, use push para guardar na lista nova.",
+    "hint": "for (const conferencia of conferencias) { if (conferencia.includes(\": 0\")) { comZero.push(conferencia); } } Termine com conferirEstoque(comZero);",
+    "explainSolution": "O laço visita as quatro linhas; o if aprova só as que contêm \": 0\" e o push guarda cada uma. As duas linhas com zero têm o mesmo nome: é a pessoa que conferiu as prateleiras vazias. A última linha executa a ação visível no caso.",
     "expected": {
-      "emFalta": [
-        0,
-        0
+      "comZero": [
+        "Bianca: 0",
+        "Bianca: 0"
       ]
     },
-    "variantHint": "Use for...of e if para colocar em emFalta cada quantidade igual a 0 da lista.",
+    "consoleArgs": [
+      "comZero"
+    ],
+    "variantHint": "Use for...of, if e push para montar comZero a partir de conferencias, em vez de escrever a lista final.",
     "variants": [
       {
         "given": {
-          "quantidades": [
-            3,
-            0,
-            5
+          "conferencias": [
+            "André: 0",
+            "Teresa: 3"
           ]
         },
         "expected": {
-          "emFalta": [
-            0
+          "comZero": [
+            "André: 0"
           ]
         }
       }
     ],
     "requires": "for",
     "case": 16,
-    "story": "Duas prateleiras estão sem caixas, mas o painel mostra tudo normal. Separe as quantidades zeradas para revelar a conferência.",
+    "story": "A conferência do estoque veio com prateleiras vazias que ninguém avisou. Cada linha da lista diz quem conferiu e quanto encontrou. Percorra a lista e separe as linhas com zero.",
     "evidence": "case-16-solution",
     "effect": "record",
     "success": "Código conferido. Você recuperou um registro para concluir este caso.",
     "action": {
       "name": "conferirEstoque",
       "args": [
-        "emFalta"
+        "comZero"
       ],
       "object": "estoque",
       "type": "stock",
       "title": "Faltas encontradas",
-      "description": "As posições zeradas foram destacadas na conferência."
-    }
+      "description": "As conferências com zero foram destacadas na prateleira."
+    },
+    "version": 2
   },
   {
     "id": 17,
     "title": "Uma ficha estruturada",
     "concept": "objetos · propriedades",
     "explanation": "Um objeto reúne informações com nomes, chamados propriedades. ficha.setor acessa a propriedade setor da ficha. restaurarFicha é uma função pronta do jogo: ela usa os dados do seu código para agir no cenário.",
-    "mission": "Leia ficha.setor e guarde o texto em setorEncontrado. Depois, chame restaurarFicha(setorEncontrado); para aplicar os dados no caso.",
+    "mission": "A ficha é um objeto com várias propriedades. Guarde em setorEncontrado o setor lido de dentro de ficha, mostre no console e aplique no caso com restaurarFicha(setorEncontrado);",
     "clue": "A ficha B-07 pertence ao Laboratório.",
     "starter": "const ficha = { codigo: \"B-07\", setor: \"Laboratório\" };\nconst setorEncontrado = \"\";\nconsole.log(setorEncontrado);\n\n// Aplique os dados no objeto do caso.\nrestaurarFicha(setorEncontrado);",
     "solution": "const ficha = { codigo: \"B-07\", setor: \"Laboratório\" };\nconst setorEncontrado = ficha.setor;\nconsole.log(setorEncontrado);\nrestaurarFicha(setorEncontrado);",
@@ -781,52 +802,81 @@ globalThis.HospitalLessons = [
   },
   {
     "id": 18,
-    "title": "Padronizar antes de comparar",
+    "title": "Dois cadastros, um nome",
     "concept": "strings · trim · toLowerCase",
-    "explanation": "trim remove espaços das pontas. toLowerCase transforma as letras em minúsculas. Você pode encadear essas operações. unificarCadastro é uma função pronta do jogo: ela usa os dados do seu código para agir no cenário.",
-    "mission": "Guarde em nomeLimpo o texto ana, sem espaços e em minúsculas. Depois, chame unificarCadastro(nomeLimpo); para aplicar os dados no caso.",
-    "clue": "Cadastro recebido: \"  ANA  \".",
-    "starter": "const nome = \"  ANA  \";\nconst nomeLimpo = \"\";\nconsole.log(nomeLimpo);\n\n// Aplique os dados no objeto do caso.\nunificarCadastro(nomeLimpo);",
-    "solution": "const nome = \"  ANA  \";\nconst nomeLimpo = nome.trim().toLowerCase();\nconsole.log(nomeLimpo);\nunificarCadastro(nomeLimpo);",
-    "conceptHint": "Textos têm métodos prontos: um remove os espaços das pontas e outro deixa tudo em minúsculas. Dá para usar os dois em sequência.",
-    "hint": "Use nome.trim().toLowerCase(). Os parênteses chamam cada operação. Termine com unificarCadastro(nomeLimpo);",
-    "explainSolution": "O texto é padronizado antes de ser usado numa comparação ou busca. A última linha executa a ação visível no caso.",
+    "explanation": "Textos têm métodos prontos: trim() tira os espaços das pontas e toLowerCase() deixa tudo minúsculo. Eles podem ser encadeados: texto.trim().toLowerCase(). Depois de limpar, === compara com outro texto. unificarCadastro é uma função pronta do jogo: ela usa os dados do seu código para agir no cenário.",
+    "mission": "Para cada nome digitado, tire os espaços das pontas, deixe tudo em minúsculas e compare com original. Guarde os resultados (true ou false) em repetido1, repetido2 e repetido3, mostre no console e aplique no caso com unificarCadastro(repetido1, repetido2, repetido3);",
+    "clue": "O cadastro original é \"ana\". Três nomes foram digitados depois, cada um por uma pessoa.",
+    "starter": "// Cadastro que já existia no sistema.\nconst original = \"ana\";\n\n// Nomes digitados naquele dia, um por pessoa.\nconst digitado1 = \"  ANA  \";\nconst digitado2 = \" Ana Paula \";\nconst digitado3 = \"ana lima\";\n\n// Limpe cada nome (sem espaços nas pontas, tudo minúsculo)\n// e compare com o original. O primeiro já está pronto.\nconst repetido1 = digitado1.trim().toLowerCase() === original;\nconst repetido2 = false;\nconst repetido3 = false;\n\nconsole.log(repetido1, repetido2, repetido3);\n\n// Aplique os dados no objeto do caso.\nunificarCadastro(repetido1, repetido2, repetido3);",
+    "solution": "const original = \"ana\";\nconst digitado1 = \"  ANA  \";\nconst digitado2 = \" Ana Paula \";\nconst digitado3 = \"ana lima\";\nconst repetido1 = digitado1.trim().toLowerCase() === original;\nconst repetido2 = digitado2.trim().toLowerCase() === original;\nconst repetido3 = digitado3.trim().toLowerCase() === original;\nconsole.log(repetido1, repetido2, repetido3);\nunificarCadastro(repetido1, repetido2, repetido3);",
+    "conceptHint": "Limpe o texto com trim() e toLowerCase() e só então compare com === ao original. A primeira comparação já mostra o modelo.",
+    "hint": "Escreva repetido2 = digitado2.trim().toLowerCase() === original e faça o mesmo para digitado3. Termine com unificarCadastro(repetido1, repetido2, repetido3);",
+    "explainSolution": "Depois de trim e toLowerCase, \"  ANA  \" vira \"ana\", igual ao original: só repetido1 é true. \"Ana Paula\" e \"ana lima\" são outras pessoas. A última linha executa a ação visível no caso.",
     "expected": {
-      "nomeLimpo": "ana"
+      "original": "ana",
+      "digitado1": "  ANA  ",
+      "digitado2": " Ana Paula ",
+      "digitado3": "ana lima",
+      "repetido1": true,
+      "repetido2": false,
+      "repetido3": false
     },
-    "variantHint": "Transforme nome com os métodos de texto, em vez de escrever o resultado.",
+    "consoleArgs": [
+      "repetido1",
+      "repetido2",
+      "repetido3"
+    ],
+    "variantHint": "Calcule cada variável limpando o texto e comparando com original, em vez de escrever true ou false.",
     "variants": [
       {
         "given": {
-          "nome": "  BrUnO "
+          "digitado1": "Ana Paula",
+          "digitado2": "  ana ",
+          "digitado3": "ANA LIMA"
         },
         "expected": {
-          "nomeLimpo": "bruno"
+          "repetido1": false,
+          "repetido2": true,
+          "repetido3": false
+        }
+      },
+      {
+        "given": {
+          "original": "ana lima",
+          "digitado3": " ANA Lima"
+        },
+        "expected": {
+          "repetido1": false,
+          "repetido2": false,
+          "repetido3": true
         }
       }
     ],
     "case": 18,
-    "story": "Um nome com espaços e letras diferentes criou dois cadastros. Padronize o texto e confira a origem da duplicação.",
+    "story": "A mesma paciente apareceu duas vezes no sistema. Três pessoas digitaram nomes naquele dia; uma delas repetiu um cadastro que já existia, só com espaços e maiúsculas diferentes. Limpe os textos para descobrir qual nome era o mesmo.",
     "evidence": "case-18-solution",
     "effect": "record",
     "success": "Código conferido. Você recuperou um registro para concluir este caso.",
     "action": {
       "name": "unificarCadastro",
       "args": [
-        "nomeLimpo"
+        "repetido1",
+        "repetido2",
+        "repetido3"
       ],
       "object": "cadastro",
       "type": "file",
-      "title": "Cadastro normalizado",
-      "description": "O texto padronizado permitiu reconhecer os dois cadastros iguais."
-    }
+      "title": "Cadastros comparados",
+      "description": "Os nomes limpos foram comparados com o cadastro original."
+    },
+    "version": 2
   },
   {
     "id": 19,
     "title": "Uma regra para todos",
     "concept": "funções · parâmetros · return",
     "explanation": "Uma função recebe valores pelos parâmetros e devolve um resultado com return. Você escreve a regra uma vez e a usa com entradas diferentes: aqui, uma vez para cada pessoa. abrirGavetaSecreta é uma função pronta do jogo: ela usa os dados do seu código para agir no cenário.",
-    "mission": "Complete a função estavaNaSala(entrada, saida, hora): ela deve devolver true quando a hora estiver entre a entrada e a saída, incluindo os dois limites, e false nos outros casos. As três chamadas já usam a função. Mostre os resultados no console e chame abrirGavetaSecreta(nelsonEstava, claraEstava, marinaEstava); para aplicar os dados no caso.",
+    "mission": "Complete a função estavaNaSala(entrada, saida, hora): ela devolve true quando a hora está entre a entrada e a saída (incluindo os dois limites) e false nos outros casos. As três chamadas já usam a função. Mostre os resultados no console e aplique no caso com abrirGavetaSecreta(nelsonEstava, claraEstava, marinaEstava);",
     "clue": "A ficha foi escondida às 21h. A porta dos arquivos registra a entrada e a saída de cada pessoa.",
     "starter": "// A ficha foi escondida às 21h.\nconst horaDoSumico = 21;\n\n// Regra: a pessoa estava na sala se entrou até essa hora\n// e saiu nessa hora ou depois.\nfunction estavaNaSala(entrada, saida, hora) {\n  // Devolva true ou false com return.\n}\n\n// Entrada e saída de cada pessoa (porta dos arquivos).\nconst nelsonEstava = estavaNaSala(19, 23, horaDoSumico);\nconst claraEstava = estavaNaSala(7, 15, horaDoSumico);\nconst marinaEstava = estavaNaSala(13, 20, horaDoSumico);\n\nconsole.log(nelsonEstava, claraEstava, marinaEstava);\n\n// Aplique os dados no objeto do caso.\nabrirGavetaSecreta(nelsonEstava, claraEstava, marinaEstava);",
     "solution": "const horaDoSumico = 21;\nfunction estavaNaSala(entrada, saida, hora) {\n  return entrada <= hora && hora <= saida;\n}\nconst nelsonEstava = estavaNaSala(19, 23, horaDoSumico);\nconst claraEstava = estavaNaSala(7, 15, horaDoSumico);\nconst marinaEstava = estavaNaSala(13, 20, horaDoSumico);\nconsole.log(nelsonEstava, claraEstava, marinaEstava);\nabrirGavetaSecreta(nelsonEstava, claraEstava, marinaEstava);",
@@ -916,62 +966,74 @@ globalThis.HospitalLessons = [
   },
   {
     "id": 20,
-    "title": "Transformar uma lista",
+    "title": "O ajuste que faltou",
     "concept": "map · função de transformação",
-    "explanation": "map cria uma nova lista aplicando uma função a cada item. valor => valor + 2 é uma função curta que recebe valor e devolve valor + 2. calibrarSensor é uma função pronta do jogo: ela usa os dados do seu código para agir no cenário.",
-    "mission": "Use map para adicionar 2 a cada leitura e guarde a nova lista em corrigidas. Depois, chame calibrarSensor(corrigidas); para aplicar os dados no caso.",
-    "clue": "Leituras de treino: 18, 20 e 22. Ajuste: +2 em cada uma.",
-    "starter": "const leituras = [18, 20, 22];\nconst corrigidas = [];\nconsole.log(corrigidas);\n\n// Aplique os dados no objeto do caso.\ncalibrarSensor(corrigidas);",
-    "solution": "const leituras = [18, 20, 22];\nconst corrigidas = leituras.map(valor => valor + 2);\nconsole.log(corrigidas);\ncalibrarSensor(corrigidas);",
-    "conceptHint": "map cria uma lista nova aplicando a mesma transformação a cada item.",
-    "hint": "Use leituras.map(valor => valor + 2). Termine com calibrarSensor(corrigidas);",
-    "explainSolution": "map transforma cada leitura e devolve [20, 22, 24], sem alterar a lista original. A última linha executa a ação visível no caso.",
+    "explanation": "map cria uma lista nova aplicando a mesma transformação a cada item: [1, 2].map(n => n + 10) resulta em [11, 12]. A seta => define uma função curta. calibrarSensor é uma função pronta do jogo: ela usa os dados do seu código para agir no cenário.",
+    "mission": "Calcule em erro quanto a primeira leitura está abaixo da referência. Depois, gere corrigidas transformando cada leitura da lista (somando o erro), sem digitar os valores. Mostre erro e corrigidas no console e aplique no caso com calibrarSensor(erro, corrigidas);",
+    "clue": "Leituras do sensor: 18, 20 e 22. Valores de referência: 20, 22 e 24. Todas as leituras estão deslocadas pela mesma quantidade.",
+    "starter": "// Leituras gravadas pelo sensor e valores do painel de referência.\nconst leituras = [18, 20, 22];\nconst referencia = [20, 22, 24];\n\n// De quanto cada leitura está deslocada em relação à referência?\nconst erro = referencia[0] - leituras[0];\n\n// Use map para corrigir todas as leituras, somando o erro.\nconst corrigidas = [];\n\nconsole.log(erro, corrigidas);\n\n// Aplique os dados no objeto do caso.\ncalibrarSensor(erro, corrigidas);",
+    "solution": "const leituras = [18, 20, 22];\nconst referencia = [20, 22, 24];\nconst erro = referencia[0] - leituras[0];\nconst corrigidas = leituras.map(leitura => leitura + erro);\nconsole.log(erro, corrigidas);\ncalibrarSensor(erro, corrigidas);",
+    "conceptHint": "map cria uma lista nova aplicando a mesma transformação a cada item. Aqui a transformação é somar o erro a cada leitura.",
+    "hint": "Escreva corrigidas = leituras.map(leitura => leitura + erro). Termine com calibrarSensor(erro, corrigidas);",
+    "explainSolution": "erro é a diferença entre a referência e a leitura: 2. map soma esse valor a cada item e devolve a lista corrigida. O erro de 2 diz quanto foi tirado de cada leitura; as fichas dizem quem fez esse ajuste. A última linha executa a ação visível no caso.",
     "expected": {
+      "erro": 2,
       "corrigidas": [
         20,
         22,
         24
       ]
     },
-    "variantHint": "Use leituras.map para calcular a nova lista, em vez de escrever os números.",
+    "consoleArgs": [
+      "erro",
+      "corrigidas"
+    ],
+    "variantHint": "Calcule erro a partir das listas e use leituras.map para gerar corrigidas, em vez de escrever os números.",
     "variants": [
       {
         "given": {
           "leituras": [
-            5,
-            10
+            10,
+            12
+          ],
+          "referencia": [
+            7,
+            9
           ]
         },
         "expected": {
+          "erro": -3,
           "corrigidas": [
             7,
-            12
+            9
           ]
         }
       }
     ],
     "case": 20,
-    "story": "Um sensor de treino está deslocado em duas unidades. Corrija a lista de leituras para acessar o registro de ajuste.",
+    "story": "As leituras do sensor estão todas deslocadas. O painel de referência mostra os valores certos. Três pessoas mexeram na calibração, cada uma com um ajuste diferente. Corrija as leituras e descubra de quanto foi o erro.",
     "evidence": "case-20-solution",
     "effect": "record",
     "success": "Código conferido. Você recuperou um registro para concluir este caso.",
     "action": {
       "name": "calibrarSensor",
       "args": [
+        "erro",
         "corrigidas"
       ],
       "object": "sensor",
       "type": "sensor",
       "title": "Sensor calibrado",
-      "description": "O painel recebeu a lista de leituras corrigidas."
-    }
+      "description": "O painel recebeu o erro encontrado e as leituras corrigidas."
+    },
+    "version": 2
   },
   {
     "id": 21,
     "title": "Do texto para os dados",
     "concept": "JSON · JSON.parse",
     "explanation": "JSON é um formato de texto para transportar dados. JSON.parse transforma esse texto em um objeto, e cada campo é lido com ponto, como dados.terminal. abrirArquivo é uma função pronta do jogo: ela usa os dados do seu código para agir no cenário.",
-    "mission": "Converta arquivo com JSON.parse. Guarde o campo terminal em terminal e o campo salvoAs em horario. Mostre os dois no console. Depois, chame abrirArquivo(terminal, horario); para aplicar os dados no caso.",
+    "mission": "arquivo é um texto no formato JSON. Transforme-o em dados e guarde o campo terminal em terminal e o campo salvoAs em horario, lendo do objeto, não do texto. Mostre os dois no console e aplique no caso com abrirArquivo(terminal, horario);",
     "clue": "O arquivo é um texto JSON com os campos terminal e salvoAs.",
     "starter": "// Parece ilegível, mas é um texto no formato JSON.\nconst arquivo = '{\"terminal\":\"T-07\",\"salvoAs\":\"02:14\"}';\n\n// Converta o texto em um objeto e leia os campos.\nconst terminal = \"\";\nconst horario = \"\";\n\nconsole.log(terminal, horario);\n\n// Aplique os dados no objeto do caso.\nabrirArquivo(terminal, horario);",
     "solution": "const arquivo = '{\"terminal\":\"T-07\",\"salvoAs\":\"02:14\"}';\nconst dados = JSON.parse(arquivo);\nconst terminal = dados.terminal;\nconst horario = dados.salvoAs;\nconsole.log(terminal, horario);\nabrirArquivo(terminal, horario);",
@@ -1017,7 +1079,7 @@ globalThis.HospitalLessons = [
     "title": "Esperar a resposta",
     "concept": "Promise · await",
     "explanation": "Uma Promise representa um resultado que pode chegar depois. await espera esse resultado antes de continuar. Neste terminal, você pode usar await diretamente. receberMensagem é uma função pronta do jogo: ela usa os dados do seu código para agir no cenário.",
-    "mission": "Espere a Promise e guarde o texto recebido em mensagem. Mostre a mensagem no console. Depois, chame receberMensagem(mensagem); para aplicar os dados no caso.",
+    "mission": "resposta é uma Promise: o texto ainda vai chegar. Espere a resposta, guarde o texto em mensagem, mostre no console e aplique no caso com receberMensagem(mensagem);",
     "clue": "Resposta esperada: Registro recebido.",
     "starter": "const resposta = Promise.resolve(\"Registro recebido\");\nconst mensagem = \"\";\nconsole.log(mensagem);\n\n// Aplique os dados no objeto do caso.\nreceberMensagem(mensagem);",
     "solution": "const resposta = Promise.resolve(\"Registro recebido\");\nconst mensagem = await resposta;\nconsole.log(mensagem);\nreceberMensagem(mensagem);",
@@ -1062,7 +1124,7 @@ globalThis.HospitalLessons = [
     "title": "O código altera a página",
     "concept": "DOM · getElementById · textContent",
     "explanation": "O DOM representa os elementos de uma página. document.getElementById encontra um elemento pelo identificador. textContent lê ou troca o texto desse elemento. restaurarPainel é uma função pronta do jogo: ela usa os dados do seu código para agir no cenário.",
-    "mission": "Encontre o elemento aviso, troque seu texto para \"Painel recuperado\" e guarde o texto final em mensagem. Depois, chame restaurarPainel(mensagem); para aplicar os dados no caso.",
+    "mission": "O mini-painel (o elemento aviso) precisa voltar a mostrar \"Painel recuperado\". Encontre o elemento, troque o texto dele e guarde o texto final em mensagem. Mostre no console e aplique no caso com restaurarPainel(mensagem);",
     "clue": "O mini-painel deve mostrar: Painel recuperado.",
     "starter": "const aviso = document.getElementById(\"aviso\");\n// Troque o texto do aviso.\nconst mensagem = aviso.textContent;\nconsole.log(mensagem);\n\n// Aplique os dados no objeto do caso.\nrestaurarPainel(mensagem);",
     "solution": "const aviso = document.getElementById(\"aviso\");\naviso.textContent = \"Painel recuperado\";\nconst mensagem = aviso.textContent;\nconsole.log(mensagem);\nrestaurarPainel(mensagem);",
@@ -1097,7 +1159,7 @@ globalThis.HospitalLessons = [
     "title": "JavaScript encontra o banco",
     "concept": "Supabase · dados · conexão SQL",
     "explanation": "No navegador, o JavaScript conversa com o Supabase pela API. O banco guarda os dados nas tabelas SQL. O cliente supabase deste terminal é um modelo local de treino, com duas pistas fictícias; a conexão real pode ser testada abaixo. consultarPistas é uma função pronta do jogo: ela usa os dados do seu código para agir no cenário.",
-    "mission": "Use await na consulta da tabela pistas_js_treino. Guarde data.length em total. O modelo de treino contém duas pistas. Depois, chame consultarPistas(total); para aplicar os dados no caso.",
+    "mission": "Consulte a tabela pistas_js_treino (a resposta demora, então espere por ela) e guarde em total quantas pistas vieram em data. Mostre no console e aplique no caso com consultarPistas(total);",
     "clue": "Tabela de treino: pistas_js_treino · duas pistas disponíveis.",
     "starter": "const { data, error } = await supabase\n  .from(\"pistas_js_treino\")\n  .select(\"id, descricao\");\n\nconst total = 0;\nconsole.log(total);\n\n// Aplique os dados no objeto do caso.\nconsultarPistas(total);",
     "solution": "const { data, error } = await supabase\n  .from(\"pistas_js_treino\")\n  .select(\"id, descricao\");\n\nif (error) {\n  console.log(error.message);\n}\nconst total = data.length;\nconsole.log(total);\nconsultarPistas(total);",

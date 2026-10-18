@@ -35,9 +35,47 @@
   $$('[data-player-name]').forEach(node=>node.textContent=user.name);
   $$('[data-player-badge]').forEach(node=>{node.hidden=false;if(!node.parentNode.querySelector('[data-sign-out]')){const button=el('button',{type:'button',className:'sign-out-button',text:'Sair'});button.setAttribute('data-sign-out','');button.addEventListener('click',signOut);node.after(button);}});
   $$('[data-account-status]').forEach(node=>node.textContent=remote?'Seu arquivo está pronto e salvo na sua conta.':'Seu arquivo está pronto (salvo só neste navegador).');
+  nameDialog(user);
+ }
+ // Nome do detetive: um pop-up pergunta na primeira vez (conta sem nome) e salva na própria conta.
+ // Depois, tocar no nome no topo da página abre o mesmo pop-up para trocar.
+ const ASKED='hospital-name-asked:';
+ function nameDialog(user){
+  if(document.getElementById('name-dialog')||typeof document.createElement!=='function')return;
+  const title=el('h2',{id:'name-dialog-title',text:'Como devo te chamar?'});
+  const lead=el('p',{className:'name-dialog-lead',text:'Esse nome aparece no seu arquivo de investigação. Dá para trocar depois tocando nele no topo da página.'});
+  const input=el('input',{id:'name-input',type:'text',maxLength:100,autocomplete:'name'}),label=el('label',{className:'sr',htmlFor:'name-input',text:'Seu nome'});
+  const save=el('button',{type:'submit',className:'run',text:'Salvar meu nome'}),later=el('button',{type:'button',className:'small-button',text:'Agora não'}),status=el('p',{className:'name-dialog-status',role:'status'});
+  const form=el('form',{className:'name-dialog-form'},label,input,save,later,status);form.noValidate=true;
+  const dialog=el('dialog',{id:'name-dialog',className:'name-dialog'},el('p',{className:'eyebrow',text:'ARQUIVO DO DETETIVE'}),title,lead,form);
+  dialog.setAttribute('aria-labelledby','name-dialog-title');document.body.append(dialog);
+  const remember=()=>{try{localStorage.setItem(ASKED+user.id,'1');}catch{}};
+  const open=()=>{if(dialog.open)return;input.value=user.name==='Detetive'?'':user.name;status.textContent='';dialog.showModal();input.focus();};
+  later.addEventListener('click',()=>{remember();dialog.close();});
+  dialog.addEventListener('cancel',remember);
+  form.addEventListener('submit',async event=>{
+   event.preventDefault();if(save.disabled)return;
+   if(!input.value.trim()){status.textContent='Digite seu nome.';input.focus();return;}
+   const name=cleanName(input.value);save.disabled=true;status.textContent='Salvando…';
+   try{
+    if(client){const {error}=await client.auth.updateUser({data:{nome:name}});if(error)throw error;}
+    else{try{localStorage.setItem(LOCAL_NAME,name);}catch{}}
+    user.name=name;$$('[data-player-name]').forEach(node=>node.textContent=name);remember();dialog.close();
+   }catch(error){
+    // Sessão cancelada no servidor (saiu em outro aparelho antes da correção do Sair): entra de novo.
+    if(error&&(error.status===403||error.code==='session_not_found')){status.textContent='Sua conta precisa entrar de novo neste aparelho. Um instante…';try{await client.auth.signOut({scope:'local'});}catch{}setTimeout(()=>location.reload(),1500);return;}
+    status.textContent=friendly(error);
+   }finally{save.disabled=false;}
+  });
+  // Tocar no nome do topo abre o pop-up.
+  $$('[data-player-badge]').forEach(chip=>{if(chip.dataset.nameDialog)return;chip.dataset.nameDialog='1';chip.title='Mudar meu nome';chip.setAttribute('role','button');chip.tabIndex=0;chip.style.cursor='pointer';chip.addEventListener('click',open);chip.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();open();}});});
+  // Primeira vez na tela inicial sem nome guardado: pergunta sozinho.
+  let asked=false;try{asked=!!localStorage.getItem(ASKED+user.id);}catch{}
+  if(document.getElementById('player-greeting')&&user.name==='Detetive'&&!asked)setTimeout(open,600);
  }
  async function signOut(){
-  try{if(client)await client.auth.signOut();else localStorage.removeItem(LOCAL_NAME);}catch{}
+  // scope local: sair aqui não derruba a conta nos outros aparelhos (o padrão, global, deslogava o celular quando se saía no computador).
+  try{if(client)await client.auth.signOut({scope:'local'});else localStorage.removeItem(LOCAL_NAME);}catch{}
   location.href='index.html';
  }
  function fromSession(session){const meta=session.user.user_metadata||{};return{id:String(session.user.id),name:cleanName(meta.nome||meta.name)};}

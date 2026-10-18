@@ -265,6 +265,24 @@
   function readFile(file) {
     return new Promise((resolve,reject)=>{ const reader=new FileReader(); reader.onload=()=>resolve(reader.result);reader.onerror=()=>reject(new Error('Não foi possível ler a imagem.'));reader.readAsDataURL(file); });
   }
+  // Fotos de celular têm 3 a 5 MB. Redimensionadas (lado maior 1400 px), cabem na nuvem (limite de 6 MB por
+  // anotação) e abrem rápido. GIF é guardado como veio, para não perder a animação; PNG continua PNG (transparência).
+  async function shrinkPhoto(file) {
+    const original=await readFile(file);
+    if(file.type==='image/gif'||typeof Image==='undefined')return original;
+    try{
+      const image=await new Promise((resolve,reject)=>{const img=new Image();img.onload=()=>resolve(img);img.onerror=()=>reject(new Error('imagem'));img.src=original;});
+      const limit=1400,scale=Math.min(1,limit/Math.max(image.naturalWidth,image.naturalHeight));
+      if(scale===1&&file.size<=700*1024)return original;
+      const canvas=document.createElement('canvas');canvas.width=Math.max(1,Math.round(image.naturalWidth*scale));canvas.height=Math.max(1,Math.round(image.naturalHeight*scale));
+      const context=canvas.getContext('2d');if(!context)return original;
+      const type=file.type==='image/png'?'image/png':'image/jpeg';
+      if(type==='image/jpeg'){context.fillStyle='#fff';context.fillRect(0,0,canvas.width,canvas.height);}
+      context.drawImage(image,0,0,canvas.width,canvas.height);
+      const smaller=canvas.toDataURL(type,0.85);
+      return smaller.length<original.length&&supportedImage.test(smaller)?smaller:original;
+    }catch{return original;}
+  }
   async function addPhotos(files, destination = selected) {
     const entry=records.get(destination)||defaultRecord(destination);
     records.set(destination,entry);
@@ -279,7 +297,7 @@
     byId('note-photos').disabled=true;
     byId('board-photos').disabled=true;
     try {
-      const photos=await Promise.all(files.map(async file=>({id:crypto.randomUUID(),name:file.name.slice(0,200),data:await readFile(file)})));
+      const photos=await Promise.all(files.map(async file=>({id:crypto.randomUUID(),name:file.name.slice(0,200),data:await shrinkPhoto(file)})));
       entry.photos.push(...photos);entry.updatedAt=new Date().toISOString();await saveRecord(entry);
       if(entry.id===selected) { renderPhotos();updateMeta(); }
       if(entry.id==='case-'+contextCase)renderBoard();
